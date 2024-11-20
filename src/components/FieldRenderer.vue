@@ -4,9 +4,8 @@
     @dragover.prevent
     @drop="onDrop($event)"
   >
-    FIELD
     <div
-      class="card flex bg-slate-200 shadow-md w-full h-full justify-center items-center"
+      class="card flex bg-slate-200 shadow-sm rounded w-full h-full justify-center items-center"
       v-if="field.card"
       :style="
         field.isBeingDragged
@@ -21,7 +20,8 @@
         v-for="img of field.card.images"
         :key="img.name"
         :src="'/assets/items/' + img.name + '.webp'"
-        class="object-contain w-4 h-4 absolute"
+        class="object-contain w-24 h-24 absolute"
+        :style="getImageStyle(img)"
         alt=""
         draggable="false"
       />
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { ActiveAffordance } from "@/data/affordances";
-import type { Field } from "@/types";
+import type { CardImage, Field } from "@/types";
 
 defineProps<{
   field: Field;
@@ -43,5 +43,14 @@ function onDragStart(event: any) {
 
 function onDrop(event: any) {
   console.log(event);
+}
+
+function getImageStyle(img: CardImage): string {
+  if (img.scale != undefined && img.offset != undefined) {
+    // TODO: everything after 1st is randomly ignored xD
+    return `transform: scale(${img.scale}); left: ${img.offset[0]} px; top: ${img.offset[1]} px;`;
+  } else {
+    return "";
+  }
 }
 </script>
