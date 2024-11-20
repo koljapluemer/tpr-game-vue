@@ -1,18 +1,19 @@
 <template>
     <div id="grid" class="flex items-center justify-center mt-10">
-        <div class="flex flex-col gap-1 bg-white p-2 bg-slate-400">
+        <div class="flex flex-col gap-1 bg-white p-2 bg-slate-300">
             <div class="flex flex-row gap-1" v-for="row in grid">
                 <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
                     :field="field" v-for="field of row"></FieldRenderer>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
-import { type Card, type Field, type Grid } from "@/types";
+import { type AlchemyAction, type Card, type Field, type Grid } from "@/types";
 import { handleDropInteraction } from "@/utils/alchemyUtils";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid } from "@/utils/actionUtils";
@@ -22,6 +23,9 @@ const props = defineProps<{
 }>();
 
 const grid = ref(props.initialGrid)
+const availableActions = ref([] as AlchemyAction[])
+updateGrid()
+
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 function onDragStart(field: Field) {
@@ -33,14 +37,16 @@ function onDragStart(field: Field) {
 
 function onDropOn(field: Field) {
     handleDropInteraction(fieldWhereMovementStartedFrom, field)
+    updateGrid()
+
 }
 
-watch(grid, (newGrid, oldGrid) => {
-    console.log('grid changed from', oldGrid, 'to', newGrid)
+function updateGrid() {
     setIdentifiersForFields(grid.value)
-    const availableActions = getActionableActionsOnGrid(grid.value)
-    console.log('available', availableActions)
-}, { immediate: true })
+    availableActions.value = getActionableActionsOnGrid(grid.value)
+}
+
+
 
 // TODO: gen some sweet keys
 </script>

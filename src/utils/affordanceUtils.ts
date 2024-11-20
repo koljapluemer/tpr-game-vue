@@ -17,10 +17,3 @@ export function activeAffordanceIsActionableOnItem(affordance: ActiveAffordance,
         return matchFound
     }
 }
-
-export function getActionableActionsFromItemPool(items: Item[]): AlchemyAction[] {
-    const actions: AlchemyAction[] = []
-
-
-    return actions
-}

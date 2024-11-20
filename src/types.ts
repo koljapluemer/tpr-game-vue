@@ -72,9 +72,9 @@ export interface CardImage {
 // QUESTS, ACTIONS, AFFORDANCES
 
 export interface AlchemyAction {
-  sender: Item
-  receiver?: Item
-  affordance: string
+  sender: Field
+  receiver?: Field
+  affordance: ActiveAffordance
   senderKeys: string[]
   receiverKeys?: string[]
 }
