@@ -1,7 +1,6 @@
 <template>
   <div class="bg-white p-1 min-h-32 min-w-32 w-32 h-32" @dragover.prevent @drop="onDrop($event)" v-if="field">
     <small>
-      {{ field.identifiers }}
     </small>
     <div class="card flex bg-slate-200 shadow-sm rounded w-full h-full justify-center items-center" v-if="field.card"
       :style="isBeingDragged

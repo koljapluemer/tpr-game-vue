@@ -15,6 +15,7 @@ import FieldRenderer from "./FieldRenderer.vue";
 import { type Card, type Field, type Grid } from "@/types";
 import { handleDropInteraction } from "@/utils/alchemyUtils";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
+import { getActionableActionsOnGrid } from "@/utils/actionUtils";
 
 const props = defineProps<{
     initialGrid: Grid;
@@ -37,6 +38,8 @@ function onDropOn(field: Field) {
 watch(grid, (newGrid, oldGrid) => {
     console.log('grid changed from', oldGrid, 'to', newGrid)
     setIdentifiersForFields(grid.value)
+    const availableActions = getActionableActionsOnGrid(grid.value)
+    console.log('available', availableActions)
 }, { immediate: true })
 
 // TODO: gen some sweet keys
