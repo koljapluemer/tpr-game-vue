@@ -53,6 +53,7 @@ export type Field = {
   card: Card | undefined
   row: number
   col: number
+  identifiers: string[]
 }
 
 // Card interface with mutable state

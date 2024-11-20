@@ -33,6 +33,7 @@ export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
         card: card,
         row: rowCounter,
         col: cellCounter,
+        identifiers: []
       }
       levelGridRow.push(levelGridField)
       cellCounter += 1
