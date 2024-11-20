@@ -1,0 +1,16 @@
+export enum PassiveAffordance {
+  CUTTABLE,
+  STORAGE_SMALL,
+  STORAGE_MEDIUM,
+  STORAGE_LARGE,
+  IS_PARKING_SPACE,
+}
+
+export enum ActiveAffordance {
+  MOVABLE,
+  CUTS,
+  STORES_IN_SMALL,
+  STORES_IN_MEDIUM,
+  STORES_IN_LARGE,
+  PARKABLE,
+}
