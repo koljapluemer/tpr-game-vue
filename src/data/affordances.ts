@@ -27,4 +27,9 @@ export const affordancePairs: { [key in ActiveAffordance]: PassiveAffordance[] |
   [ActiveAffordance.STORES_IN_MEDIUM]: [PassiveAffordance.STORAGE_LARGE, PassiveAffordance.STORAGE_MEDIUM],
   [ActiveAffordance.STORES_IN_LARGE]: [PassiveAffordance.STORAGE_LARGE],
   [ActiveAffordance.PARKABLE]: [PassiveAffordance.IS_PARKING_SPACE]
-} 
+}
+
+export const affordanceVerbs: { [key in ActiveAffordance]?: string } = {
+  [ActiveAffordance.CUTS]: "CUT",
+  [ActiveAffordance.MOVABLE]: "MOVE",
+}

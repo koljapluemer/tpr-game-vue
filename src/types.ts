@@ -79,8 +79,8 @@ export interface AlchemyAction {
   receiverKeys?: string[]
 }
 
-interface Quest {
-  requiredAffordance: string
+export interface Quest {
+  requiredAffordance: ActiveAffordance
   requiredSenderKey?: string
   requiredReceiverKey?: string
 }

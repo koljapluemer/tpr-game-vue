@@ -22,7 +22,7 @@ export enum ItemName {
 export const items: Item[] = [
   {
     id: ItemName.kiwi,
-    primaryKey: 'kiwi',
+    primaryKey: 'KIWI',
     secondaryKeys: [],
     images: ['kiwi_uncut'],
     activeAffordances: [ActiveAffordance.MOVABLE],
@@ -31,7 +31,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.knife,
-    primaryKey: 'knife',
+    primaryKey: 'KIFE',
     secondaryKeys: [],
     images: ['knife'],
     activeAffordances: [ActiveAffordance.CUTS, ActiveAffordance.MOVABLE],
