@@ -1,5 +1,7 @@
 <template>
-  <LevelRenderer :levelTemplate="currentLevel"></LevelRenderer>
+  <div id="game" class="m-auto">
+    <LevelRenderer v-if="currentLevel" :levelTemplate="currentLevel"></LevelRenderer>
+  </div>
 </template>
 
 <script setup lang="ts">

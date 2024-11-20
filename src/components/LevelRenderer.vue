@@ -1,9 +1,11 @@
 <template>
-  <h2 class="font-bold text-2xl text-center text-slate-800 p-2">
-    Pack die Melone ins Auto!
-  </h2>
+  <div id="level" class="m-auto">
+    <h2 class="font-bold text-2xl text-center text-slate-800 p-2">
+      Pack die Melone ins Auto!
+    </h2>
 
-  <GridRenderer :grid="grid"></GridRenderer>
+    <GridRenderer :grid="grid"></GridRenderer>
+  </div>
 </template>
 
 <script setup lang="ts">
