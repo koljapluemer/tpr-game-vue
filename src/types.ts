@@ -49,9 +49,8 @@ export interface Level {
 export type Grid = Field[][]
 
 // Field that may contain a card
-export interface Field {
+export type Field = {
   card: Card | null
-  isBeingDragged: boolean
 }
 
 // Card interface with mutable state

@@ -28,7 +28,6 @@ export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
       }
       const levelGridField: Field = {
         card,
-        isBeingDragged: false,
       }
       levelGridRow.push(levelGridField)
     })

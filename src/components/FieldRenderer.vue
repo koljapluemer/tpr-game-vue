@@ -3,18 +3,19 @@
     class="bg-white p-1 min-h-32 min-w-32 w-32 h-32"
     @dragover.prevent
     @drop="onDrop($event)"
+    v-if="field"
   >
     <div
       class="card flex bg-slate-200 shadow-sm rounded w-full h-full justify-center items-center"
       v-if="field.card"
       :style="
-        field.isBeingDragged
+        isBeingDragged
           ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
           : ''
       "
       :draggable="field.card.item.activeAffordances.includes(ActiveAffordance.MOVABLE)"
       @dragstart="onDragStart($event)"
-      @dragend="field.isBeingDragged = false"
+      @dragend="isBeingDragged = false"
     >
       <img
         v-for="img of field.card.images"
@@ -31,18 +32,40 @@
 
 <script setup lang="ts">
 import { ActiveAffordance } from "@/data/affordances";
-import type { CardImage, Field } from "@/types";
+import type { Card, CardImage, Field } from "@/types";
+import { ref, type PropType } from "vue";
 
-defineProps<{
-  field: Field;
+const emit = defineEmits<{
+  startedDraggingFromField: Field,
+  droppedOnField: Field
 }>();
 
+// const props = defineProps({
+//   field: Object as PropType<Field>,
+// });
+
+const props = defineProps<{
+    field: Field
+}>();
+
+
+console.log('type of prop field', typeof props.field)
+console.log('prop field', props.field)
+const isBeingDragged = ref(false)
 function onDragStart(event: any) {
-  console.log(event);
+    isBeingDragged.value = true
+    if (typeof props.field != "undefined") {
+        event.dataTransfer.dropEffect = "move";
+        event.dataTransfer.effectAllowed = "move";
+        // @ts-ignore: ts think that field is of type [Field] instead of Field (it isn't)
+        emit("startedDraggingFromField", props.field);
+    }
 }
 
 function onDrop(event: any) {
-  console.log(event);
+    isBeingDragged.value = false
+    // @ts-ignore: ts think that field is of type [Field] instead of Field (it isn't)
+    emit("droppedOnField", props.field)
 }
 
 function getImageStyle(img: CardImage): string {
