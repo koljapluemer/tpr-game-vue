@@ -12,7 +12,7 @@ export interface Item {
   secondaryKeys?: string[]
   activeAffordances?: ActiveAffordance[]
   passiveAffordances?: PassiveAffordance[]
-  load_when_cut?: string
+  load_when_cut?: ItemName
   color?: string
 }
 
@@ -50,7 +50,9 @@ export type Grid = Field[][]
 
 // Field that may contain a card
 export type Field = {
-  card: Card | null
+  card: Card | undefined
+  row: number
+  col: number
 }
 
 // Card interface with mutable state

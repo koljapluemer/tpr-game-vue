@@ -4,11 +4,14 @@ import { getItemByID } from './itemUtils'
 
 export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
   const levelGrid: Grid = []
+  let rowCounter = 0
   levelTemplate.grid.forEach((row) => {
     const levelGridRow: Field[] = []
     row.forEach((cell) => {
+      let cellCounter = 0
+
       // see if field is filled or not
-      let card: Card | null = null
+      let card: Card | undefined = undefined
       if (cell[0].length > 0) {
         const randomItemName: ItemName = cell[0][Math.floor(Math.random() * cell[0].length)]
         const randomItem = getItemByID(randomItemName)
@@ -27,11 +30,15 @@ export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
         }
       }
       const levelGridField: Field = {
-        card,
+        card: card,
+        row: rowCounter,
+        col: cellCounter,
       }
       levelGridRow.push(levelGridField)
+      cellCounter += 1
     })
     levelGrid.push(levelGridRow)
+    rowCounter += 1
   })
   return levelGrid
 }

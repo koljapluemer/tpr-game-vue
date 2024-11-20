@@ -27,7 +27,7 @@ export const items: Item[] = [
     images: ['kiwi_uncut'],
     activeAffordances: [ActiveAffordance.MOVABLE],
     passiveAffordances: [PassiveAffordance.CUTTABLE],
-    load_when_cut: 'kiwi-cut',
+    load_when_cut: ItemName.kiwi_cut,
   },
   {
     id: ItemName.knife,

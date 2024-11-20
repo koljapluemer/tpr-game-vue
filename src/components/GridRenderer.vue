@@ -1,12 +1,12 @@
 <template>
   <div id="grid" class="flex items-center justify-center mt-10">
-    <div class="flex flex-col gap-1 bg-white p-2 bg-slate-300">
+    <div class="flex flex-col gap-1 bg-white p-2 bg-slate-100">
       <div class="flex flex-row gap-1" v-for="row in grid">
         <FieldRenderer
           @startedDraggingFromField="onDragStart(field)"
           @droppedOnField="onDropOn(field)"
           :field="field"
-          v-for="field in row"
+          v-for="field of row"
         ></FieldRenderer>
       </div>
     </div>
@@ -14,18 +14,34 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
-import type { Field, Grid } from "@/types";
+import { type Card, type Field, type Grid } from "@/types";
 
-defineProps<{
-  grid: Grid;
+const props = defineProps<{
+  initialGrid: Grid;
 }>();
+
+const grid = ref(props.initialGrid)
+let fieldWhereMovementStartedFrom:Field|undefined = undefined
 
 function onDragStart(field: Field) {
   console.log("child field started drag", field);
+  if (typeof field.card !== "undefined") {
+    fieldWhereMovementStartedFrom = field
+  }
 }
 
 function onDropOn(field: Field) {
-  console.log("was dropped on", field);
+
+  // handle drop on empty
+  if (field.card === undefined && typeof fieldWhereMovementStartedFrom !== "undefined") {
+    console.log('dropping on empty')
+    field.card = fieldWhereMovementStartedFrom.card
+    fieldWhereMovementStartedFrom.card = undefined
+  }
+
+  fieldWhereMovementStartedFrom = undefined;
+
 }
 </script>

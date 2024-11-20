@@ -4,7 +4,7 @@
       Pack die Melone ins Auto!
     </h2>
 
-    <GridRenderer :grid="grid"></GridRenderer>
+    <GridRenderer :initialGrid="grid"></GridRenderer>
   </div>
 </template>
 
