@@ -1,14 +1,14 @@
 import { type Quest, type AlchemyAction, type Grid, type Field, type LevelTemplate, LevelProperty } from "@/types";
 import { toRaw } from "vue";
 import { getActionableActionsOnGrid } from "./alchemyUtils";
-import { capability, capabilityPartnered } from "@/data/affordances";
+import { CapabilityPartnered } from "@/data/affordances";
 
 
 export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid): Quest[] {
     const quests: Quest[] = []
     const actions = getActionableActionsOnGrid(grid)
     actions.forEach((action) => {
-        if (action.affordance in capabilityPartnered) {
+        if (action.affordance in CapabilityPartnered) {
             action.senderKeys.forEach(senderKey => {
                 action.receiverKeys?.forEach(receiverKey => {
                     const quest: Quest = {

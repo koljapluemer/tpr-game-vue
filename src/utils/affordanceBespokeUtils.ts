@@ -1,15 +1,15 @@
 // if we have no elegant way of handling stuff like cutting, we can at least quarantine in a file
 
-import { capabilityPartnered, type Capability } from "@/data/affordances"
 import type { Field } from "@/types"
 import { getItemByID } from "./itemUtils"
+import { CapabilityPartnered } from "@/data/affordances"
 
 
-export function reactToSpecialInteractions(affordance: Capability, senderField: Field, receiverField: Field) {
+export function reactToSpecialInteractions(affordance: CapabilityPartnered, senderField: Field, receiverField: Field) {
     const senderCard = senderField.card
     const receiverCard = receiverField.card
     if (senderCard && receiverCard) {
-        if (affordance === capabilityPartnered.Cuts) {
+        if (affordance === CapabilityPartnered.Cuts) {
             if (receiverField.card!.item.load_when_cut) {
                 const newItem = getItemByID(receiverField.card!.item.load_when_cut)
                 console.log('cut img found:', newItem)
@@ -27,9 +27,9 @@ export function reactToSpecialInteractions(affordance: Capability, senderField: 
             }
         }
         // STORAGE
-        if (senderCard.item.activeAffordances?.includes(capabilityPartnered.StoresInSmall)
-            || senderCard.item.activeAffordances?.includes(capabilityPartnered.StoresInMedium)
-            || senderCard.item.activeAffordances?.includes(capabilityPartnered.StoresInLarge)
+        if (senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInSmall)
+            || senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInMedium)
+            || senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInLarge)
         ) {
             senderField.card = undefined
         }

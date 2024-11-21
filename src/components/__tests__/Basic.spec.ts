@@ -5,11 +5,11 @@ import App from '@/App.vue'
 
 
 import { getGridFromLevelTemplate } from '@/utils/gridUtils'
-import { capability, capabilityClick, capabilityMove, capabilityPartnered, passiveAffordance, type Capability, type CapabilityClick, type CapabilityMove, type CapabilityPartnered } from "@/data/affordances";
-import type { AlchemyAction, AlchemyActionClick, AlchemyActionMove, AlchemyActionPartnered, Field, Grid, Item } from "@/types"
 import { ItemName } from '@/data/items';
 import test from 'node:test';
-import { IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
+import { getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
+import type { Field } from '@/types';
+import { CapabilityPartnered, PassiveAffordance } from '@/data/affordances';
 
 
 const kiwiField: Field = {
@@ -18,8 +18,9 @@ const kiwiField: Field = {
             id: ItemName.kiwi,
             primaryKey: "TEST_KIWI",
             images: [],
-            activeAffordances: [capability.Movable],
-            passiveAffordances: [passiveAffordance.IsCuttable],
+            isMovable: true,
+            activeAffordances: [],
+            passiveAffordances: [PassiveAffordance.IsCuttable],
         },
         images: []
     },
@@ -35,7 +36,8 @@ const knifeField: Field = {
             primaryKey: 'TEST_KIFE',
             secondaryKeys: [],
             images: [],
-            activeAffordances: [capability.Cuts, capability.Movable],
+            isMovable: true,
+            activeAffordances: [CapabilityPartnered.Cuts],
         },
         images: []
     },
@@ -44,7 +46,14 @@ const knifeField: Field = {
     identifiers: ["THE__TEST_KNIFE"]
 } as const
 
-const cutsAffordance = capability.Cuts
+const emptyField: Field = {
+    card: undefined,
+    row: 0,
+    col: 2,
+    identifiers: []
+}
+
+const cutsAffordance = CapabilityPartnered.Cuts
 
 
 describe('UTILS', () => {
@@ -54,5 +63,18 @@ describe('UTILS', () => {
 
     it('IsPartneredCapabilityActionableOnField(): Cutting A Knife (nonsense)', () => {
         expect(IsPartneredCapabilityActionableOnField(cutsAffordance, knifeField)).toBe(false)
+    })
+
+
+    it('getActionsForWhenFieldIsDroppedOnField(): knife dropped on kiwi', () => {
+        expect(
+            getActionsForWhenFieldIsDroppedOnField(knifeField, kiwiField).length
+        ).toEqual(1)
+    })
+
+    it('getActionsForWhenFieldIsDroppedOnField(): kiwi moved to empty', () => {
+        expect(
+            getActionsForWhenFieldIsDroppedOnField(kiwiField, emptyField).length
+        ).toEqual(0)
     })
 })

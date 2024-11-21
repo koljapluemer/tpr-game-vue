@@ -1,6 +1,6 @@
 // STATIC DATA
 
-import { capabilityClick, type CapabilityClick, type Capability, type CapabilityMove, type CapabilityPartnered, type PassiveAffordance } from './data/affordances'
+import type { CapabilityPartnered, PassiveAffordance } from './data/affordances'
 import type { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'
 
@@ -10,8 +10,9 @@ export interface Item {
   images: string[]
 
   secondaryKeys?: string[]
-  activeAffordances?: Capability[]
+  activeAffordances?: CapabilityPartnered[]
   passiveAffordances?: PassiveAffordance[]
+  isMovable?: boolean
   load_when_cut?: ItemName
   color?: string
 }
@@ -73,30 +74,15 @@ export interface CardImage {
 
 export interface AlchemyAction {
   sender: Field
-  affordance: Capability
+  affordance: CapabilityPartnered
   senderKeys: string[]
-  receiver?: Field
-  receiverKeys?: string[]
-}
-
-export interface AlchemyActionMove extends AlchemyAction {
-  receiver: Field
-  affordance: CapabilityMove
-}
-
-export interface AlchemyActionClick extends AlchemyAction {
-  affordance: CapabilityClick
-}
-
-export interface AlchemyActionPartnered extends AlchemyAction {
   receiver: Field
   receiverKeys: string[]
-  affordance: CapabilityPartnered
 }
 
 
 export interface Quest {
-  requiredAffordance: Capability
+  requiredAffordance: CapabilityPartnered
   requiredSenderKey?: string
   requiredReceiverKey?: string
 }

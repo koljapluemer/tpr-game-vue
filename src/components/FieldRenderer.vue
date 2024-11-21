@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import { capabilityMove } from "@/data/affordances";
 import type { Card, CardImage, Field } from "@/types";
 import { computed, ref, type PropType } from "vue";
 
@@ -62,7 +61,7 @@ function getImageStyle(img: CardImage): string {
 }
 
 const isMovable = computed(() => {
-  const isMovable = (props.field.card?.item.activeAffordances && props.field.card.item.activeAffordances.includes(capabilityMove.Movable))
+  const isMovable = (props.field.card?.item.activeAffordances && props.field.card.item.isMovable)
   if (typeof isMovable !== "undefined") {
     return isMovable
   }
