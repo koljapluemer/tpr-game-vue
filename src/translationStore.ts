@@ -19,7 +19,7 @@ export const translationStore = reactive({
     addMissingTranslationKey(key: string) {
         if (!this.missingTranslationKeys.includes(key)) {
             this.missingTranslationKeys.push(key)
-            console.warn('missing keys', this.missingTranslationKeys)
+            this.logMissingTranslationKeys()
         }
     },
 
@@ -33,6 +33,10 @@ export const translationStore = reactive({
             console.warn('missing translation texts', this.missingTranslationTexts)
 
         }
+    },
+
+    logMissingTranslationKeys() {
+        console.warn(this.missingTranslationKeys.join('\n'))
     }
 
 

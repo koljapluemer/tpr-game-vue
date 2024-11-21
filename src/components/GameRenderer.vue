@@ -10,7 +10,7 @@ import { LevelTemplateName } from "@/data/levelTemplates";
 import { getLevelTemplateByID } from "@/utils/levelUtils";
 import { ref } from "vue";
 
-const currentLevel = getLevelTemplateByID(LevelTemplateName.pack_car_x);
+const currentLevel = getLevelTemplateByID(LevelTemplateName.cut_fruit_1);
 
 
 

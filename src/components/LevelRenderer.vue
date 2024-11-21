@@ -52,11 +52,12 @@ function onDragStart(field: Field) {
 }
 
 function onDropOn(field: Field) {
-    const actionThatHappenend = handleDropInteraction(fieldWhereMovementStartedFrom, field)
-    if (actionThatHappenend) {
-        console.log('look, an action:', actionThatHappenend)
+    console.log('drop on field', field)
+    const actionsThatHappenend = handleDropInteraction(fieldWhereMovementStartedFrom, field)
+    for (const action of actionsThatHappenend) {
+        console.log('look, an action:', action)
         if (currentQuest.value) {
-            const questWasDone = actionFulfilledQuest(actionThatHappenend, currentQuest.value)
+            const questWasDone = actionFulfilledQuest(action, currentQuest.value)
             if (questWasDone) {
                 endCurrentQuest(true)
             }

@@ -1,5 +1,5 @@
 import translationData from '@/assets/translations/translations.json'
-import { translationStore } from '@/store'
+import { translationStore } from '@/translationStore'
 
 export function getTranslationForKey(key: string, languageCode: string): string | undefined {
     console.log('translation data', translationData)

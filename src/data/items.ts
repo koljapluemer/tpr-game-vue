@@ -38,14 +38,14 @@ export const items: Item[] = [
   },
   {
     id: ItemName.kiwi_cut,
-    primaryKey: 'kiwi_halves',
+    primaryKey: 'KIWI_HALVES',
     secondaryKeys: [],
     images: ['kiwi_cut'],
     activeAffordances: [ActiveAffordance.MOVABLE],
   },
   {
     id: ItemName.car_black,
-    primaryKey: 'car',
+    primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_black-Photoroom'],
     passiveAffordances: [PassiveAffordance.STORAGE_MEDIUM],
@@ -53,7 +53,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.car_blue,
-    primaryKey: 'car',
+    primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_blue_bmw_crop', 'car_blue-Photoroom'],
     passiveAffordances: [PassiveAffordance.STORAGE_MEDIUM],
@@ -62,7 +62,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.car_green,
-    primaryKey: 'car',
+    primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_green-Photoroom'],
     passiveAffordances: [PassiveAffordance.STORAGE_MEDIUM],
@@ -71,28 +71,28 @@ export const items: Item[] = [
   },
   {
     id: ItemName.fan,
-    primaryKey: 'fan',
+    primaryKey: 'FAN',
     secondaryKeys: [],
     images: ['fan_crop'],
     activeAffordances: [ActiveAffordance.MOVABLE, ActiveAffordance.STORES_IN_MEDIUM],
   },
   {
     id: ItemName.globe,
-    primaryKey: 'glob',
+    primaryKey: 'GLOBE',
     secondaryKeys: [],
     images: ['globe_crop'],
     activeAffordances: [ActiveAffordance.MOVABLE, ActiveAffordance.STORES_IN_MEDIUM],
   },
   {
     id: ItemName.potted_plant,
-    primaryKey: 'potted_plant',
+    primaryKey: 'POTTED_PLANT',
     secondaryKeys: [],
     images: ['pot_plant_crop'],
     activeAffordances: [ActiveAffordance.MOVABLE, ActiveAffordance.STORES_IN_MEDIUM],
   },
   {
     id: ItemName.suitcase_white,
-    primaryKey: 'suitcase',
+    primaryKey: 'SUITCASE',
     secondaryKeys: [],
     images: ['suitcas2_crop'],
     passiveAffordances: [PassiveAffordance.STORAGE_SMALL],
@@ -101,7 +101,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.suitcase_blue,
-    primaryKey: 'suitcase',
+    primaryKey: 'SUITCASE',
     secondaryKeys: [],
     images: ['suitcase1_crop'],
     passiveAffordances: [PassiveAffordance.STORAGE_SMALL],
@@ -110,7 +110,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.melon,
-    primaryKey: 'melon',
+    primaryKey: 'MELON',
     secondaryKeys: [],
     images: ['melon_whole'],
     activeAffordances: [ActiveAffordance.MOVABLE, ActiveAffordance.STORES_IN_SMALL],
@@ -118,7 +118,7 @@ export const items: Item[] = [
   { id: ItemName.house, primaryKey: 'house', images: ['house_crop', 'house_front'] },
   {
     id: ItemName.car_old_movable,
-    primaryKey: 'car',
+    primaryKey: 'CAR',
     images: ['car_blue_old_crop'],
     activeAffordances: [ActiveAffordance.MOVABLE, ActiveAffordance.PARKABLE],
 
@@ -126,7 +126,7 @@ export const items: Item[] = [
   },
   {
     id: ItemName.parking_lot,
-    primaryKey: 'parking_lot',
+    primaryKey: 'PARKING_LOT',
     images: ['parking_lot_1', 'parking_lot_2'],
     passiveAffordances: [PassiveAffordance.IS_PARKING_SPACE],
   },
