@@ -1,7 +1,7 @@
 <template>
     <h2 class="font-bold text-2xl text-center text-slate-800 p-2">
         <span v-if="currentQuest">
-            {{ questKey }}
+            {{ questPrompt }}
         </span>
     </h2>
 
@@ -23,8 +23,9 @@ import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplat
 import { handleDropInteraction } from "@/utils/alchemyUtils";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid } from "@/utils/actionUtils";
-import { actionFulfilledQuest, getAvailableQuestsBasedonActionList, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
+import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
+import { getTranslationForKey } from "@/utils/translationUtils";
 
 const props = defineProps<{
     level: LevelTemplate;
@@ -74,9 +75,9 @@ function updateGrid() {
     }
 }
 
-const questKey = computed(() => {
+const questPrompt = computed(() => {
     if (currentQuest.value) {
-        return getQuestKey(currentQuest.value)
+        return getTranslationForKey(getQuestKey(currentQuest.value), "ar")
     } else {
         return undefined
     }
