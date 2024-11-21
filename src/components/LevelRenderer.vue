@@ -20,9 +20,8 @@
 import { computed, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
 import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
-import { handleDropInteraction } from "@/utils/alchemyUtils";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
-import { getActionableActionsOnGrid } from "@/utils/actionUtils";
+import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/actionUtils";
 import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { getTranslationForKey } from "@/utils/translationUtils";
@@ -53,15 +52,21 @@ function onDragStart(field: Field) {
 
 function onDropOn(field: Field) {
     console.log('drop on field', field)
-    const actionsThatHappenend = handleDropInteraction(fieldWhereMovementStartedFrom, field)
-    for (const action of actionsThatHappenend) {
-        console.log('look, an action:', action)
-        if (currentQuest.value) {
-            const questWasDone = actionFulfilledQuest(action, currentQuest.value)
-            if (questWasDone) {
-                endCurrentQuest(true)
+    // not sure how there would ever be a drop on without the movement field set
+    if (fieldWhereMovementStartedFrom) {
+        const actionsThatHappenend = getActionsForWhenFieldIsDroppedOnField(fieldWhereMovementStartedFrom, field)
+        for (const action of actionsThatHappenend) {
+            console.log('look, an action:', action)
+            if (currentQuest.value) {
+                const questWasDone = actionFulfilledQuest(action, currentQuest.value)
+                if (questWasDone) {
+                    endCurrentQuest(true)
+                }
+
             }
         }
+    } else {
+        console.warn('drop interaction registered but no starting field was ever set')
     }
     updateGrid()
 
