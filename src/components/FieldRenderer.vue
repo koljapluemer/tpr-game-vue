@@ -6,8 +6,7 @@
       :style="isBeingDragged
         ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
         : ''
-        " :draggable="field.card.item.activeAffordances.includes(ActiveAffordance.MOVABLE)"
-      @dragstart="onDragStart($event)" @dragend="isBeingDragged = false">
+        " :draggable="isMovable" @dragstart="onDragStart($event)" @dragend="isBeingDragged = false">
       <img v-for="img of field.card.images" :key="img.name" :src="'/assets/items/' + img.name + '.webp'"
         class="object-contain w-24 h-24 absolute" :style="getImageStyle(img)" alt="" draggable="false" />
     </div>
@@ -18,7 +17,7 @@
 <script setup lang="ts">
 import { ActiveAffordance } from "@/data/affordances";
 import type { Card, CardImage, Field } from "@/types";
-import { ref, type PropType } from "vue";
+import { computed, ref, type PropType } from "vue";
 
 const emit = defineEmits<{
   startedDraggingFromField: Field,
@@ -61,4 +60,13 @@ function getImageStyle(img: CardImage): string {
     return "";
   }
 }
+
+const isMovable = computed(() => {
+  const isMovable = (props.field.card?.item.activeAffordances && props.field.card.item.activeAffordances.includes(ActiveAffordance.MOVABLE))
+  if (typeof isMovable !== "undefined") {
+    return isMovable
+  }
+  return false
+
+})
 </script>
