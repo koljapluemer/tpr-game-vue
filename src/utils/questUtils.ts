@@ -1,6 +1,6 @@
 import { type Quest, type AlchemyAction, type Grid, type Field, type LevelTemplate, LevelProperty } from "@/types";
 import { toRaw } from "vue";
-import { getActionableActionsOnGrid } from "./actionUtils";
+import { getActionableActionsOnGrid } from "./alchemyUtils";
 import { capability, capabilityPartnered } from "@/data/affordances";
 
 

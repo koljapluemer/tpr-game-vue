@@ -21,7 +21,7 @@ import { computed, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
 import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
-import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/actionUtils";
+import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/alchemyUtils";
 import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { getTranslationForKey } from "@/utils/translationUtils";
