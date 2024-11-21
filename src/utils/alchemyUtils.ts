@@ -8,7 +8,7 @@ export function IsPartneredCapabilityActionableOnField(affordance: CapabilityPar
     let isActionable = false
     const requiredPassiveAffordance: PassiveAffordance = affordancePartnerings[affordance]
     if (requiredPassiveAffordance && item && item.passiveAffordances) {
-        if (requiredPassiveAffordance in item.passiveAffordances) {
+        if (item.passiveAffordances.includes(requiredPassiveAffordance)) {
             isActionable = true
         }
     }
