@@ -1,9 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import App from '@/App.vue'
-
-
 import { getGridFromLevelTemplate } from '@/utils/gridUtils'
 import { capability, capabilityClick, capabilityMove, capabilityPartnered, passiveAffordance, type Capability, type CapabilityClick, type CapabilityMove, type CapabilityPartnered } from "@/data/affordances";
 import type { AlchemyAction, AlchemyActionClick, AlchemyActionMove, AlchemyActionPartnered, Field, Grid, Item } from "@/types"
@@ -11,6 +8,9 @@ import { ItemName } from '@/data/items';
 import test from 'node:test';
 import { IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
 
+// # testing the alchemy utils
+
+// ## TEST 1
 
 const kiwiField: Field = {
     card: {
@@ -46,13 +46,6 @@ const knifeField: Field = {
 
 const cutsAffordance = capability.Cuts
 
-
-describe('UTILS', () => {
-    it('IsPartneredCapabilityActionableOnField(): Cutting A Kiwi', () => {
-        expect(IsPartneredCapabilityActionableOnField(cutsAffordance, kiwiField)).toBe(true)
-    })
-
-    it('IsPartneredCapabilityActionableOnField(): Cutting A Knife (nonsense)', () => {
-        expect(IsPartneredCapabilityActionableOnField(cutsAffordance, knifeField)).toBe(false)
-    })
+test('Test Kiwi & Knife: UTILS | IsPartneredCapabilityActionableOnField()', () => {
+    expect(IsPartneredCapabilityActionableOnField(cutsAffordance, kiwiField)).toBe(true)
 })
