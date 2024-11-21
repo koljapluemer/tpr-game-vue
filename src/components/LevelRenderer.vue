@@ -25,6 +25,7 @@ import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } fr
 import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { getTranslationForKey } from "@/utils/translationUtils";
+import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
 
 const props = defineProps<{
     level: LevelTemplate;
@@ -44,25 +45,28 @@ startRandomQuestFromList()
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 function onDragStart(field: Field) {
-    console.log("child field started drag", field);
     if (typeof field.card !== "undefined") {
         fieldWhereMovementStartedFrom = field
     }
 }
 
 function onDropOn(field: Field) {
-    console.log('drop on field', field)
     // not sure how there would ever be a drop on without the movement field set
     if (fieldWhereMovementStartedFrom) {
-        const actionsThatHappenend = getActionsForWhenFieldIsDroppedOnField(fieldWhereMovementStartedFrom, field)
-        for (const action of actionsThatHappenend) {
-            console.log('look, an action:', action)
-            if (currentQuest.value) {
-                const questWasDone = actionFulfilledQuest(action, currentQuest.value)
-                if (questWasDone) {
-                    endCurrentQuest(true)
-                }
+        const simplyMovedToEmptyField = executeMoveToField(fieldWhereMovementStartedFrom, field)
+        if (!simplyMovedToEmptyField) {
+            const actionsThatHappenend = getActionsForWhenFieldIsDroppedOnField(fieldWhereMovementStartedFrom, field)
+            actionsThatHappenend.forEach(action => {
+                executeActionEffects(action)
+            })
+            for (const action of actionsThatHappenend) {
+                if (currentQuest.value) {
+                    const questWasDone = actionFulfilledQuest(action, currentQuest.value)
+                    if (questWasDone) {
+                        endCurrentQuest(true)
+                    }
 
+                }
             }
         }
     } else {
@@ -77,7 +81,6 @@ function updateGrid() {
         setIdentifiersForFields(grid.value)
         availableActions.value = getActionableActionsOnGrid(grid.value)
         availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value)
-        console.log('quests', availableQuests.value)
     }
 }
 

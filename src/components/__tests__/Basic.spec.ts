@@ -7,8 +7,8 @@ import App from '@/App.vue'
 import { getGridFromLevelTemplate } from '@/utils/gridUtils'
 import { ItemName } from '@/data/items';
 import test from 'node:test';
-import { getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
-import type { Field } from '@/types';
+import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
+import type { Field, Grid } from '@/types';
 import { CapabilityPartnered, PassiveAffordance } from '@/data/affordances';
 
 
@@ -53,6 +53,16 @@ const emptyField: Field = {
     identifiers: []
 }
 
+const kiwiKnifeGrid: Grid = [
+    [
+        knifeField, emptyField, kiwiField
+    ]
+]
+const twoKiwisOneKnife: Grid = [
+    [
+        knifeField, emptyField, kiwiField, kiwiField
+    ]
+]
 const cutsAffordance = CapabilityPartnered.Cuts
 
 
@@ -76,5 +86,11 @@ describe('UTILS', () => {
         expect(
             getActionsForWhenFieldIsDroppedOnField(kiwiField, emptyField).length
         ).toEqual(0)
+    })
+
+    it('getActionableActionsOnGrid(): basic kiwi-knife field action count', () => {
+        expect(
+            getActionableActionsOnGrid(twoKiwisOneKnife).length
+        ).toEqual(2)
     })
 })

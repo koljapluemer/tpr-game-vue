@@ -1,18 +1,20 @@
 // if we have no elegant way of handling stuff like cutting, we can at least quarantine in a file
 
-import type { Field } from "@/types"
+import type { AlchemyAction, Field } from "@/types"
 import { getItemByID } from "./itemUtils"
 import { CapabilityPartnered } from "@/data/affordances"
 
 
-export function reactToSpecialInteractions(affordance: CapabilityPartnered, senderField: Field, receiverField: Field) {
+export function executeActionEffects(action: AlchemyAction) {
+    const senderField = action.sender
+    const receiverField = action.receiver
+    const affordance = action.affordance
     const senderCard = senderField.card
     const receiverCard = receiverField.card
     if (senderCard && receiverCard) {
         if (affordance === CapabilityPartnered.Cuts) {
             if (receiverField.card!.item.load_when_cut) {
                 const newItem = getItemByID(receiverField.card!.item.load_when_cut)
-                console.log('cut img found:', newItem)
                 if (newItem) {
                     receiverField.card = {
                         item: newItem,
@@ -34,4 +36,14 @@ export function reactToSpecialInteractions(affordance: CapabilityPartnered, send
             senderField.card = undefined
         }
     }
-} 
+}
+
+export function executeMoveToField(originalField: Field, targetField: Field): bool {
+    let moveToEmptyHappened = false
+    if (targetField.card === undefined) {
+        targetField.card = originalField.card
+        originalField.card = undefined
+        moveToEmptyHappened = true
+    }
+    return moveToEmptyHappened
+}

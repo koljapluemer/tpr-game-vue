@@ -32,8 +32,6 @@ const props = defineProps<{
 }>();
 
 
-console.log('type of prop field', typeof props.field)
-console.log('prop field', props.field)
 const isBeingDragged = ref(false)
 function onDragStart(event: any) {
   isBeingDragged.value = true

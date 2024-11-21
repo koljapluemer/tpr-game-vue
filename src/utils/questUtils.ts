@@ -22,7 +22,6 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid)
             })
         }
     })
-    console.log('found possible quests', quests)
     return quests
 }
 
@@ -58,7 +57,6 @@ export function actionFulfilledQuest(action: AlchemyAction, quest: Quest): boole
         // (but if it's unset, the quest doesn't care about the sender, so don't check)
         if (quest.requiredSenderKey) {
             if (!(action.senderKeys.includes(quest.requiredSenderKey))) {
-                console.log('required key', quest.requiredSenderKey, 'not in action key', action.senderKeys)
                 questFufilled = false
             }
         }
