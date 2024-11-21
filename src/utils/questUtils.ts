@@ -26,6 +26,10 @@ export function getAvailableQuestsBasedonActionList(actions: AlchemyAction[]): Q
     return quests
 }
 
+// I thought I didn't need this, but if I have stuff like level-wide bans of move quests ets
+// requires some general redesign, though
+// export function getAvailableQuestsBasedOnGridAndLevel
+
 export function getQuestKey(quest: Quest): string {
     let key = ""
     if (quest.requiredSenderKey) {
@@ -43,4 +47,27 @@ export function getQuestKey(quest: Quest): string {
 
     return key
 
+}
+
+export function actionFulfilledQuest(action: AlchemyAction, quest: Quest): boolean {
+    let questFufilled = false;
+    // affordance must match, otherwise no matter
+    if (action.affordance === quest.requiredAffordance) {
+        questFufilled = true;
+        // if there is a required sender key, check for that
+        // (but if it's unset, the quest doesn't care about the sender, so don't check)
+        if (quest.requiredSenderKey) {
+            if (!(action.senderKeys.includes(quest.requiredSenderKey))) {
+                console.log('required key', quest.requiredSenderKey, 'not in action key', action.senderKeys)
+                questFufilled = false
+            }
+        }
+        if (quest.requiredReceiverKey) {
+            if (!(action.receiverKeys && action.receiverKeys.includes(quest.requiredReceiverKey))) {
+                questFufilled = false
+            }
+        }
+
+    }
+    return questFufilled
 }

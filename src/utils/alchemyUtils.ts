@@ -1,13 +1,21 @@
-import type { Field, Grid } from "@/types";
+import type { AlchemyAction, Field, Grid } from "@/types";
 import { getItemByID } from "./itemUtils";
 import { ActiveAffordance, PassiveAffordance } from "@/data/affordances";
+import { toRaw } from "vue";
 
-export function handleDropInteraction(senderField: Field | undefined, receiverField: Field) {
+export function handleDropInteraction(senderField: Field | undefined, receiverField: Field): AlchemyAction | undefined {
+    let action: AlchemyAction | undefined = undefined
     // handle drop on empty
     if (receiverField.card === undefined && typeof senderField !== "undefined") {
         console.log('dropping on empty')
         receiverField.card = senderField.card
         senderField.card = undefined
+
+        action = {
+            sender: senderField,
+            affordance: ActiveAffordance.MOVABLE,
+            senderKeys: structuredClone(toRaw(senderField.identifiers))
+        }
 
     }
 
@@ -21,6 +29,14 @@ export function handleDropInteraction(senderField: Field | undefined, receiverFi
         //   cutting
         if (sender?.item.activeAffordances !== undefined && receiver.item.passiveAffordances !== undefined && ActiveAffordance.CUTS in sender?.item.activeAffordances && PassiveAffordance.CUTTABLE in receiver.item.passiveAffordances) {
             if (receiver.item.load_when_cut) {
+                action = {
+                    sender: senderField,
+                    affordance: ActiveAffordance.CUTS,
+                    senderKeys: structuredClone(toRaw(senderField.identifiers)),
+                    receiver: receiverField,
+                    receiverKeys: structuredClone(toRaw(receiverField.identifiers))
+                }
+
                 const newItem = getItemByID(receiver.item.load_when_cut)
                 console.log('cut img found:', newItem)
                 if (newItem) {
@@ -38,5 +54,7 @@ export function handleDropInteraction(senderField: Field | undefined, receiverFi
 
         senderField = undefined;
     }
+
+    return action
 
 }

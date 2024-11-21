@@ -16,9 +16,9 @@ export enum PassiveAffordance {
   IS_PARKING_SPACE,
 }
 
+// SYNTAX EXPLANATION:
 // undefined: doesn't need no partner
 // array: any of these needs to exist to be actionable
-
 // the "array" for the key is just so ts can cope with the enum as key
 export const affordancePairs: { [key in ActiveAffordance]: PassiveAffordance[] | undefined } = {
   [ActiveAffordance.MOVABLE]: undefined,

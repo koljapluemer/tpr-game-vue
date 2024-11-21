@@ -1,6 +1,6 @@
 // levelTemplates.js
 
-import type { LevelTemplate } from '@/types'
+import { LevelProperty, type LevelTemplate } from '@/types'
 import { ItemName } from './items'
 
 const thingsThatFitInCar: ItemName[] = [
@@ -28,6 +28,8 @@ export const levelTemplates: LevelTemplate[] = [
       [[[]], [[]]],
     ],
     prerequisites: [],
+    props: [LevelProperty.DisableMovementQuests]
+
   },
   {
     id: LevelTemplateName.pack_car_x,
