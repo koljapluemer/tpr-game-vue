@@ -23,3 +23,12 @@ export const affordancePartnerings = {
   [CapabilityPartnered.StoresInLarge]: PassiveAffordance.IsStorageLarge,
   [CapabilityPartnered.Parkable]: PassiveAffordance.IsStorageLarge
 } as const
+
+
+export const capabilityVerbs = {
+  [CapabilityPartnered.Cuts]: "CUT",
+  [CapabilityPartnered.StoresInSmall]: "STORE",
+  [CapabilityPartnered.StoresInMedium]: "STORE",
+  [CapabilityPartnered.StoresInLarge]: "STORE",
+  [CapabilityPartnered.Parkable]: "PARK",
+}

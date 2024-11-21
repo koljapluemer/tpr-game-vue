@@ -38,7 +38,7 @@ export function executeActionEffects(action: AlchemyAction) {
     }
 }
 
-export function executeMoveToField(originalField: Field, targetField: Field): bool {
+export function executeMoveToField(originalField: Field, targetField: Field): boolean {
     let moveToEmptyHappened = false
     if (targetField.card === undefined) {
         targetField.card = originalField.card

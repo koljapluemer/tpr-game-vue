@@ -2,6 +2,7 @@
     <h2 class="font-bold text-2xl text-center text-slate-800 p-2">
         <span v-if="currentQuest">
             {{ questPrompt }}
+            <!-- <small>{{ getQuestKey(currentQuest) }}</small> -->
         </span>
     </h2>
 
