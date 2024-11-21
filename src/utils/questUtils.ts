@@ -1,27 +1,68 @@
-import { affordanceVerbs } from "@/data/affordances";
-import { type Quest, type AlchemyAction } from "@/types";
+import { ActiveAffordance, affordancePairs, affordanceVerbs } from "@/data/affordances";
+import { type Quest, type AlchemyAction, type Grid, type Field, type LevelTemplate, LevelProperty } from "@/types";
+import { activeAffordanceIsActionableOnItem } from "./affordanceUtils";
+import { toRaw } from "vue";
 
-export function getAvailableQuestsBasedonActionList(actions: AlchemyAction[]): Quest[] {
+
+export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid): Quest[] {
     const quests: Quest[] = []
-    // ANY CUT ANY
-    // THE__KNIFE__CUT__ANY
-    // ANY__CUT__THE__KIWI
-    // THE__KNIFE__CUT__THE__KIWI
-    // THE__KNIFE__MOVE
 
-    actions.forEach(action => {
-        if (action.sender) {
-            action.sender.identifiers.forEach(id => {
-                const quest: Quest = {
-                    requiredAffordance: action.affordance,
-                    requiredSenderKey: id
-                }
-                quests.push(quest)
-            })
-
-        }
+    const fieldsWithCards: Field[] = []
+    grid.forEach(row => {
+        row.forEach(cell => {
+            if (cell.card) {
+                fieldsWithCards.push(cell)
+            }
+        })
     })
 
+    fieldsWithCards.forEach(field => {
+        field.card?.item.activeAffordances?.forEach(affordance => {
+            // indepdent affordance (like move)
+            if (affordancePairs[affordance] === undefined) {
+
+                structuredClone(toRaw(field.identifiers)).forEach(key => {
+                    const quest: Quest = {
+                        requiredAffordance: affordance,
+                        requiredSenderKey: key
+                    }
+                    const questExcluded = (
+                        (level.props?.includes(LevelProperty.DisableMovementQuests) && affordance === ActiveAffordance.MOVABLE)
+                        || false
+                    )
+                    if (!questExcluded) {
+                        quests.push(quest)
+                    }
+                })
+
+            } else {
+                // affordances needing another to work
+                fieldsWithCards.forEach(receiverField => {
+                    if (receiverField.card && activeAffordanceIsActionableOnItem(affordance, receiverField.card.item)) {
+                        structuredClone(toRaw(field.identifiers)).forEach(senderKey => {
+                            structuredClone(toRaw(receiverField.identifiers)).forEach(receiverKey => {
+                                const quest: Quest = {
+                                    requiredAffordance: affordance,
+                                    requiredSenderKey: senderKey,
+                                    requiredReceiverKey: receiverKey
+                                }
+                                const questExcluded = false
+                                if (!questExcluded) {
+                                    quests.push(quest)
+                                }
+                            })
+                        })
+                        // todo: make the other quest types
+                        // ANY CUT ANY
+                        // THE__KNIFE__CUT__ANY
+                        // ANY__CUT__THE__KIWI
+                        // THE__KNIFE__CUT__THE__KIWI
+                        // THE__KNIFE__MOVE
+                    }
+                })
+            }
+        })
+    })
 
     return quests
 }

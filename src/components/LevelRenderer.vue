@@ -23,7 +23,7 @@ import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplat
 import { handleDropInteraction } from "@/utils/alchemyUtils";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid } from "@/utils/actionUtils";
-import { actionFulfilledQuest, getAvailableQuestsBasedonActionList, getQuestKey } from "@/utils/questUtils";
+import { actionFulfilledQuest, getAvailableQuestsBasedonActionList, getAvailableQuestsBasedOnLevel, getQuestKey } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 
 const props = defineProps<{
@@ -69,7 +69,7 @@ function updateGrid() {
     if (grid.value) {
         setIdentifiersForFields(grid.value)
         availableActions.value = getActionableActionsOnGrid(grid.value)
-        availableQuests.value = getAvailableQuestsBasedonActionList(availableActions.value)
+        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value)
         console.log('quests', availableQuests.value)
     }
 }

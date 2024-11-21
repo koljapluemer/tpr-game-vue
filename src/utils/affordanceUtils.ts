@@ -17,3 +17,4 @@ export function activeAffordanceIsActionableOnItem(affordance: ActiveAffordance,
         return matchFound
     }
 }
+
