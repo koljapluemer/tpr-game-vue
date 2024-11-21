@@ -1,13 +1,10 @@
 <template>
   <div id="game" class="m-auto">
-    <LevelRenderer v-if="currentLevel" :levelTemplate="currentLevel"></LevelRenderer>
+    <GameRenderer></GameRenderer>
   </div>
 </template>
 
 <script setup lang="ts">
-import LevelRenderer from "@/components/LevelRenderer.vue";
-import { LevelTemplateName } from "@/data/levelTemplates";
-import { getLevelTemplateByID } from "@/utils/levelUtils";
+import GameRenderer from "@/components/GameRenderer.vue";
 
-let currentLevel = getLevelTemplateByID(LevelTemplateName.cut_fruit_1);
 </script>
