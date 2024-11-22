@@ -27,7 +27,7 @@ import FieldRenderer from "./FieldRenderer.vue";
 import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/alchemyUtils";
-import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel } from "@/utils/questUtils";
+import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, isQuestStillPossible } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
 import SoundEffectPlayer from "./SoundEffectPlayer.vue";
@@ -71,13 +71,24 @@ function onDropOn(field: Field) {
             actionsThatHappenend.forEach(action => {
                 executeActionEffects(action)
             })
-            for (const action of actionsThatHappenend) {
-                if (currentQuest.value) {
-                    const questWasDone = actionFulfilledQuest(action, currentQuest.value)
+            let questWasDone = false
+            if (currentQuest.value && grid.value) {
+
+                for (const action of actionsThatHappenend) {
+                    questWasDone = actionFulfilledQuest(action, currentQuest.value)
                     if (questWasDone) {
+                        console.log('quest succeeded by action, ending...')
                         endCurrentQuest(true)
+                        break
                     }
 
+                }
+                if (!questWasDone) {
+                    console.log('action did not solve quest')
+                    if (!isQuestStillPossible(currentQuest.value, grid.value)) {
+                        console.log('quest now impossible')
+                        endCurrentQuest(false)
+                    }
                 }
             }
         }

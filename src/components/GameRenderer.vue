@@ -1,6 +1,6 @@
 <template>
   <div id="level" class="m-auto">
-    <LevelRenderer :key="levelIndexWithinProgression" :level="currentLevel" v-if="currentLevel"
+    <LevelRenderer :key="levelChangedAt" :level="currentLevel" v-if="currentLevel"
       @noMoreOpenQuests="onLevelHasNoMoreOpenQuests">
     </LevelRenderer>
   </div>
@@ -13,7 +13,9 @@ import { getLevelTemplateByID } from "@/utils/levelUtils";
 import { computed, ref } from "vue";
 
 let currentProgression = progressions[0]
-let levelIndexWithinProgression = ref(0)
+let levelIndexWithinProgression = ref(6)
+
+const levelChangedAt = ref(Date.now())
 
 const currentLevel = computed(() => {
   console.log('current level changed, getting lvl', levelIndexWithinProgression.value)
@@ -21,8 +23,12 @@ const currentLevel = computed(() => {
 })
 
 function onLevelHasNoMoreOpenQuests() {
-  console.log('level has no more quests')
-  levelIndexWithinProgression.value += 1
+  // for now, simply loop last level of progression if out of levels
+  if (levelIndexWithinProgression.value < currentProgression.length - 1) {
+    levelIndexWithinProgression.value += 1
+  }
+
+  levelChangedAt.value = Date.now()
 }
 
 </script>
