@@ -51,7 +51,7 @@ export const items: Item[] = [
     primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_black-Photoroom'],
-    passiveAffordances: [PassiveAffordance.IsStorageMedium],
+    passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
     color: 'black',
   },
   {
@@ -59,7 +59,7 @@ export const items: Item[] = [
     primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_blue_bmw_crop', 'car_blue-Photoroom'],
-    passiveAffordances: [PassiveAffordance.IsStorageMedium],
+    passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
     color: 'blue',
   },
@@ -68,7 +68,7 @@ export const items: Item[] = [
     primaryKey: 'CAR',
     secondaryKeys: [],
     images: ['car_green-Photoroom'],
-    passiveAffordances: [PassiveAffordance.IsStorageMedium],
+    passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
     color: 'green',
   },

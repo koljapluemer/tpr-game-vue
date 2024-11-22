@@ -7,10 +7,13 @@ export function getTranslationForKey(key: string, languageCode: string): string 
         const translation: string | undefined = sentence[languageCode as keyof typeof sentence]
         if (!translation) {
             translationStore.addMissingTranslationText(key, languageCode)
+            return undefined
         }
         return translation
     } else {
         translationStore.addMissingTranslationKey(key)
+        return undefined
+
     }
-    return undefined
+
 }

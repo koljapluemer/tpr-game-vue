@@ -27,8 +27,8 @@ export const affordancePartnerings = {
 
 export const capabilityVerbs = {
   [CapabilityPartnered.Cuts]: "CUT",
-  [CapabilityPartnered.StoresInSmall]: "STORE",
-  [CapabilityPartnered.StoresInMedium]: "STORE",
-  [CapabilityPartnered.StoresInLarge]: "STORE",
+  [CapabilityPartnered.StoresInSmall]: "STORE_IN",
+  [CapabilityPartnered.StoresInMedium]: "STORE_IN",
+  [CapabilityPartnered.StoresInLarge]: "STORE_IN",
   [CapabilityPartnered.Parkable]: "PARK",
 }

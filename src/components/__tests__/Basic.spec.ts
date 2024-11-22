@@ -48,6 +48,58 @@ const knifeField: Field = {
     identifiers: ["THE__TEST_KNIFE"]
 } as const
 
+const melonField: Field = {
+    card: {
+        item: {
+            id: ItemName.melon,
+            primaryKey: 'TEST_MELON',
+            secondaryKeys: [],
+            images: [],
+            isMovable: true,
+            activeAffordances: [CapabilityPartnered.StoresInMedium, CapabilityPartnered.StoresInSmall],
+        },
+        images: []
+    },
+    row: 0,
+    col: 1,
+    identifiers: ["THE__TEST_MELON"]
+} as const
+
+const suitcaseField: Field = {
+    card: {
+        item: {
+            id: ItemName.suitcase_blue,
+            primaryKey: 'TEST_SUITCASE',
+            secondaryKeys: [],
+            images: [],
+            isMovable: true,
+            activeAffordances: [CapabilityPartnered.StoresInMedium],
+            passiveAffordances: [PassiveAffordance.IsStorageSmall]
+        },
+        images: []
+    },
+    row: 0,
+    col: 1,
+    identifiers: ["THE__TEST_SUITCASE"]
+} as const
+
+const carField: Field = {
+    card: {
+        item: {
+            id: ItemName.car_black,
+            primaryKey: 'TEST_CAR',
+            secondaryKeys: [],
+            images: [],
+            isMovable: false,
+            passiveAffordances: [PassiveAffordance.IsStorageSmall, PassiveAffordance.IsStorageMedium]
+        },
+        images: []
+    },
+    row: 0,
+    col: 1,
+    identifiers: ["THE__TEST_CAR"]
+} as const
+
 const emptyField: Field = {
     card: undefined,
     row: 0,
@@ -65,10 +117,22 @@ const twoKiwisOneKnife: Grid = [
         knifeField, emptyField, kiwiField, kiwiField
     ]
 ]
+
+const gridCarMelonSuitcase: Grid = [
+    [
+        melonField, suitcaseField, carField
+    ]
+]
+
 const cutsAffordance = CapabilityPartnered.Cuts
 
 const levelKiwiKnifeGridBasic: LevelTemplate = {
     id: LevelTemplateName.cut_fruit_1,
+    grid: []
+}
+
+const levelCarBasic: LevelTemplate = {
+    id: LevelTemplateName.pack_car_x,
     grid: []
 }
 
@@ -111,6 +175,12 @@ describe('UTILS', () => {
         expect(
             getAvailableQuestsBasedOnLevel(levelKiwiKnifeGridBasic, twoKiwisOneKnife).length
         ).toEqual(2)
+    })
+    // quests pack car
+    it('getAvailableQuestsBasedOnLevel: car packing essential', () => {
+        expect(
+            getAvailableQuestsBasedOnLevel(levelCarBasic, gridCarMelonSuitcase).length
+        ).toEqual(4)
     })
 })
 

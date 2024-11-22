@@ -1,8 +1,8 @@
 import os
 import csv
 
-CSV_FILE = './game/language/translation_text/tpr-game - Sheet1.csv'
-MISSING_KEYS_FILE = 'missing_keys.txt'
+CSV_FILE = './src/assets/translations/translations.csv'
+MISSING_KEYS_FILE = './translation_scripts/missing_keys.txt'
 
 # loop missing keys
 # if they're not in the first col of the csv file, add them (as new row)

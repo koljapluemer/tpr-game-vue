@@ -2,6 +2,7 @@ import { type Quest, type AlchemyAction, type Grid, type Field, type LevelTempla
 import { toRaw } from "vue";
 import { getActionableActionsOnGrid } from "./alchemyUtils";
 import { CapabilityPartnered, capabilityVerbs } from "@/data/affordances";
+import { getTranslationForKey } from "./translationUtils";
 
 
 export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid): Quest[] {
@@ -22,7 +23,10 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid)
             })
         }
     })
-    return quests
+    const questsThatArePlayable = quests.filter(quest => {
+        getTranslationForKey(getQuestKey(quest), "ar") !== undefined
+    })
+    return questsThatArePlayable
 }
 
 // I thought I didn't need this, but if I have stuff like level-wide bans of move quests ets
