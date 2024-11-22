@@ -32,6 +32,7 @@ import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
 import SoundEffectPlayer from "./SoundEffectPlayer.vue";
 import QuestRenderer from "./QuestRenderer.vue";
+import { StandardSound } from "@/data/standardSounds";
 
 
 
@@ -85,10 +86,12 @@ function onDropOn(field: Field) {
                 }
                 if (!questWasDone) {
                     setIdentifiersForFields(grid.value)
-                    console.log('action did not solve quest')
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
                         console.log('quest now impossible')
                         endCurrentQuest(false)
+                        requestPlayStandard(StandardSound.Failure)
+                    } else {
+                        requestPlayStandard(StandardSound.Wrong)
                     }
                 }
             }
@@ -130,8 +133,12 @@ function endCurrentQuest(questWasSuccessful: boolean) {
 
 
 function handleSuccess() {
+    requestPlayStandard(StandardSound.Success)
+}
+
+function requestPlayStandard(sound: StandardSound) {
     if (soundEffectPlayer.value !== undefined) {
-        soundEffectPlayer.value.playSound()
+        soundEffectPlayer.value.playStandardSound(sound)
     }
 }
 
