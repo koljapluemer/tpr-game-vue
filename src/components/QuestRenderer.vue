@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 
-import { translationStore } from '@/translationStore';
+import { translationStore } from '@/stores/translationStore';
 import type { Quest } from '@/types';
 import { getQuestKey } from '@/utils/questUtils';
 import { getTranslationForKey } from '@/utils/translationUtils';

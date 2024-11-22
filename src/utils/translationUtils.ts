@@ -1,5 +1,5 @@
 import translationData from '@/assets/translations/translations.json'
-import { translationStore } from '@/translationStore'
+import { translationStore } from '@/stores/translationStore'
 
 export function getTranslationForKey(key: string, languageCode: string): string | undefined {
     const sentence = translationData.find((sentence) => sentence.key == key)

@@ -1,20 +1,19 @@
 <template>
-  <div class="bg-white p-1 min-h-32 min-w-32 w-32 h-32" @dragover.prevent @drop="onDrop($event)" v-if="field">
-    <small>
-    </small>
-    <div class="card flex bg-slate-200 shadow-sm rounded w-full h-full justify-center items-center" v-if="field.card"
-      :style="isBeingDragged
-        ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
-        : ''
-        " :draggable="isMovable" @dragstart="onDragStart($event)" @dragend="isBeingDragged = false">
+  <div class="bg-white p-1 h-32 aspect-square" @dragover.prevent @drop="onDrop($event)" v-if="field">
+    <div class="grow relative h-full w-full card rounded shadow-md bg-base-100" v-if="field.card" :style="isBeingDragged
+      ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
+      : ''
+      " :draggable="isMovable" @dragstart="onDragStart($event)" @dragend="isBeingDragged = false">
       <img v-for="img of field.card.images" :key="img.name" :src="'/assets/items/' + img.name + '.webp'"
-        class="object-contain w-24 h-24 absolute" :style="getImageStyle(img)" alt="" draggable="false" />
+        class="object-contain absolute" :style="getImageStyle(img)" alt="" draggable="false" />
     </div>
-
   </div>
 </template>
 
+
 <script setup lang="ts">
+// w-24 h-24 absolute
+import { levelStore } from "@/stores/levelStore";
 import type { Card, CardImage, Field } from "@/types";
 import { computed, ref, type PropType } from "vue";
 
@@ -23,9 +22,6 @@ const emit = defineEmits<{
   droppedOnField: Field
 }>();
 
-// const props = defineProps({
-//   field: Object as PropType<Field>,
-// });
 
 const props = defineProps<{
   field: Field
@@ -50,12 +46,18 @@ function onDrop(event: any) {
 }
 
 function getImageStyle(img: CardImage): string {
+  let maxWidth = '100%'
+  console.log('grid stuff', levelStore.currentLevel?.grid[0]?.length)
+  if (levelStore.currentLevel?.grid[0]?.length !== undefined) {
+    maxWidth = `${window.screen.width / levelStore.currentLevel?.grid[0]?.length}px`;
+
+  }
+  let style = `max-width: ${maxWidth}; max-height: 100%;left: 50%;transform: translate(-50%, -50%);top: 50%;`
   if (img.scale != undefined && img.offset != undefined) {
     // TODO: everything after 1st is randomly ignored xD
-    return `transform: scale(${img.scale}); left: ${img.offset[0]} px; top: ${img.offset[1]} px;`;
-  } else {
-    return "";
+    style += `transform: scale(${img.scale}); left: ${img.offset[0]} px; top: ${img.offset[1]} px;`;
   }
+  return style
 }
 
 const isMovable = computed(() => {

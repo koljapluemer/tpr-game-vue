@@ -54,8 +54,6 @@ export type Grid = Field[][]
 // Field that may contain a card
 export type Field = {
   card: Card | undefined
-  row: number
-  col: number
   identifiers: string[]
 }
 

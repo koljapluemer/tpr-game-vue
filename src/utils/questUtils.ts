@@ -3,7 +3,7 @@ import { toRaw } from "vue";
 import { getActionableActionsOnGrid } from "./alchemyUtils";
 import { CapabilityPartnered, capabilityVerbs } from "@/data/affordances";
 import { getTranslationForKey } from "./translationUtils";
-import { translationStore } from "@/translationStore";
+import { translationStore } from "@/stores/translationStore";
 
 
 export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid, returnOnlyPlayable = false): Quest[] {

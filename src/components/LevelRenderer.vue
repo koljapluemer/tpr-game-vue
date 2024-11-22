@@ -1,20 +1,17 @@
 <template>
-    <div class="flex flex-col items-center ">
-        <div class="">
-            <div class="min-h-32 h-32">
-                <QuestRenderer :quest="currentQuest" v-if="currentQuest"></QuestRenderer>
-            </div>
-
-            <div id="grid" class="flex items-center justify-center " v-if="grid">
-                <div class="flex flex-col gap-1 bg-base-200 shadow-xl p-2 my-2 card">
-                    <div class="flex flex-row gap-1" v-for="row in grid">
-                        <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
-                            :field="field" v-for="field of row"></FieldRenderer>
-                    </div>
-                </div>
-            </div>
+    <div class="flex flex-col items-center w-full h-full max-h-full max-w-full">
+        <div class="min-h-20 h-20">
+            <QuestRenderer :quest="currentQuest" v-if="currentQuest"></QuestRenderer>
         </div>
 
+        <div id="grid" class="flex flex-col items-center justify-center w-full h-full gap-1 p-1 max-h-full max-w-full"
+            v-if="grid">
+            <div class="flex flex-row gap-1 bg-base-300 p-1 justify-center" v-for="row in grid">
+                <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
+                    :field="field" v-for="field of row"></FieldRenderer>
+            </div>
+
+        </div>
     </div>
 
     <SoundEffectPlayer ref="soundEffectPlayer"></SoundEffectPlayer>
@@ -50,6 +47,9 @@ const currentQuest = ref(undefined as Quest | undefined)
 const lastQuest = ref(undefined as Quest | undefined)
 
 const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
+
+const columns = ref(2)
+const rows = ref(2)
 
 grid.value = getGridFromLevelTemplate(props.level)
 updateGrid()
@@ -110,6 +110,16 @@ function updateGrid() {
         availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, true)
     }
 }
+
+const flatGrid = computed((): Field[] => {
+    const flatGrid: Field[] = []
+    grid.value?.forEach(row => {
+        row.forEach(cell => {
+            flatGrid.push(cell)
+        })
+    })
+    return flatGrid
+})
 
 
 function startRandomQuestFromList() {

@@ -1,7 +1,5 @@
 <template>
-  <div id="game" class="m-auto">
-    <GameRenderer></GameRenderer>
-  </div>
+  <GameRenderer></GameRenderer>
 </template>
 
 <script setup lang="ts">
