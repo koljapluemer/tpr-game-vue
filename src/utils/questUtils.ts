@@ -38,16 +38,12 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid,
 export function isQuestStillPossible(quest: Quest, grid: Grid): boolean {
     const actions = getActionableActionsOnGrid(grid)
     let isPossible = false
-    console.log('checking whether quest is still possible', quest)
     actions.forEach(action => {
         // TODO: what about quests where the og was "put a flower in x" and now only "put the flower in x" is possible??
         if (action.affordance == quest.requiredAffordance) {
-            console.log('found affordance match')
             if (quest.requiredReceiverKey === undefined || quest.requiredReceiverKey !== undefined && action.receiverKeys.includes(quest.requiredReceiverKey)) {
-                console.log('found receiver match')
                 if (quest.requiredSenderKey === undefined || quest.requiredSenderKey !== undefined && action.senderKeys.includes(quest.requiredSenderKey)) {
                     isPossible = true
-                    console.log('found sender match')
                 }
             }
         }

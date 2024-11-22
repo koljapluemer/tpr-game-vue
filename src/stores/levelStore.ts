@@ -18,14 +18,12 @@ export const levelStore = reactive({
         // if current level, check if we're to repeat it
         if (this.currentLevel?.props?.includes(LevelProperty.RepeatOnce)) {
             if (this.currentLevelRepetitionCounter == 0) {
-                console.log('repeating level once')
                 this.repeatCurrentLevel()
                 return
             }
         }
         if (this.currentLevel?.props?.includes(LevelProperty.RepeatFourTimes)) {
             if (this.currentLevelRepetitionCounter < 3) {
-                console.log('repeating 4 times')
                 this.repeatCurrentLevel()
                 return
             }

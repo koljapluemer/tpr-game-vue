@@ -4,9 +4,10 @@
             <QuestRenderer :quest="currentQuest" v-if="currentQuest"></QuestRenderer>
         </div>
 
-        <div id="grid" class="flex flex-col items-center justify-center w-full h-full gap-1 p-1 max-h-full max-w-full"
+        <div id="grid"
+            class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 "
             v-if="grid">
-            <div class="flex flex-row gap-1 bg-base-300 p-1 justify-center" v-for="row in grid">
+            <div class="flex flex-row gap-2 justify-center" v-for="row in grid">
                 <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
                     :field="field" v-for="field of row"></FieldRenderer>
             </div>
@@ -78,7 +79,6 @@ function onDropOn(field: Field) {
                 for (const action of actionsThatHappenend) {
                     questWasDone = actionFulfilledQuest(action, currentQuest.value)
                     if (questWasDone) {
-                        console.log('quest succeeded by action, ending...')
                         endCurrentQuest(true)
                         break
                     }
@@ -87,7 +87,6 @@ function onDropOn(field: Field) {
                 if (!questWasDone) {
                     setIdentifiersForFields(grid.value)
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
-                        console.log('quest now impossible')
                         endCurrentQuest(false)
                         requestPlayStandard(StandardSound.Failure)
                     } else {

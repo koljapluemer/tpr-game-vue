@@ -18,7 +18,6 @@ function playSound(soundPath: string) {
 }
 
 function _play(href: string) {
-    console.log('playing href', href)
     let audio = new Audio(href) as HTMLAudioElement
 
     audio.addEventListener('ended', () => {
