@@ -19,7 +19,7 @@ def main():
     with open(CSV_FILE, 'r') as f:
         reader = csv.reader(f)
         header = next(reader)
-        language_codes = header[2:]
+        language_codes = header[1:]
 
     # get api data from api.txt
     with open('.api.txt', 'r') as f:
@@ -30,6 +30,7 @@ def main():
     languages_speakers = {
         "ar": ["Ahmed", "Murza", "Farida", "Lamiia"],
         "de": ["Bernd", "Christoph", "Claus", "Conrad", "Dietrich", "Helmut", "Ilma", "Katja", "Louisa", "Magda", "Tanja"],
+        "et": ["Kert", "Anu"]
     }
 
 
@@ -37,7 +38,8 @@ def main():
     for language_code in language_codes:
 
         # skip en
-        if not language_code in ["ar", "de"]:
+        if not language_code in ["ar", "de", "et"]:
+            print("skipping, because lang code is", language_code)
             continue
         # get all rows for this language
         with open(CSV_FILE, 'r') as f:
@@ -81,7 +83,7 @@ def main():
                                 file_content = requests.get(file_url).content
                                 with open(file_path, 'wb') as file:
                                     file.write(file_content)
-
+              
 
 def from_string_to_filename(dirty):
     dirty = dirty.replace("?", "﹖")
