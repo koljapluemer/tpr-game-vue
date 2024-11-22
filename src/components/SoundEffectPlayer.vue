@@ -8,6 +8,7 @@ const isPlaying = ref(false)
 let audio: HTMLAudioElement | null = null;
 const successSrc = new URL('@/assets/sounds/success_short.mp3', import.meta.url).href;
 
+
 onMounted(() => {
     // Initialize the audio object
     audio = new Audio(successSrc);

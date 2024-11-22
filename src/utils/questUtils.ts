@@ -86,12 +86,12 @@ export function actionFulfilledQuest(action: AlchemyAction, quest: Quest): boole
         questFufilled = true;
         // if there is a required sender key, check for that
         // (but if it's unset, the quest doesn't care about the sender, so don't check)
-        if (quest.requiredSenderKey) {
+        if (quest.requiredSenderKey !== undefined) {
             if (!(action.senderKeys.includes(quest.requiredSenderKey))) {
                 questFufilled = false
             }
         }
-        if (quest.requiredReceiverKey) {
+        if (quest.requiredReceiverKey !== undefined) {
             if (!(action.receiverKeys && action.receiverKeys.includes(quest.requiredReceiverKey))) {
                 questFufilled = false
             }

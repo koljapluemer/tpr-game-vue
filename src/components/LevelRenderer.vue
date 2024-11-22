@@ -84,6 +84,7 @@ function onDropOn(field: Field) {
 
                 }
                 if (!questWasDone) {
+                    setIdentifiersForFields(grid.value)
                     console.log('action did not solve quest')
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
                         console.log('quest now impossible')
