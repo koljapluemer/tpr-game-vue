@@ -39,6 +39,8 @@ const props = defineProps<{
     level: LevelTemplate;
 }>();
 
+const emit = defineEmits(['noMoreOpenQuests'])
+
 const grid = ref(undefined as Grid | undefined)
 const availableActions = ref([] as AlchemyAction[])
 const availableQuests = ref([] as Quest[])
@@ -90,7 +92,7 @@ function updateGrid() {
     if (grid.value) {
         setIdentifiersForFields(grid.value)
         availableActions.value = getActionableActionsOnGrid(grid.value)
-        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, true)
+        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)
     }
 }
 
@@ -100,6 +102,8 @@ function startRandomQuestFromList() {
     if (questsWithoutLast.length > 0) {
         currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
         lastQuest.value = currentQuest.value
+    } else {
+        emit("noMoreOpenQuests")
     }
 }
 
