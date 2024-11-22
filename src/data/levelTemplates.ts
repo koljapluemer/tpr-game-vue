@@ -103,13 +103,16 @@ export const levelTemplates: LevelTemplate[] = [
     id: LevelTemplateName.mixed_in_suitcase,
     grid: [
       [[colorfulSuitcases], [basicPackingMix], [basicPackingMix]]
-    ]
+    ],
+    props: [LevelProperty.RepeatOnce]
   },
   {
     id: LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
     grid: [
       [[colorfulCars], [[]], [[]]],
       [[basicPackingMix], [basicPackingMix], [basicPackingMix]]
-    ]
+    ],
+    props: [LevelProperty.RepeatFourTimes]
+
   },
 ]
