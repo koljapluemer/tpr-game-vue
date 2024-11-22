@@ -5,7 +5,7 @@ import type { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'
 
 export const LanguageCode = {
-  "de": "German", "ar": "Arabic", "et": "Estonian"
+  "German": "de", "Arabic": "ar", "Estonian": "et"
 }
 
 export type LanguageCodeType = (typeof LanguageCode)[keyof typeof LanguageCode]

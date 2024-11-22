@@ -22,7 +22,7 @@ function requestLangChange(event: any) {
   <footer class="footer p-2">
     <select class="select select-bordered w-full max-w-xs" v-model="languageSelected"
       @change="requestLangChange($event)">
-      <option v-for="(lang, code) in LanguageCode" :value="code">{{ lang }}</option>
+      <option v-for="(code, lang) in LanguageCode" :value="code">{{ lang }}</option>
     </select>
   </footer>
 </template>

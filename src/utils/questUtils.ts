@@ -25,7 +25,7 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid,
         }
     })
     const questsThatArePlayable = quests.filter(quest => {
-        return getTranslationForKey(getQuestKey(quest), translationStore.activeLanguageCode) !== undefined
+        return getTranslationForKey(getQuestKey(quest)) !== undefined
     })
 
     if (returnOnlyPlayable) {
