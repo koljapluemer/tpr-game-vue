@@ -6,7 +6,8 @@
     <div class="grow relative h-full w-full card rounded shadow-md bg-base-100" v-if="field.card" :style="isBeingDragged
       ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
       : ''
-      " :draggable="isMovable" @dragstart="onDragStart($event)" @dragend="isBeingDragged = false">
+      " :draggable="isMovable" @dragstart="onDragStart($event)" @dragend="isBeingDragged = false"
+      style='touch-action: none;'>
       <img v-for="img of field.card.images" :key="img.name" :src="'/assets/items/' + img.name + '.webp'"
         class="object-contain absolute" :style="getImageStyle(img)" alt="" draggable="false" />
     </div>
