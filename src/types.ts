@@ -4,6 +4,12 @@ import type { CapabilityPartnered, PassiveAffordance } from './data/affordances'
 import type { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'
 
+export const LanguageCode = {
+  "de": "German", "ar": "Arabic", "et": "Estonian"
+}
+
+export type LanguageCodeType = (typeof LanguageCode)[keyof typeof LanguageCode]
+
 export interface Item {
   id: ItemName
   primaryKey: string

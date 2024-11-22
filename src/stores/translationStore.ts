@@ -1,3 +1,4 @@
+import type { LanguageCodeType } from '@/types'
 import { reactive } from 'vue'
 
 interface TranslationAudio {
@@ -15,7 +16,7 @@ export const translationStore = reactive({
     missingTranslationKeys: [] as string[],
     missingTranslationTexts: [] as TranslationText[],
     missingTranslationAudios: [] as TranslationAudio[],
-    activeLanguageCode: "ar" as string,
+    activeLanguageCode: undefined as LanguageCodeType | undefined,
 
     addMissingTranslationKey(key: string) {
         if (!this.missingTranslationKeys.includes(key)) {
@@ -24,10 +25,15 @@ export const translationStore = reactive({
         }
     },
 
-    addMissingTranslationText(key: string, languageCode: string) {
+    changeLangCode(code: LanguageCodeType) {
+        console.log('code changed', code)
+        this.activeLanguageCode = code
+    },
+
+    addMissingTranslationText(key: string) {
         const tt: TranslationText = {
             key: key,
-            languageCode: languageCode
+            languageCode: this.activeLanguageCode!
         }
         if (!this.missingTranslationTexts.includes(tt)) {
             this.missingTranslationTexts.push(tt)

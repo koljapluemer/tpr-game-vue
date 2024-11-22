@@ -1,5 +1,5 @@
 <template>
-  <div id="level" class="m-auto h-full w-full max-w-full max-h-full" v-if="gameStarted">
+  <div v-if="gameStarted">
     <LevelRenderer :level="levelStore.currentLevel" v-if="levelStore.currentLevel" :key="levelStore.levelLoadedAt"
       @noMoreOpenQuests="onLevelHasNoMoreOpenQuests">
     </LevelRenderer>
@@ -25,7 +25,7 @@ import { ref } from "vue";
 import LevelRenderer from "./LevelRenderer.vue";
 
 
-const gameStarted = ref(true)
+const gameStarted = ref(false)
 
 function onLevelHasNoMoreOpenQuests() {
   levelStore.loadNextLevel()
