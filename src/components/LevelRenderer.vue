@@ -38,6 +38,8 @@
 
     </div>
 
+    <SoundEffectPlayer ref="soundEffectPlayer"></SoundEffectPlayer>
+    <button class="btn" @click="handleSuccess">play success</button>
 
 </template>
 
@@ -51,6 +53,8 @@ import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey } fro
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { getTranslationForKey } from "@/utils/translationUtils";
 import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
+import SoundEffectPlayer from "./SoundEffectPlayer.vue";
+
 
 const props = defineProps<{
     level: LevelTemplate;
@@ -63,6 +67,8 @@ const availableQuests = ref([] as Quest[])
 const currentQuest = ref(undefined as Quest | undefined)
 const lastQuest = ref(undefined as Quest | undefined)
 const questSoundPlaying = ref(false)
+
+const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
 
 grid.value = getGridFromLevelTemplate(props.level)
 updateGrid()
@@ -146,6 +152,12 @@ function playQuestAudio() {
         // @ts-ignore: let's trust that this is in fact an audio player, yes
         audioPlayer.play();
         questSoundPlaying.value = true;
+    }
+}
+
+function handleSuccess() {
+    if (soundEffectPlayer.value !== undefined) {
+        soundEffectPlayer.value.playSound()
     }
 }
 
