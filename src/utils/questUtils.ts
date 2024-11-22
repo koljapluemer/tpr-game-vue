@@ -3,6 +3,7 @@ import { toRaw } from "vue";
 import { getActionableActionsOnGrid } from "./alchemyUtils";
 import { CapabilityPartnered, capabilityVerbs } from "@/data/affordances";
 import { getTranslationForKey } from "./translationUtils";
+import { translationStore } from "@/translationStore";
 
 
 export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid, returnOnlyPlayable = false): Quest[] {
@@ -24,7 +25,7 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid,
         }
     })
     const questsThatArePlayable = quests.filter(quest => {
-        return getTranslationForKey(getQuestKey(quest), "ar") !== undefined
+        return getTranslationForKey(getQuestKey(quest), translationStore.activeLanguageCode) !== undefined
     })
 
     if (returnOnlyPlayable) {

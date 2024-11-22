@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center ">
         <div class="">
-            <div class="min-h-24 h-24">
+            <div class="min-h-32 h-32">
                 <QuestRenderer :quest="currentQuest" v-if="currentQuest"></QuestRenderer>
             </div>
 
@@ -107,7 +107,7 @@ function updateGrid() {
     if (grid.value) {
         setIdentifiersForFields(grid.value)
         availableActions.value = getActionableActionsOnGrid(grid.value)
-        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)
+        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, true)
     }
 }
 

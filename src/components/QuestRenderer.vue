@@ -14,7 +14,7 @@
             </svg>
 
         </button>
-        <div class="card-title">
+        <div class="card-title text-3xl">
             {{ questPrompt }}
         </div>
     </div>
@@ -24,11 +24,12 @@
         Your browser does not support the audio tag.
     </audio>
 
-    <small>{{ getQuestKey(props.quest) }}</small>
+    <!-- <small>{{ getQuestKey(props.quest) }}</small> -->
 </template>
 
 <script setup lang="ts">
 
+import { translationStore } from '@/translationStore';
 import type { Quest } from '@/types';
 import { getQuestKey } from '@/utils/questUtils';
 import { getTranslationForKey } from '@/utils/translationUtils';
@@ -59,7 +60,7 @@ watch(props.quest, () => {
 
 const questPrompt = computed(() => {
     if (props.quest) {
-        return getTranslationForKey(getQuestKey(props.quest), "ar")
+        return getTranslationForKey(getQuestKey(props.quest), translationStore.activeLanguageCode)
     } else {
         return undefined
     }

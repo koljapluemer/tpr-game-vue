@@ -15,6 +15,7 @@ export const translationStore = reactive({
     missingTranslationKeys: [] as string[],
     missingTranslationTexts: [] as TranslationText[],
     missingTranslationAudios: [] as TranslationAudio[],
+    activeLanguageCode: "ar" as string,
 
     addMissingTranslationKey(key: string) {
         if (!this.missingTranslationKeys.includes(key)) {
