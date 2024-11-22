@@ -1,4 +1,4 @@
-import type { LanguageCodeType } from '@/types'
+import { LanguageCode, type LanguageCodeType } from '@/types'
 import { reactive } from 'vue'
 
 interface TranslationAudio {
@@ -16,7 +16,7 @@ export const translationStore = reactive({
     missingTranslationKeys: [] as string[],
     missingTranslationTexts: [] as TranslationText[],
     missingTranslationAudios: [] as TranslationAudio[],
-    activeLanguageCode: undefined as LanguageCodeType | undefined,
+    activeLanguageCode: LanguageCode.Arabic,
 
     addMissingTranslationKey(key: string) {
         if (!this.missingTranslationKeys.includes(key)) {
