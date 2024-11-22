@@ -5,7 +5,7 @@ import { CapabilityPartnered, capabilityVerbs } from "@/data/affordances";
 import { getTranslationForKey } from "./translationUtils";
 
 
-export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid): Quest[] {
+export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid, returnOnlyPlayable = false): Quest[] {
     const quests: Quest[] = []
     const actions = getActionableActionsOnGrid(grid)
     actions.forEach((action) => {
@@ -24,9 +24,14 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid)
         }
     })
     const questsThatArePlayable = quests.filter(quest => {
-        getTranslationForKey(getQuestKey(quest), "ar") !== undefined
+        return getTranslationForKey(getQuestKey(quest), "ar") !== undefined
     })
-    return questsThatArePlayable
+
+    if (returnOnlyPlayable) {
+        return questsThatArePlayable
+    } else {
+        return quests
+    }
 }
 
 // I thought I didn't need this, but if I have stuff like level-wide bans of move quests ets

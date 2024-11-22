@@ -15,5 +15,5 @@ export function getTranslationForKey(key: string, languageCode: string): string 
         return undefined
 
     }
-
 }
+

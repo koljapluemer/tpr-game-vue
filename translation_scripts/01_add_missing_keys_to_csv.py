@@ -17,7 +17,6 @@ missing_keys = list(set(missing_keys))
 missing_keys.sort()
 
 
-
 with open(CSV_FILE, 'r') as f:
     reader = csv.reader(f)
     rows = list(reader)
