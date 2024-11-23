@@ -131,6 +131,9 @@ const levelCarBasic: LevelTemplate = {
 const busLevelTemplate = getLevelTemplateByID(LevelTemplateName.board_bus_front_back)
 const busLevelGrid = getGridFromLevelTemplate(busLevelTemplate!) 
 
+const busLevelTemplate3 = getLevelTemplateByID(LevelTemplateName.board_bus_front_back_middle)
+const busLevelGrid3 = getGridFromLevelTemplate(busLevelTemplate3!) 
+
 
 describe('UTILS', () => {
     // alchemy
@@ -197,6 +200,20 @@ describe('UTILS', () => {
             "A__BUS",
             "THE__CHARACTER_WOMAN",
             "THE__BUS__AT_BACK",
+            "THE__BUS__AT_FRONT",
+          ])
+    })
+
+    it('bus identifier generations correct for front-back-middle', () => {
+        expect(
+            setIdentifiersForFields(busLevelGrid3, true)
+        ).toEqual([
+            "A__BUS",
+            "A__BUS",
+            "A__BUS",
+            "THE__CHARACTER_WOMAN",
+            "THE__BUS__AT_BACK",
+            "THE__BUS__IN_MIDDLE",
             "THE__BUS__AT_FRONT",
           ])
     })
