@@ -1,6 +1,6 @@
 // levelTemplates.js
 
-import { LevelProperty, type LevelTemplate, type Topic } from '@/types'
+import { type FieldProperty, FieldPropertyName, LevelProperty, type LevelTemplate, type Topic } from '@/types'
 import { ItemName } from './items'
 
 const thingsThatFitInCar: ItemName[] = [
@@ -223,13 +223,13 @@ export const levelTemplates: LevelTemplate[] = [
     id: LevelTemplateName.park_around_building,
     grid: [
       [
-        [[]], [[ItemName.parking_lot]], [[]]
+        [[]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]   ], [[]]
       ],
       [
-        [[ItemName.parking_lot]], [[ItemName.house]], [[ItemName.parking_lot]]
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[ItemName.house]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]]
       ],
       [
-        [[ItemName.car_old_movable]], [[ItemName.parking_lot]], [[]]
+        [[ItemName.car_old_movable]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[]]
       ],
     ]
 

@@ -26,14 +26,21 @@ export type Item = {
   load_when_unlocked?: ItemName
 }
 
-export enum FieldProperty {
+export enum FieldPropertyName {
   DisableMovementQuests,
+  IdentifyPositionInRelationToCoordinate
+
 }
 
 export enum LevelProperty {
   DisableMovementQuests,
   DisableSecondaryKeyUsage,
   GenerateRelativePositions
+}
+
+export type FieldProperty = {
+  name: FieldPropertyName,
+  data?: any
 }
 
 export type LevelTemplateGridRowField = [
@@ -63,6 +70,7 @@ export type Grid = Field[][]
 export type Field = {
   card: Card | undefined
   identifiers: string[]
+  fieldProperties?: FieldProperty[]
 }
 
 // Card interface with mutable state

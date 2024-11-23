@@ -1,5 +1,5 @@
 
-import { LevelProperty, type Field, type Grid, type Item } from "@/types";
+import { FieldPropertyName, LevelProperty, type Field, type Grid, type Item } from "@/types";
 
 export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]):string[] {
     const generateRelativePositions = levelProps?.includes(LevelProperty.GenerateRelativePositions)
@@ -33,6 +33,58 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
             identifiers = identifiers.concat(field.identifiers)
         })
     })
+
+    // position relative to something (BEHIND__HOUSE)
+    grid.forEach((row, rowIndex) => {
+        row.forEach((field, colIndex) => {
+            const relativeRelationProp = field.fieldProperties?.find(prop => {
+                return prop.name == FieldPropertyName.IdentifyPositionInRelationToCoordinate
+            })
+            if (relativeRelationProp) {
+                if (field.card && field.card.item) {
+                    const key = field.card.item.primaryKey
+                    const rowOfInterest = relativeRelationProp.data!.row 
+                    const colOfInterest = relativeRelationProp.data!.col
+                    const fieldOfInterest = getFieldAtPosition(grid, rowOfInterest , colOfInterest ) 
+                    if (fieldOfInterest) {
+                        // left of thing
+                        if (rowOfInterest === rowIndex && colOfInterest - colIndex === 1) {
+                            fieldOfInterest.identifiers.forEach(targetIdentifier => {
+                                const newIdentifier = 'THE__' + key + '__LEFT_OF__' + targetIdentifier
+                                field.identifiers.push(newIdentifier)
+                                identifiers.push(newIdentifier)
+                            })
+                        }
+                        // right of thing
+                        if (rowOfInterest === rowIndex && colOfInterest - colIndex === -1) {
+                            fieldOfInterest.identifiers.forEach(targetIdentifier => {
+                                const newIdentifier = 'THE__' + key + '__RIGHT_OF__' + targetIdentifier
+                                field.identifiers.push(newIdentifier)
+                                identifiers.push(newIdentifier)
+                            })
+                        }
+                        // top of thing
+                        if (rowOfInterest - rowIndex === 1 && colOfInterest === colIndex ) {
+                            fieldOfInterest.identifiers.forEach(targetIdentifier => {
+                                const newIdentifier = 'THE__' + key + '__BEHIND/TOP_OF__' + targetIdentifier
+                                field.identifiers.push(newIdentifier)
+                                identifiers.push(newIdentifier)
+                            })
+                        }
+                        // under thing
+                        if (rowOfInterest - rowIndex === -1 && colOfInterest === colIndex ) {
+                            fieldOfInterest.identifiers.forEach(targetIdentifier => {
+                                const newIdentifier = 'THE__' + key + '__BELOW/INFRONT_OF__' + targetIdentifier
+                                field.identifiers.push(newIdentifier)
+                                identifiers.push(newIdentifier)
+                            })
+                        }
+                    }
+                }
+            }
+        })
+    })
+
 
     if (generateRelativePositions){
         grid.forEach((row, rowIndex) => {
@@ -85,6 +137,8 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
         })
         })
     }
+
+    console.log('identifiers', identifiers)
 
     return identifiers
 }

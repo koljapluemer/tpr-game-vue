@@ -31,9 +31,8 @@ export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
       }
       const levelGridField: Field = {
         card: card,
-        row: rowCounter,
-        col: cellCounter,
-        identifiers: []
+        identifiers: [],
+        fieldProperties: cell[1]
       }
       levelGridRow.push(levelGridField)
       cellCounter += 1
