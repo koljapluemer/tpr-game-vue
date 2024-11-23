@@ -18,7 +18,11 @@ export enum ItemName {
   parking_lot,
   car_old_movable,
   shoes,
-  water_bottle
+  water_bottle,
+  car_mustang_closed,
+  car_mustang_open,
+  car_keys,
+  key
 }
 
 export const items: Item[] = [
@@ -158,4 +162,28 @@ export const items: Item[] = [
     images: ['shoes'],
     activeAffordances: [CapabilityPartnered.StoresInSmall, CapabilityPartnered.StoresInMedium],
   },
+  {
+    id: ItemName.car_mustang_closed,
+    primaryKey: 'CAR',
+    isMovable: false,
+    images: ['mustang-closed'],
+    passiveAffordances: [PassiveAffordance.Unlockable],
+    load_when_unlocked: ItemName.car_mustang_open
+
+  },
+  {
+    id: ItemName.car_mustang_open,
+    primaryKey: 'CAR',
+    isMovable: false,
+    images: ['mustang-open'],
+    passiveAffordances: [PassiveAffordance.Lockable],
+    load_when_locked: ItemName.car_mustang_closed
+  },
+  {
+    id: ItemName.car_keys,
+    primaryKey: 'CAR_KEYS',
+    isMovable: true,
+    images: ['car_keys'],
+    activeAffordances: [CapabilityPartnered.Locks, CapabilityPartnered.Unlocks]
+  }
 ] as const

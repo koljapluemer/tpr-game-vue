@@ -19,8 +19,11 @@ export type Item = {
   activeAffordances?: CapabilityPartnered[]
   passiveAffordances?: PassiveAffordance[]
   isMovable?: boolean
-  load_when_cut?: ItemName
   color?: string
+
+  load_when_cut?: ItemName
+  load_when_locked?: ItemName
+  load_when_unlocked?: ItemName
 }
 
 export enum FieldProperty {

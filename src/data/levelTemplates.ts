@@ -26,6 +26,7 @@ export enum LevelTemplateName {
   shoes_in_car,
   bottle_in_car,
   shoes_suitcase_etc_mixed_in_car,
+  car_lock_unlock,
 }
 
 export const topics: Topic[] = [
@@ -58,12 +59,18 @@ export const topics: Topic[] = [
     progressions: [
       [
         LevelTemplateName.cut_fruit_1,
-
       ]
     ],
     finalPracticeRotation: [
       LevelTemplateName.cut_fruit_1,
     ]
+  },
+  {
+    id: "lock-unlock",
+    progressions: [
+      [LevelTemplateName.car_lock_unlock]
+    ],
+    finalPracticeRotation: [LevelTemplateName.car_lock_unlock]
   }
 
 ]
@@ -140,4 +147,16 @@ export const levelTemplates: LevelTemplate[] = [
       [[basicPackingMix], [basicPackingMix], [basicPackingMix]]
     ],
   },
+  // lock/unlock
+  {
+    id: LevelTemplateName.car_lock_unlock,
+    grid: [
+      [
+        [[ItemName.car_keys]]
+      ],
+      [
+        [[ItemName.car_mustang_open]]
+      ]
+    ]
+  }
 ]

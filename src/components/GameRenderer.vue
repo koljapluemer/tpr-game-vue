@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full justify-center items-center flex gap-2 flex-row" v-if="isModePickingWhatToPlayNext">
+  <div class="justify-center items-center flex gap-2 flex-row mt-20" v-if="isModePickingWhatToPlayNext">
     <button class="btn" @click="selectLevel">More of the same!</button>
     <button class="btn" @click="selectTopic">Something new!</button>
   </div>
@@ -20,7 +20,10 @@ import LevelRenderer from './LevelRenderer.vue';
 const { pickRandom } = useArrayUtils()
 const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
-const currentTopic = ref(undefined as Topic | undefined)
+
+// const currentTopic = ref(undefined as Topic | undefined)
+
+const currentTopic = ref(topics[2] as Topic | undefined)
 const lastPlayedTopic = ref(undefined as Topic | undefined)
 
 const currentLevel = ref(undefined as LevelTemplate | undefined)
@@ -63,7 +66,7 @@ function onLevelHasNoMoreOpenQuests() {
 }
 
 onMounted(() => {
-  selectTopic()
+  // selectTopic()
   selectLevel()
 })
 

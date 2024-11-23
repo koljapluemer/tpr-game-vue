@@ -106,7 +106,8 @@ function updateGrid() {
     if (grid.value) {
         setIdentifiersForFields(grid.value)
         availableActions.value = getActionableActionsOnGrid(grid.value)
-        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, true)
+        // TODO: change this to true for production
+        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)
     }
 }
 
