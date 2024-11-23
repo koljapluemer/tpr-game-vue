@@ -24,7 +24,7 @@ function requestLangChange(event: any) {
       @change="requestLangChange($event)">
       <option v-for="(code, lang) in LanguageCode" :value="code">{{ lang }}</option>
     </select>
-    <small>v.2024-11-23.2</small>
+    <small>v.2024-11-23.3</small>
   </footer>
 </template>
 
