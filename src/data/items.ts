@@ -141,7 +141,6 @@ export const items: Item[] = [
     primaryKey: 'CAR',
     images: ['car_blue_old_crop'],
     activeAffordances: [CapabilityPartnered.Parkable],
-
     color: 'blue',
   },
   {

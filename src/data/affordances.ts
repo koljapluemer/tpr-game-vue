@@ -27,10 +27,11 @@ export const affordancePartnerings = {
   [CapabilityPartnered.StoresInSmall]: PassiveAffordance.IsStorageSmall,
   [CapabilityPartnered.StoresInMedium]: PassiveAffordance.IsStorageMedium,
   [CapabilityPartnered.StoresInLarge]: PassiveAffordance.IsStorageLarge,
-  [CapabilityPartnered.Parkable]: PassiveAffordance.IsStorageLarge,
+  [CapabilityPartnered.Parkable]: PassiveAffordance.IsParkingSpace,
   [CapabilityPartnered.Unlocks]: PassiveAffordance.Unlockable,
   [CapabilityPartnered.Locks]: PassiveAffordance.Lockable,
-  [CapabilityPartnered.Boards]: PassiveAffordance.IsBoardable
+  [CapabilityPartnered.Boards]: PassiveAffordance.IsBoardable,
+
 } as const
 
 

@@ -29,7 +29,8 @@ export enum LevelTemplateName {
   car_lock_unlock,
   board_a_bus,
   board_bus_front_back,
-  board_bus_front_back_middle
+  board_bus_front_back_middle,
+  park_around_building
 }
 
 export const topics: Topic[] = [
@@ -92,8 +93,16 @@ export const topics: Topic[] = [
       ]
     ],
     finalPracticeRotation: [LevelTemplateName.board_bus_front_back_middle, LevelTemplateName.board_bus_front_back]
+  },
+  {
+    id: "park-behind-left-right-front",
+    progressions: [
+      [
+      LevelTemplateName.park_around_building
+      ]
+    ],
+    finalPracticeRotation: [LevelTemplateName.park_around_building]
   }
-
 ]
 
 export const levelTemplates: LevelTemplate[] = [
@@ -114,14 +123,6 @@ export const levelTemplates: LevelTemplate[] = [
     grid: [
       [[[]], [colorfulCars], [colorfulCars], [[]]],
       [[thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar]],
-    ],
-  },
-  {
-    id: LevelTemplateName.park_car_x,
-    grid: [
-      [[[]], [[ItemName.parking_lot]], [[]]],
-      [[[ItemName.parking_lot]], [[ItemName.house]], [[ItemName.parking_lot]]],
-      [[[ItemName.car_old_movable]], [[ItemName.parking_lot]], [[]]],
     ],
   },
   // first progression
@@ -217,4 +218,20 @@ export const levelTemplates: LevelTemplate[] = [
       ],
     ]
   },
+  // parking
+  {
+    id: LevelTemplateName.park_around_building,
+    grid: [
+      [
+        [[]], [[ItemName.parking_lot]], [[]]
+      ],
+      [
+        [[ItemName.parking_lot]], [[ItemName.house]], [[ItemName.parking_lot]]
+      ],
+      [
+        [[ItemName.car_old_movable]], [[ItemName.parking_lot]], [[]]
+      ],
+    ]
+
+  }
 ]
