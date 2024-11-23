@@ -28,7 +28,8 @@ export type Item = {
 
 export enum FieldPropertyName {
   DisableMovementQuests,
-  IdentifyPositionInRelationToCoordinate
+  IdentifyPositionInRelationToCoordinate,
+  ForceUniqueItem
 
 }
 

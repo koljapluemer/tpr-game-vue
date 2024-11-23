@@ -31,6 +31,10 @@ export function executeActionEffects(action: AlchemyAction) {
         ) {
             senderField.card = undefined
         }
+        // GIVE/TAKE 
+        if (action.affordance === CapabilityPartnered.Giveable) {
+            senderField.card = undefined
+        }
         // LOCK/UNLOCK
         if (action.affordance === CapabilityPartnered.Locks) {
             if (receiverField.card?.item.load_when_locked) {

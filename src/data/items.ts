@@ -26,7 +26,11 @@ export enum ItemName {
   bus_mid,
   bus_large_yellow_red,
   bus_blue,
-  character_woman
+  character_woman,
+  cat_food,
+  cat_grey,
+  cat_brown,
+  cat_white
 }
 
 export const items: Item[] = [
@@ -216,5 +220,33 @@ export const items: Item[] = [
     isMovable: false,
     images: ['bus_blue'],
     passiveAffordances: [PassiveAffordance.IsBoardable]
+  },
+  {
+    id: ItemName.cat_food,
+    primaryKey: 'CAT_FOOD',
+    isMovable: true,
+    images: ['cat_food'],
+    activeAffordances: [CapabilityPartnered.Giveable]
+  },
+  {
+    id: ItemName.cat_brown,
+    primaryKey: 'CAT',
+    color: 'BROWN',
+    images: ['cat_brown'],
+    passiveAffordances: [PassiveAffordance.Takes]
+  },
+  {
+    id: ItemName.cat_white,
+    primaryKey: 'CAT',
+    color: 'WHITE',
+    images: ['cat_white'],
+    passiveAffordances: [PassiveAffordance.Takes]
+  },
+  {
+    id: ItemName.cat_grey,
+    primaryKey: 'CAT',
+    color: 'GREY',
+    images: ['cat_grey'],
+    passiveAffordances: [PassiveAffordance.Takes]
   },
 ] as const

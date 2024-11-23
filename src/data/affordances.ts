@@ -7,6 +7,7 @@ export enum CapabilityPartnered {
   Locks,
   Unlocks,
   Boards,
+  Giveable,
 }
 
 
@@ -18,7 +19,8 @@ export enum PassiveAffordance {
   IsParkingSpace,
   Unlockable,
   Lockable,
-  IsBoardable
+  IsBoardable,
+  Takes
 }
 
 
@@ -31,6 +33,7 @@ export const affordancePartnerings = {
   [CapabilityPartnered.Unlocks]: PassiveAffordance.Unlockable,
   [CapabilityPartnered.Locks]: PassiveAffordance.Lockable,
   [CapabilityPartnered.Boards]: PassiveAffordance.IsBoardable,
+  [CapabilityPartnered.Giveable]: PassiveAffordance.Takes
 
 } as const
 
@@ -43,5 +46,6 @@ export const capabilityVerbs = {
   [CapabilityPartnered.StoresInMedium]: "STORE_IN",
   [CapabilityPartnered.StoresInLarge]: "STORE_IN",
   [CapabilityPartnered.Parkable]: "PARK",
-  [CapabilityPartnered.Boards]: "BOARD"
+  [CapabilityPartnered.Boards]: "BOARD",
+  [CapabilityPartnered.Giveable]: "GIVE"
 }

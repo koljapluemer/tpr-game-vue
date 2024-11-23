@@ -12,6 +12,7 @@ const thingsThatFitInCar: ItemName[] = [
   ItemName.melon,
 ]
 const colorfulCars: ItemName[] = [ItemName.car_black, ItemName.car_blue, ItemName.car_green]
+const colorFulCats: ItemName[] = [ItemName.cat_brown, ItemName.cat_grey, ItemName.cat_white]
 const colorfulSuitcases = [ItemName.suitcase_blue, ItemName.suitcase_white]
 const basicPackingMix: ItemName[] = [ItemName.shoes, ItemName.water_bottle, ...colorfulSuitcases]
 
@@ -30,7 +31,8 @@ export enum LevelTemplateName {
   board_a_bus,
   board_bus_front_back,
   board_bus_front_back_middle,
-  park_around_building
+  park_around_building,
+  feed_3_cats
 }
 
 export const topics: Topic[] = [
@@ -102,6 +104,15 @@ export const topics: Topic[] = [
       ]
     ],
     finalPracticeRotation: [LevelTemplateName.park_around_building]
+  },
+  {
+    id: "feeding-colorful-cats",
+    progressions: [
+      [
+        LevelTemplateName.feed_3_cats
+      ]
+    ],
+    finalPracticeRotation: [LevelTemplateName.feed_3_cats]
   }
 ]
 
@@ -232,6 +243,17 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.car_old_movable]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[]]
       ],
     ]
-
+  },
+  // cats
+  {
+    id: LevelTemplateName.feed_3_cats,
+    grid: [
+      [
+        [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]], [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]], [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.cat_food]], [[ItemName.cat_food]], [[]]
+      ]
+    ]
   }
 ]
