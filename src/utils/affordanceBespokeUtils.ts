@@ -4,6 +4,7 @@ import type { AlchemyAction, Card, Field } from "@/types"
 import { getItemByID } from "./itemUtils"
 import { CapabilityPartnered } from "@/data/affordances"
 import type { ItemName } from "@/data/items"
+import { scan } from "rxjs"
 
 
 export function executeActionEffects(action: AlchemyAction) {
@@ -51,6 +52,18 @@ export function executeActionEffects(action: AlchemyAction) {
         if (action.affordance === CapabilityPartnered.Boards) {
             senderField.card = undefined
         }
+        // PARKING
+        if (action.affordance === CapabilityPartnered.Parkable) {
+
+            receiverField.card?.images.push(
+                {
+                    name: senderCard.images[0].name,
+                    zIndex: 1
+                }
+            )
+            senderField.card = undefined
+
+        }
 
     }
 }
@@ -65,7 +78,8 @@ function getCardBasedOnItemId(id: ItemName | undefined): Card | undefined {
                 item: item,
                 images: [{
                     name: item.images[0],
-                    zIndex: 0
+                    zIndex: 0,
+                    scale: 0.3
                 }
                 ]
             }
