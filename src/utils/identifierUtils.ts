@@ -1,7 +1,9 @@
 
-import type { Field, Grid, Item } from "@/types";
+import { LevelProperty, type Field, type Grid, type Item } from "@/types";
 
-export function setIdentifiersForFields(grid: Grid, generateRelativePositions = false):string[] {
+export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]):string[] {
+    const generateRelativePositions = levelProps?.includes(LevelProperty.GenerateRelativePositions)
+
     const keyCount: { [key: string]: number } = {}
     let identifiers = [] as string[]
 

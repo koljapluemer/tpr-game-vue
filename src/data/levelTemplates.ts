@@ -194,7 +194,8 @@ export const levelTemplates: LevelTemplate[] = [
       [
         [[ItemName.bus_mid]], [[ItemName.character_woman]]
       ],
-    ]
+    ],
+    props: [LevelProperty.GenerateRelativePositions]
   },
   {
     id: LevelTemplateName.board_bus_front_back,
@@ -205,7 +206,8 @@ export const levelTemplates: LevelTemplate[] = [
       [
         [[ItemName.bus_mid]], [[ItemName.character_woman]]
       ]
-    ]
+    ],
+    props: [LevelProperty.GenerateRelativePositions]
   },
   {
     id: LevelTemplateName.board_a_bus,

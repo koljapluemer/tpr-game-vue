@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
-import { type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
+import { LevelProperty, type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/alchemyUtils";
 import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, isQuestStillPossible } from "@/utils/questUtils";
@@ -85,7 +85,7 @@ function onDropOn(field: Field) {
 
                 }
                 if (!questWasDone) {
-                    setIdentifiersForFields(grid.value)
+                    setIdentifiersForFields(grid.value, props.level.props)
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
                         endCurrentQuest(false)
                         requestPlayStandard(StandardSound.Failure)
@@ -104,7 +104,7 @@ function onDropOn(field: Field) {
 
 function updateGrid() {
     if (grid.value) {
-        setIdentifiersForFields(grid.value)
+        setIdentifiersForFields(grid.value, props.level.props)
         availableActions.value = getActionableActionsOnGrid(grid.value)
         // TODO: change this to true for production
         availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)

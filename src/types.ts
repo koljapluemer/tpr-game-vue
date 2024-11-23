@@ -33,6 +33,7 @@ export enum FieldProperty {
 export enum LevelProperty {
   DisableMovementQuests,
   DisableSecondaryKeyUsage,
+  GenerateRelativePositions
 }
 
 export type LevelTemplateGridRowField = [

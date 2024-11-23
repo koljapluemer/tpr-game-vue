@@ -8,7 +8,7 @@ import { getGridFromLevelTemplate } from '@/utils/gridUtils'
 import { ItemName } from '@/data/items';
 import test from 'node:test';
 import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
-import type { Field, Grid, Level, LevelTemplate } from '@/types';
+import { LevelProperty, type Field, type Grid, type Level, type LevelTemplate } from '@/types';
 import { CapabilityPartnered, PassiveAffordance } from '@/data/affordances';
 import { getAvailableQuestsBasedOnLevel } from '@/utils/questUtils';
 import { LevelTemplateName } from '@/data/levelTemplates';
@@ -194,7 +194,7 @@ describe('UTILS', () => {
 
     it('bus identifier generations correct for front-back', () => {
         expect(
-            setIdentifiersForFields(busLevelGrid, true)
+            setIdentifiersForFields(busLevelGrid, [LevelProperty.GenerateRelativePositions])
         ).toEqual([
             "A__BUS",
             "A__BUS",
@@ -206,7 +206,7 @@ describe('UTILS', () => {
 
     it('bus identifier generations correct for front-back-middle', () => {
         expect(
-            setIdentifiersForFields(busLevelGrid3, true)
+            setIdentifiersForFields(busLevelGrid3, [LevelProperty.GenerateRelativePositions])
         ).toEqual([
             "A__BUS",
             "A__BUS",
