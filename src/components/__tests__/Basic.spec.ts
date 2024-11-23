@@ -28,8 +28,6 @@ const kiwiField: Field = {
         },
         images: []
     },
-    row: 0,
-    col: 0,
     identifiers: ["THE__TEST_KIWI"],
 }
 
@@ -45,8 +43,6 @@ const knifeField: Field = {
         },
         images: []
     },
-    row: 0,
-    col: 1,
     identifiers: ["THE__TEST_KNIFE"]
 } as const
 
@@ -62,8 +58,6 @@ const melonField: Field = {
         },
         images: []
     },
-    row: 0,
-    col: 1,
     identifiers: ["THE__TEST_MELON"]
 } as const
 
@@ -80,8 +74,6 @@ const suitcaseField: Field = {
         },
         images: []
     },
-    row: 0,
-    col: 1,
     identifiers: ["THE__TEST_SUITCASE"]
 } as const
 
@@ -97,15 +89,11 @@ const carField: Field = {
         },
         images: []
     },
-    row: 0,
-    col: 1,
     identifiers: ["THE__TEST_CAR"]
 } as const
 
 const emptyField: Field = {
     card: undefined,
-    row: 0,
-    col: 2,
     identifiers: []
 }
 
