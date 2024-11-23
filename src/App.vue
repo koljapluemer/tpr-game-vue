@@ -12,11 +12,11 @@ function requestLangChange(event: any) {
   translationStore.changeLangCode(languageSelected.value)
 }
 
-onMounted(() => {
-  let ddPolyFillScript = document.createElement('script')
-  ddPolyFillScript.setAttribute('src', '/dragDropPolyfill.js')
-  document.head.appendChild(ddPolyFillScript)
-})
+// onMounted(() => {
+//   let ddPolyFillScript = document.createElement('script')
+//   ddPolyFillScript.setAttribute('src', '/dragDropPolyfill.js')
+//   document.head.appendChild(ddPolyFillScript)
+// })
 
 </script>
 
