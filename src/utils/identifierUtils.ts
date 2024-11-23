@@ -5,6 +5,8 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
     const generateRelativePositions = levelProps?.includes(LevelProperty.GenerateRelativePositions)
 
     const keyCount: { [key: string]: number } = {}
+    const keysColorAllowed: {[key: string]: boolean} = {}
+    // NEXT: implement color
     let identifiers = [] as string[]
 
     grid.forEach(row => {
@@ -16,6 +18,16 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
                 } else {
                     keyCount[key] = 1
                 }
+                // we want only allow color for keys where all 
+                // such objects have a color
+                // TODO: unit test this
+                if (field.card.item.color) {
+                    if (!(key in keysColorAllowed) || keysColorAllowed[key] === true) {
+                        keysColorAllowed[key] = true
+                    }
+                } else {
+                    keysColorAllowed[key] = false
+                }
             }
         })
     })
@@ -23,14 +35,29 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
     grid.forEach(row => {
         row.forEach(field => {
             if (field.card && field.card.item) {
+                field.identifiers = []
+                // GENERAL KEYS
                 const key = field.card.item.primaryKey
+
                 if (keyCount[key] == 1) {
-                    field.identifiers = ['THE__' + field.card.item.primaryKey]
+                    const id = 'THE__' + field.card.item.primaryKey
+                    field.identifiers.push(id)
+                    identifiers.push(id)
                 } else {
-                    field.identifiers = ['A__' + field.card.item.primaryKey]
+                      const id = 'A__' + field.card.item.primaryKey
+                      field.identifiers.push(id)
+                    identifiers.push(id)
+                }
+                // COLOR
+                if (keysColorAllowed[key]) {
+                        // TODO: this currently assumes that every object of every color just exists once
+                        // needs refactor or additional loop to actually react correctly to "2 brown cats -> feed A brown cat"
+                        const id = 'THE__' + field.card.item.color + '__' + field.card.item.primaryKey
+                        field.identifiers.push(id)
+                        identifiers.push(id)
                 }
             }
-            identifiers = identifiers.concat(field.identifiers)
+       
         })
     })
 
