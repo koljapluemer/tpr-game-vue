@@ -8,46 +8,45 @@ import type { ItemName } from "@/data/items"
 
 export function executeActionEffects(action: AlchemyAction) {
     console.log('execute action effects for action', action)
+
     const senderField = action.sender
     const receiverField = action.receiver
     const affordance = action.affordance
-    let senderCard = senderField.card
-    let receiverCard = receiverField.card
+    const senderCard = senderField.card
+    const receiverCard = receiverField.card
     if (senderCard && receiverCard) {
         console.log('got sender and receiver')
         // CUTTING
         if (affordance === CapabilityPartnered.Cuts) {
             const cardWithCutItem = getCardBasedOnItemId(receiverField.card?.item.load_when_cut)
             if (cardWithCutItem) {
-                receiverCard = cardWithCutItem
+                receiverField.card = cardWithCutItem
             }
             return
         }
         // STORAGE
-        if (senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInSmall)
-            || senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInMedium)
-            || senderCard.item.activeAffordances?.includes(CapabilityPartnered.StoresInLarge)
+        if (action.affordance === CapabilityPartnered.StoresInSmall
+            || action.affordance === CapabilityPartnered.StoresInMedium
+            || action.affordance === CapabilityPartnered.StoresInLarge
         ) {
-            senderCard = undefined
+            senderField.card = undefined
             return
         }
         // LOCK/UNLOCK
-        console.log('aff:', senderCard.item.activeAffordances)
-        if (senderCard.item.activeAffordances?.includes(CapabilityPartnered.Locks)) {
+        if (action.affordance === CapabilityPartnered.Locks) {
             if (receiverField.card?.item.load_when_locked) {
                 const newCardWithLockedItem = getCardBasedOnItemId(receiverField.card?.item.load_when_locked)
                 if (newCardWithLockedItem) {
-                    receiverCard = newCardWithLockedItem
+                    receiverField.card = newCardWithLockedItem
                 }
             }
             return
         }
-        if (senderCard.item.activeAffordances?.includes(CapabilityPartnered.Unlocks)) {
-            console.log('handle unlock')
-            if (receiverField.card?.item.load_when_locked) {
+        if (action.affordance === CapabilityPartnered.Unlocks) {
+            if (receiverField.card?.item.load_when_unlocked) {
                 const newCardWithUnlockedItem = getCardBasedOnItemId(receiverField.card?.item.load_when_unlocked)
                 if (newCardWithUnlockedItem) {
-                    receiverCard = newCardWithUnlockedItem
+                    receiverField.card = newCardWithUnlockedItem
                 }
             }
             return
