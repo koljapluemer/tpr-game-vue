@@ -22,7 +22,11 @@ export enum ItemName {
   car_mustang_closed,
   car_mustang_open,
   car_keys,
-  key
+  key,
+  bus_mid,
+  bus_large_yellow_red,
+  bus_blue,
+  character_woman
 }
 
 export const items: Item[] = [
@@ -185,5 +189,33 @@ export const items: Item[] = [
     isMovable: true,
     images: ['car_keys'],
     activeAffordances: [CapabilityPartnered.Locks, CapabilityPartnered.Unlocks]
-  }
+  },
+  {
+    id: ItemName.character_woman,
+    primaryKey: 'CHARACTER_WOMAN',
+    isMovable: true,
+    images: ['you'],
+    activeAffordances: [CapabilityPartnered.Boards]
+  },
+  {
+    id: ItemName.bus_mid,
+    primaryKey: 'BUS',
+    isMovable: false,
+    images: ['bus_mid_size'],
+    passiveAffordances: [PassiveAffordance.IsBoardable]
+  },
+  {
+    id: ItemName.bus_large_yellow_red,
+    primaryKey: 'BUS',
+    isMovable: false,
+    images: ['bus_big_crop'],
+    passiveAffordances: [PassiveAffordance.IsBoardable]
+  },
+  {
+    id: ItemName.bus_blue,
+    primaryKey: 'BUS',
+    isMovable: false,
+    images: ['bus_blue'],
+    passiveAffordances: [PassiveAffordance.IsBoardable]
+  },
 ] as const

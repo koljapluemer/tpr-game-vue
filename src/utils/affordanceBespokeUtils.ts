@@ -22,7 +22,6 @@ export function executeActionEffects(action: AlchemyAction) {
             if (cardWithCutItem) {
                 receiverField.card = cardWithCutItem
             }
-            return
         }
         // STORAGE
         if (action.affordance === CapabilityPartnered.StoresInSmall
@@ -30,7 +29,6 @@ export function executeActionEffects(action: AlchemyAction) {
             || action.affordance === CapabilityPartnered.StoresInLarge
         ) {
             senderField.card = undefined
-            return
         }
         // LOCK/UNLOCK
         if (action.affordance === CapabilityPartnered.Locks) {
@@ -40,7 +38,6 @@ export function executeActionEffects(action: AlchemyAction) {
                     receiverField.card = newCardWithLockedItem
                 }
             }
-            return
         }
         if (action.affordance === CapabilityPartnered.Unlocks) {
             if (receiverField.card?.item.load_when_unlocked) {
@@ -49,7 +46,10 @@ export function executeActionEffects(action: AlchemyAction) {
                     receiverField.card = newCardWithUnlockedItem
                 }
             }
-            return
+        }
+        // BOARDING (e.g. a bus)
+        if (action.affordance === CapabilityPartnered.Boards) {
+            senderField.card = undefined
         }
 
     }

@@ -27,6 +27,9 @@ export enum LevelTemplateName {
   bottle_in_car,
   shoes_suitcase_etc_mixed_in_car,
   car_lock_unlock,
+  board_a_bus,
+  board_bus_front_back,
+  board_bus_front_back_middle
 }
 
 export const topics: Topic[] = [
@@ -71,6 +74,24 @@ export const topics: Topic[] = [
       [LevelTemplateName.car_lock_unlock]
     ],
     finalPracticeRotation: [LevelTemplateName.car_lock_unlock]
+  },
+  {
+    id: "bus-boarding",
+    progressions: [
+      [
+        LevelTemplateName.board_a_bus,
+        LevelTemplateName.board_bus_front_back,
+        LevelTemplateName.board_bus_front_back,
+      ],
+      [
+        LevelTemplateName.board_a_bus,
+        LevelTemplateName.board_bus_front_back,
+        LevelTemplateName.board_bus_front_back_middle,
+        LevelTemplateName.board_bus_front_back_middle,
+        LevelTemplateName.board_bus_front_back_middle
+      ]
+    ],
+    finalPracticeRotation: [LevelTemplateName.board_bus_front_back_middle, LevelTemplateName.board_bus_front_back]
   }
 
 ]
@@ -158,5 +179,40 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.car_mustang_open]]
       ]
     ]
-  }
+  },
+  // BUS BOARDING
+  //   board_a_bus, board_bus_front_back, board_bus_front_back_middle
+  {
+    id: LevelTemplateName.board_bus_front_back_middle,
+    grid: [
+      [
+        [[ItemName.bus_mid]], [[]]
+      ],
+      [
+        [[ItemName.bus_mid]], [[]]
+      ],
+      [
+        [[ItemName.bus_mid]], [[ItemName.character_woman]]
+      ],
+    ]
+  },
+  {
+    id: LevelTemplateName.board_bus_front_back,
+    grid: [
+      [
+        [[ItemName.bus_mid]], [[]]
+      ],
+      [
+        [[ItemName.bus_mid]], [[ItemName.character_woman]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.board_a_bus,
+    grid: [
+      [
+        [[ItemName.bus_mid]], [[ItemName.character_woman]]
+      ],
+    ]
+  },
 ]
