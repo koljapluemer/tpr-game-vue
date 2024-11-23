@@ -10,7 +10,7 @@ export const LanguageCode = {
 
 export type LanguageCodeType = (typeof LanguageCode)[keyof typeof LanguageCode]
 
-export interface Item {
+export type Item = {
   id: ItemName
   primaryKey: string
   images: string[]
@@ -30,8 +30,6 @@ export enum FieldProperty {
 export enum LevelProperty {
   DisableMovementQuests,
   DisableSecondaryKeyUsage,
-  RepeatOnce,
-  RepeatFourTimes,
 }
 
 export type LevelTemplateGridRowField = [
@@ -41,7 +39,7 @@ export type LevelTemplateGridRowField = [
 export type LevelTemplateGridRow = LevelTemplateGridRowField[]
 export type LevelTemplateGrid = LevelTemplateGridRow[]
 
-export interface LevelTemplate {
+export type LevelTemplate = {
   id: LevelTemplateName // Unique identifier for the level
   grid: LevelTemplateGrid
   props?: LevelProperty[]
@@ -50,7 +48,7 @@ export interface LevelTemplate {
 
 // GAME PLAY/GRID UI
 
-export interface Level {
+export type Level = {
   grid: Grid
 }
 
@@ -64,12 +62,12 @@ export type Field = {
 }
 
 // Card interface with mutable state
-export interface Card {
+export type Card = {
   item: Item
   images: CardImage[]
 }
 
-export interface CardImage {
+export type CardImage = {
   name: string
   zIndex: number
   scale?: number
@@ -78,7 +76,7 @@ export interface CardImage {
 
 // QUESTS, ACTIONS, AFFORDANCES
 
-export interface AlchemyAction {
+export type AlchemyAction = {
   sender: Field
   affordance: CapabilityPartnered
   senderKeys: string[]
@@ -87,8 +85,32 @@ export interface AlchemyAction {
 }
 
 
-export interface Quest {
+export type Quest = {
   requiredAffordance: CapabilityPartnered
   requiredSenderKey?: string
   requiredReceiverKey?: string
+}
+
+// LEVEL ORGA
+
+export type Progression = LevelTemplateName[]
+export type Topic = {
+  id: string,
+  progressions: Progression[],
+  finalPracticeRotation: LevelTemplateName[]
+}
+
+// LEARNING DATA
+
+export enum RotationMode {
+  ClimbingProgressions,
+  FinalRotation
+}
+
+export type LearningDataForTopic = {
+  topicId: string,
+  lastSeenAt?: Date,
+  indexOfCurrentProgression: number,
+  indexOfCurrentLevel: number,
+  rotationMode: RotationMode
 }

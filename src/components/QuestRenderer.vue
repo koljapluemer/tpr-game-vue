@@ -24,7 +24,7 @@
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- <small>{{ getQuestKey(props.quest) }}</small> -->
+    <small>{{ getQuestKey(props.quest) }}</small>
 </template>
 
 <script setup lang="ts">
@@ -60,7 +60,7 @@ watch(props.quest, () => {
 
 const questPrompt = computed(() => {
     if (props.quest) {
-        return getTranslationForKey(getQuestKey(props.quest), translationStore.activeLanguageCode)
+        return getTranslationForKey(getQuestKey(props.quest))
     } else {
         return undefined
     }

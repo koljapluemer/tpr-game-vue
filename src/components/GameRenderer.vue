@@ -1,36 +1,70 @@
 <template>
-  <div v-if="gameStarted">
-    <LevelRenderer :level="levelStore.currentLevel" v-if="levelStore.currentLevel" :key="levelStore.levelLoadedAt"
-      @noMoreOpenQuests="onLevelHasNoMoreOpenQuests">
-    </LevelRenderer>
+  <div class="w-full h-full justify-center items-center flex gap-2 flex-row" v-if="isModePickingWhatToPlayNext">
+    <button class="btn" @click="selectLevel">More of the same!</button>
+    <button class="btn" @click="selectTopic">Something new!</button>
   </div>
-  <div v-else class="flex h-full w-full justify-center items-center p-20">
-    <button class="btn btn-accent btn-circle m-auto btn-lg shadow-xl" @click="gameStarted = true">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="h-16 w-16">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
-      </svg>
-
-    </button>
-
-  </div>
+  <LevelRenderer v-else :level="currentLevel" v-if="currentLevel" :key="levelRegenerationAt"
+    @noMoreOpenQuests="onLevelHasNoMoreOpenQuests">
+  </LevelRenderer>
 
 </template>
 
 <script setup lang="ts">
-import { levelStore } from "@/stores/levelStore";
-import { ref } from "vue";
-import LevelRenderer from "./LevelRenderer.vue";
+import useTopicDataStorage from '@/composables/learning_data/useTopicDataStorage';
+import { useArrayUtils } from '@/composables/useArrayUtils';
+import { topics } from '@/data/levelTemplates';
+import type { LevelTemplate, Progression, Topic } from '@/types';
+import { onMounted, ref } from 'vue';
+import LevelRenderer from './LevelRenderer.vue';
 
+const { pickRandom } = useArrayUtils()
+const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
-const gameStarted = ref(false)
+const currentTopic = ref(undefined as Topic | undefined)
+const lastPlayedTopic = ref(undefined as Topic | undefined)
 
-function onLevelHasNoMoreOpenQuests() {
-  levelStore.loadNextLevel()
+const currentLevel = ref(undefined as LevelTemplate | undefined)
+
+const levelRegenerationAt = ref(Date.now())
+const isModePickingWhatToPlayNext = ref(false)
+
+function selectTopic() {
+  const topicsWithoutLastPlayed = (topics.filter((topic) => topic.id !== lastPlayedTopic.value?.id))
+  console.log('topics w/o last played', topicsWithoutLastPlayed, 'last played', lastPlayedTopic.value)
+  currentTopic.value = pickRandom(topicsWithoutLastPlayed)
+  console.log('picked topic', currentTopic)
+  lastPlayedTopic.value = currentTopic.value
+  selectLevel()
+  isModePickingWhatToPlayNext.value = false
+
 }
 
-levelStore.loadNextLevel()
+
+function selectLevel() {
+  if (currentTopic.value !== undefined) {
+    currentLevel.value = getNextLevelForTopic(currentTopic.value)
+    levelRegenerationAt.value = Date.now()
+    console.log('picked new level', currentLevel.value)
+  }
+  isModePickingWhatToPlayNext.value = false
+
+}
+
+function onLevelHasNoMoreOpenQuests() {
+  console.log('out of quests')
+  if (currentTopic.value !== undefined) {
+    const isTimeForChoice = iterateTopicProgress(currentTopic.value)
+    if (isTimeForChoice) {
+      isModePickingWhatToPlayNext.value = true
+    } else {
+      selectLevel()
+    }
+  }
+}
+
+onMounted(() => {
+  selectTopic()
+  selectLevel()
+})
 
 </script>

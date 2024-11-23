@@ -1,6 +1,6 @@
 // levelTemplates.js
 
-import { LevelProperty, type LevelTemplate } from '@/types'
+import { LevelProperty, type LevelTemplate, type Topic } from '@/types'
 import { ItemName } from './items'
 
 const thingsThatFitInCar: ItemName[] = [
@@ -28,16 +28,44 @@ export enum LevelTemplateName {
   shoes_suitcase_etc_mixed_in_car,
 }
 
-export const progressions = [
-  [
-    LevelTemplateName.shoes_in_suitcase,
-    LevelTemplateName.bottle_in_suitcase,
-    LevelTemplateName.mixed_in_suitcase,
-    LevelTemplateName.suitcase_in_car,
-    LevelTemplateName.shoes_in_car,
-    LevelTemplateName.bottle_in_car,
-    LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
-  ]
+export const topics: Topic[] = [
+  {
+    id: "packing-car-shoes-bottle-suitcase",
+    progressions: [
+      [
+        LevelTemplateName.shoes_in_suitcase,
+        LevelTemplateName.bottle_in_suitcase,
+        LevelTemplateName.mixed_in_suitcase,
+        LevelTemplateName.mixed_in_suitcase,
+        LevelTemplateName.mixed_in_suitcase,
+      ],
+      [
+        LevelTemplateName.suitcase_in_car,
+        LevelTemplateName.shoes_in_car,
+        LevelTemplateName.bottle_in_car,
+        LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
+        LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
+        LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
+      ]
+    ],
+    finalPracticeRotation: [
+      LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
+      LevelTemplateName.mixed_in_suitcase,
+    ]
+  },
+  {
+    id: "cutting-fruits",
+    progressions: [
+      [
+        LevelTemplateName.cut_fruit_1,
+
+      ]
+    ],
+    finalPracticeRotation: [
+      LevelTemplateName.cut_fruit_1,
+    ]
+  }
+
 ]
 
 export const levelTemplates: LevelTemplate[] = [
@@ -104,7 +132,6 @@ export const levelTemplates: LevelTemplate[] = [
     grid: [
       [[colorfulSuitcases], [basicPackingMix], [basicPackingMix]]
     ],
-    props: [LevelProperty.RepeatOnce]
   },
   {
     id: LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
@@ -112,7 +139,5 @@ export const levelTemplates: LevelTemplate[] = [
       [[colorfulCars], [[]], [[]]],
       [[basicPackingMix], [basicPackingMix], [basicPackingMix]]
     ],
-    props: [LevelProperty.RepeatFourTimes]
-
   },
 ]

@@ -9,7 +9,7 @@
             v-if="grid">
             <div class="flex flex-row gap-2 justify-center" v-for="row in grid">
                 <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
-                    :field="field" v-for="field of row"></FieldRenderer>
+                    :field="field" :cellSize="cellSize" v-for="field of row"></FieldRenderer>
             </div>
 
         </div>
@@ -150,6 +150,20 @@ function requestPlayStandard(sound: StandardSound) {
         soundEffectPlayer.value.playStandardSound(sound)
     }
 }
+
+const cellSize = computed(() => {
+    let size = 300
+    let maxWidth = 100000
+    let maxHeight = 100000
+    if (props.level.grid[0].length !== undefined) {
+        maxWidth = (window.screen.width / props.level.grid[0]?.length) * 0.85;
+    }
+    if (props.level.grid.length !== undefined) {
+        maxHeight = (window.screen.height / props.level.grid.length) - 170 * 0.7;
+    }
+    size = Math.min(size, maxWidth, maxHeight)
+    return `${size}px`
+})
 
 
 </script>

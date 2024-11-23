@@ -16,7 +16,6 @@
 
 
 <script setup lang="ts">
-import { levelStore } from "@/stores/levelStore";
 import type { CardImage, Field } from "@/types";
 import { computed, ref } from "vue";
 
@@ -27,7 +26,8 @@ const emit = defineEmits<{
 
 
 const props = defineProps<{
-  field: Field
+  field: Field,
+  cellSize: string
 }>();
 
 
@@ -48,25 +48,7 @@ function onDrop(event: any) {
   emit("droppedOnField", props.field)
 }
 
-const cellSize = computed(() => {
-  let size = 300
-  let maxWidth = 100000
-  let maxHeight = 100000
-  if (levelStore.currentLevel?.grid[0]?.length !== undefined) {
-    maxWidth = (window.screen.width / levelStore.currentLevel?.grid[0]?.length) * 0.85;
-  }
-  if (levelStore.currentLevel?.grid.length !== undefined) {
-    maxHeight = (window.screen.height / levelStore.currentLevel?.grid.length) - 170 * 0.7;
-  }
-  size = Math.min(size, maxWidth, maxHeight)
-  return `${size}px`
-})
-// let maxWidth = '100%'
-// if (levelStore.currentLevel?.grid[0]?.length !== undefined) {
-//   maxWidth = `${window.screen.width / levelStore.currentLevel?.grid[0]?.length}px`;
 
-// }
-// return maxWidth
 
 function getImageStyle(img: CardImage): string {
 
