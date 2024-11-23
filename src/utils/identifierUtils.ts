@@ -1,8 +1,9 @@
 
 import type { Grid, Item } from "@/types";
 
-export function setIdentifiersForFields(grid: Grid) {
+export function setIdentifiersForFields(grid: Grid, generateRelativePositions = false):string[] {
     const keyCount: { [key: string]: number } = {}
+    let identifiers = [] as string[]
 
     grid.forEach(row => {
         row.forEach(field => {
@@ -27,6 +28,9 @@ export function setIdentifiersForFields(grid: Grid) {
                     field.identifiers = ['A__' + field.card.item.primaryKey]
                 }
             }
+            identifiers = identifiers.concat(field.identifiers)
         })
     })
+
+    return identifiers
 }

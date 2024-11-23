@@ -12,6 +12,8 @@ import type { Field, Grid, Level, LevelTemplate } from '@/types';
 import { CapabilityPartnered, PassiveAffordance } from '@/data/affordances';
 import { getAvailableQuestsBasedOnLevel } from '@/utils/questUtils';
 import { LevelTemplateName } from '@/data/levelTemplates';
+import { getLevelTemplateByID } from '@/utils/levelUtils';
+import { setIdentifiersForFields } from '@/utils/identifierUtils';
 
 
 const kiwiField: Field = {
@@ -136,6 +138,11 @@ const levelCarBasic: LevelTemplate = {
     grid: []
 }
 
+// bus stuff
+
+const busLevelTemplate = getLevelTemplateByID(LevelTemplateName.board_bus_front_back)
+const busLevelGrid = getGridFromLevelTemplate(busLevelTemplate!) 
+
 
 describe('UTILS', () => {
     // alchemy
@@ -181,6 +188,29 @@ describe('UTILS', () => {
         expect(
             getAvailableQuestsBasedOnLevel(levelCarBasic, gridCarMelonSuitcase).length
         ).toEqual(4)
+    })
+
+    // bus
+    it('bus identifier generations correct at base level', () => {
+        expect(
+            setIdentifiersForFields(busLevelGrid)
+        ).toEqual([
+            "A__BUS",
+            "A__BUS",
+            "THE__CHARACTER_WOMAN",
+          ])
+    })
+
+    it('bus identifier generations correct for front-back', () => {
+        expect(
+            setIdentifiersForFields(busLevelGrid, true)
+        ).toEqual([
+            "A__BUS",
+            "A__BUS",
+            "THE__CHARACTER_WOMAN",
+            "THE__BUS__AT_BACK",
+            "THE__BUS__AT_FRONT",
+          ])
     })
 })
 
