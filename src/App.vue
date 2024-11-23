@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { translationStore } from "./stores/translationStore";
 import { LanguageCode, type LanguageCodeType } from "./types";
@@ -11,6 +11,12 @@ function requestLangChange(event: any) {
   console.log('select is now', languageSelected.value, 'event', event)
   translationStore.changeLangCode(languageSelected.value)
 }
+
+onMounted(() => {
+  let ddPolyFillScript = document.createElement('script')
+  ddPolyFillScript.setAttribute('src', '/dragDropPolyfill.js')
+  document.head.appendChild(ddPolyFillScript)
+})
 
 </script>
 
