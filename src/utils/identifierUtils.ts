@@ -1,5 +1,7 @@
 
+import { useArrayUtils } from "@/composables/useArrayUtils";
 import { FieldPropertyName, LevelProperty, type Field, type Grid, type Item } from "@/types";
+const {getUniqueArray} = useArrayUtils()
 
 export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]):string[] {
     const generateRelativePositions = levelProps?.includes(LevelProperty.GenerateRelativePositions)
@@ -164,8 +166,6 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
         })
         })
     }
-
-    console.log('identifiers', identifiers)
 
     return identifiers
 }

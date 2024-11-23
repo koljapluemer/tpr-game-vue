@@ -1,6 +1,9 @@
 import type { AlchemyAction, Field, Grid, Item } from "@/types"
 import { toRaw } from 'vue';
 import { affordancePartnerings, CapabilityPartnered, type PassiveAffordance } from "@/data/affordances";
+import { useArrayUtils } from "@/composables/useArrayUtils";
+
+const {getUniqueArray} = useArrayUtils()
 
 export function IsPartneredCapabilityActionableOnField(affordance: CapabilityPartnered, field: Field): boolean {
     const item = field.card?.item
@@ -42,8 +45,8 @@ export function getActionableActionsOnGrid(grid: Grid): AlchemyAction[] {
             actions = actions.concat(getActionsForWhenFieldIsDroppedOnField(senderField, receiverField))
         })
     })
-
-    return actions
+    const uniqueActions = getUniqueArray(actions)
+    return uniqueActions
 }
 
 

@@ -24,5 +24,18 @@ export function useArrayUtils() {
         return result;
     };
 
-    return { pickRandom, shuffleArray };
+    /**
+     * Filters out duplicate objects from an array based on their JSON stringified values.
+     * @param array The input array of objects.
+     * @returns A new array with only unique objects.
+     */
+    const getUniqueArray = <T>(array: T[]): T[] => {
+        return array.filter((value, index, self) => {
+          const stringifiedValue = JSON.stringify(value);
+          return index === self.findIndex(obj => JSON.stringify(obj) === stringifiedValue);
+        });
+      };
+      
+
+    return { pickRandom, shuffleArray, getUniqueArray };
 }
