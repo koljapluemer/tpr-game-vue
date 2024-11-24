@@ -41,8 +41,6 @@ const props = defineProps<{
 const emit = defineEmits(['noMoreOpenQuests'])
 
 const grid = ref(undefined as Grid | undefined)
-const availableActions = ref([] as AlchemyAction[])
-const availableQuests = ref([] as Quest[])
 
 const currentQuest = ref(undefined as Quest | undefined)
 const lastQuestKey = ref(undefined as string | undefined)
@@ -51,14 +49,14 @@ const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
 
 const timeoutId = ref(undefined as number | undefined)
 
-
+const maximumQuestsToBePlayedInThisLevel = ref(5)
+const questsPlayedInThisLevel = ref(0)
 
 
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 onMounted(() => {
     grid.value = getGridFromLevelTemplate(props.level)
-    updateGrid()
     startRandomQuestFromList()
 
 })
@@ -102,18 +100,9 @@ function onDropOn(field: Field) {
     } else {
         console.warn('drop interaction registered but no starting field was ever set')
     }
-    updateGrid()
 
 }
 
-function updateGrid() {
-    if (grid.value) {
-        setIdentifiersForFields(grid.value, props.level.props)
-        availableActions.value = getActionableActionsOnGrid(grid.value)
-        // TODO: change this to true for production
-        availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)
-    }
-}
 
 const flatGrid = computed((): Field[] => {
     const flatGrid: Field[] = []
@@ -125,15 +114,24 @@ const flatGrid = computed((): Field[] => {
     return flatGrid
 })
 
-
 function startRandomQuestFromList() {
-    const questsWithoutLast = availableQuests.value.filter(quest => getQuestKey(quest) !== lastQuestKey.value)
-    if (questsWithoutLast.length > 0) {
+    questsPlayedInThisLevel.value += 1
+    console.log('quests played', questsPlayedInThisLevel.value)
+    if (grid.value !== undefined) {
+        setIdentifiersForFields(grid.value, props.level.props)
+
+    const availableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)
+    const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== lastQuestKey.value)
+    if (questsWithoutLast.length > 0 &&  questsPlayedInThisLevel.value < maximumQuestsToBePlayedInThisLevel.value ) {
         currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
         lastQuestKey.value = getQuestKey(currentQuest.value)
     } else {
+        // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
         emit("noMoreOpenQuests")
     }
+} else {
+    console.warn('level grid undefined, this should never happen')
+}
 }
 
 function endCurrentQuest(questWasSuccessful: boolean) {

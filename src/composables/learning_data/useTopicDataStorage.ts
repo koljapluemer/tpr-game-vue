@@ -4,6 +4,7 @@ import type { LevelTemplateName } from "@/data/levelTemplates";
 import { getLevelTemplateByID } from "@/utils/levelUtils";
 import { useArrayUtils } from "../useArrayUtils";
 import { translationStore } from "@/stores/translationStore";
+import { ref } from "vue";
 
 const { pickRandom } = useArrayUtils()
 
@@ -51,7 +52,7 @@ export default function () {
                 }
             }
         } else {
-            goodMomentToChangeTopic = Math.random() < 0.3
+            goodMomentToChangeTopic = Math.random() < 0.3 
         }
         updateDataForWithNewTopicData(topicData)
         return goodMomentToChangeTopic
@@ -99,6 +100,6 @@ export default function () {
         updateDataForWithNewTopicData,
         getDataForTopicId,
         getNextLevelForTopic,
-        iterateTopicProgress
+        iterateTopicProgress,
     }
 }

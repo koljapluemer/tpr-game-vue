@@ -16,8 +16,11 @@
 
 
 <script setup lang="ts">
+import useTopicDataStorage from "@/composables/learning_data/useTopicDataStorage";
+import { globalDataStore } from "@/stores/globalData";
 import type { CardImage, Field } from "@/types";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+
 
 const emit = defineEmits<{
   startedDraggingFromField: Field,
@@ -69,5 +72,12 @@ const isMovable = computed(() => {
   }
   return false
 
+})
+
+ onMounted(() => {
+  const mainImg = props.field.card?.images[0]
+  if (mainImg) {
+    globalDataStore.levelDemoImages.push(mainImg.name)
+  }
 })
 </script>
