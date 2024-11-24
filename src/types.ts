@@ -88,6 +88,7 @@ export type CardImage = {
   zIndex: number
   scale?: number
   offset?: [number, number]
+  rotation? : number
 }
 
 // QUESTS, ACTIONS, AFFORDANCES

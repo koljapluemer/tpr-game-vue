@@ -22,7 +22,6 @@ const carLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push,
 const doorLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push, ItemName.key, ItemName.hand_pull], [{name: FieldPropertyName.ForceUniqueItem}]]
 
 export enum LevelTemplateName {
-  cut_fruit_1,
   pack_car_x,
   park_car_x,
   shoes_in_suitcase,
@@ -47,8 +46,23 @@ export enum LevelTemplateName {
   door_close_lock,
   door_close_lock_all,
   box_open,
+  cut_fruit_1,
   cut_fruits_bowl_all,
+  cut_avocado,
+  cut_kiwi_avocado,
+  place_kiwi_bowl,
+  place_avocado_bowl,
+  place_kiwi_avocado,
+  place_cut_kiwi_avocado,
+  place_cut_broccoli,
+  place_cut_lemon,
+  place_cut_lemon_broccoli,
+  place_cut_onion,
+  place_cut_watermelon,
+  place_cut_watermelon_onion
 }
+
+// TODO: add the cutting level progression
 
 export const topics: Topic[] = [
   {
@@ -73,6 +87,7 @@ export const topics: Topic[] = [
     finalPracticeRotation: [
       LevelTemplateName.shoes_suitcase_etc_mixed_in_car,
       LevelTemplateName.mixed_in_suitcase,
+      LevelTemplateName.pack_car_x
     ]
   },
   // NEXT: more of these
@@ -81,6 +96,24 @@ export const topics: Topic[] = [
     progressions: [
       [
         LevelTemplateName.cut_fruit_1,
+        LevelTemplateName.cut_avocado,
+        LevelTemplateName.cut_kiwi_avocado,
+        LevelTemplateName.place_kiwi_bowl,
+        LevelTemplateName.place_avocado_bowl,
+        LevelTemplateName.place_kiwi_avocado,
+        LevelTemplateName.place_kiwi_avocado,
+        LevelTemplateName.place_cut_kiwi_avocado,
+        LevelTemplateName.place_cut_kiwi_avocado,
+        LevelTemplateName.place_cut_lemon,
+        LevelTemplateName.place_cut_broccoli,
+        LevelTemplateName.place_cut_lemon_broccoli,
+        LevelTemplateName.place_cut_lemon_broccoli,
+        LevelTemplateName.place_cut_watermelon,
+        LevelTemplateName.place_cut_onion,
+        LevelTemplateName.place_cut_watermelon_onion,
+        LevelTemplateName.place_cut_watermelon_onion,
+        LevelTemplateName.cut_fruits_bowl_all,
+        LevelTemplateName.cut_fruits_bowl_all,
       ]
     ],
     finalPracticeRotation: [
@@ -143,26 +176,40 @@ export const topics: Topic[] = [
     finalPracticeRotation: [LevelTemplateName.feed_3_cats]
   }
 ]
-// CUTTING FRUITS
+
+
 export const levelTemplates: LevelTemplate[] = [
+  // CUTTING FRUITS
+  // cut_fruit_1,
+  // cut_fruits_bowl_all,
+  // cut_avocado,
+  // cut_kiwi_avocado,
+  // place_kiwi_bowl,
+  // place_avocado_bowl,
+  // place_cut_kiwi_avocado,
+  // place_cut_broccoli,
+  // place_cut_lemon,
+  // place_cut_lemon_broccoli,
+  // place_cut_onion,
+  // place_cut_watermelon,
+  // place_cut_watermelon_onion
   {
     id: LevelTemplateName.cut_fruit_1,
-
     grid: [
-      [[[ItemName.kiwi]], [[ItemName.knife]]],
-      [[[]], [[]]],
+      [
+        [[ItemName.kiwi, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.kiwi, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ]
     ],
     prerequisites: [],
     props: [LevelProperty.DisableMovementQuests]
-
   },
   {
-    id: LevelTemplateName.pack_car_x,
-
+    id: LevelTemplateName.cut_avocado,
     grid: [
-      [[[]], [colorfulCars], [colorfulCars], [[]]],
-      [[thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar]],
-    ],
+      [
+        [[ItemName.avocado, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.avocado, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ]
+    ]
   },
   {
     id: LevelTemplateName.cut_fruits_bowl_all,
@@ -175,6 +222,131 @@ export const levelTemplates: LevelTemplate[] = [
       ]
     ]
   },
+  {
+    id: LevelTemplateName.cut_kiwi_avocado,
+    grid: [
+      [
+        [[ItemName.avocado, ItemName.knife, ItemName.kiwi], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.avocado, ItemName.knife, ItemName.kiwi], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.avocado, ItemName.kiwi]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.place_kiwi_bowl,
+    grid: [
+      [
+        [[ItemName.kiwi, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.kiwi, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ]
+    ],
+  },
+  {
+    id: LevelTemplateName.place_avocado_bowl,
+    grid: [
+      [
+        [[ItemName.avocado, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.avocado, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.bowl, ItemName.avocado]]
+      ]
+    ],
+  },
+  {
+    id: LevelTemplateName.place_kiwi_avocado,
+    grid: [
+      [
+        [[ItemName.avocado, ItemName.bowl, ItemName.kiwi], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.avocado, ItemName.bowl, ItemName.kiwi], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.avocado, ItemName.kiwi, ItemName.bowl ]],   [[ItemName.avocado, ItemName.kiwi, ItemName.bowl ]], 
+      ]
+    ]
+  },
+  { 
+    id: LevelTemplateName.place_cut_kiwi_avocado,
+    grid: [
+      [
+        [[ItemName.avocado, ItemName.bowl, ItemName.kiwi, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.avocado, ItemName.bowl, ItemName.kiwi, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.avocado, ItemName.kiwi, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.avocado, ItemName.kiwi, ItemName.bowl ]], 
+      ]
+    ]
+
+  },
+  {
+    id: LevelTemplateName.place_cut_broccoli,
+    grid: [
+      [
+        [[ItemName.broccoli, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.broccoli, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.broccoli, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.broccoli, ItemName.bowl ]], 
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.place_cut_lemon,
+    grid: [
+      [
+        [[ItemName.lemon, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.lemon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.lemon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.lemon, ItemName.bowl ]], 
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.place_cut_lemon_broccoli,
+    grid: [
+      [
+        [[ItemName.lemon,ItemName.broccoli, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.lemon,ItemName.broccoli, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.lemon,ItemName.broccoli]]
+      ],
+      [
+        [[ItemName.lemon,ItemName.broccoli, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.lemon,ItemName.broccoli, ItemName.bowl ]],  [[ItemName.lemon,ItemName.broccoli]]
+      ]
+    ]
+  },
+  
+  {
+    id: LevelTemplateName.place_cut_watermelon,
+    grid: [
+      [
+        [[ItemName.watermelon, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.watermelon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.watermelon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.watermelon, ItemName.bowl ]], 
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.place_cut_onion,
+    grid: [
+      [
+        [[ItemName.onion, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.onion, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.onion, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.onion, ItemName.bowl ]], 
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.place_cut_watermelon_onion,
+    grid: [
+      [
+        [[ItemName.onion,ItemName.watermelon, ItemName.bowl,ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.onion,ItemName.watermelon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.watermelon,ItemName.onion]]
+      ],
+      [
+        [[ItemName.onion,ItemName.watermelon, ItemName.bowl, ItemName.knife], [{name:FieldPropertyName.ForceUniqueItem}]],  [[ItemName.watermelon,ItemName.onion, ItemName.bowl ]],  [[ItemName.watermelon,ItemName.onion]]
+      ]
+    ]
+  },
+
+  // CAR PACKING (OLD)
+  {
+    id: LevelTemplateName.pack_car_x,
+
+    grid: [
+      [[[]], [colorfulCars], [colorfulCars], [[]]],
+      [[thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar]],
+    ],
+  },
+
 
   // first progression
   {
@@ -210,7 +382,7 @@ export const levelTemplates: LevelTemplate[] = [
   {
     id: LevelTemplateName.mixed_in_suitcase,
     grid: [
-      [[colorfulSuitcases], [basicPackingMix], [basicPackingMix]]
+      [ [basicPackingMix], [basicPackingMix], [colorfulSuitcases]]
     ],
   },
   {

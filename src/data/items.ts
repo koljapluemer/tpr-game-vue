@@ -59,7 +59,7 @@ export const items: Item[] = [
     primaryKey: 'KIWI',
     secondaryKeys: [],
     images: ['kiwi_uncut'],
-    activeAffordances: [],
+    activeAffordances: [CapabilityPartnered.Placeable],
     isMovable: true,
     passiveAffordances: [PassiveAffordance.IsCuttable],
     load_when_cut: ItemName.kiwi_cut,
@@ -78,7 +78,7 @@ export const items: Item[] = [
     secondaryKeys: [],
     isMovable: true,
     images: ['kiwi_cut'],
-    activeAffordances: [],
+    activeAffordances: [CapabilityPartnered.Placeable],
   },
   {
     id: ItemName.car_black,

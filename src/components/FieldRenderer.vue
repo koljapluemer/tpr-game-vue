@@ -55,14 +55,17 @@ function onDrop(event: any) {
 
 function getImageStyle(img: CardImage): string {
 
-  let style = `max-width: 100%; max-height: 100%;left: 50%;top: 50%;`
+  let styleString = `max-width: 100%; max-height: 100%;left: 50%;top: 50%;`
+  let transformString = 'transform: translate(-50%, -50%) '
   if (img.scale != undefined) {
     // TODO: this check doesn't work but nevermind for now
-    style += `transform: translate(-50%, -50%) scale(${img.scale});`;
-  } else {
-    style += `transform: translate(-50%, -50%);`
+    transformString += ` scale(${img.scale}) `;
   }
-  return style
+  if (img.rotation != undefined) {
+    transformString +=  `rotate(${img.rotation}deg)`
+  }
+  styleString += transformString + ';'
+  return styleString
 }
 
 const isMovable = computed(() => {

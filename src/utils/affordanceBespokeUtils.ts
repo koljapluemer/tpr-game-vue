@@ -5,7 +5,9 @@ import { getItemByID } from "./itemUtils"
 import { CapabilityPartnered } from "@/data/affordances"
 import type { ItemName } from "@/data/items"
 import { scan } from "rxjs"
+import { useArrayUtils } from "@/composables/useArrayUtils"
 
+const {getRandomInt} = useArrayUtils()
 
 export function executeActionEffects(action: AlchemyAction) {
 
@@ -17,10 +19,8 @@ export function executeActionEffects(action: AlchemyAction) {
     if (senderCard && receiverCard) {
         // CUTTING
         if (affordance === CapabilityPartnered.Cuts) {
-            console.log('cut registered')
             const cardWithCutItem = getCardBasedOnItemId(receiverField.card?.item.load_when_cut)
             if (cardWithCutItem) {
-                console.log('loading cut item')
                 receiverField.card = cardWithCutItem
             }
         }
@@ -89,18 +89,23 @@ export function executeActionEffects(action: AlchemyAction) {
         // PLACING
         // (currently fruits in bowl)
         if (action.affordance === CapabilityPartnered.Placeable) {
-            receiverField.card?.images.push(getImage(senderCard.images[0].name, 0.5))
+            receiverField.card?.images.push(getImage(senderCard.images[0].name, 0.5, true))
             senderField.card = undefined
         }
 
     }
 }
 
-function getImage(imageName:string, scale=0.3): CardImage {
+function getImage(imageName:string, scale=0.3, rotateRandomly = false): CardImage {
+    let rotation = 0;
+    if (rotateRandomly) {
+        rotation = getRandomInt(0, 360)
+    }
     return {
         name:imageName,
         zIndex: 1,
-        scale: scale
+        scale: scale,
+        rotation: rotation
     }
 }
 
