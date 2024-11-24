@@ -22,7 +22,8 @@
 </svg>
 
     </button>
-  </div></div>
+    </div>
+    </div>
   <LevelRenderer v-else :level="currentLevel" v-if="currentLevel" :key="levelRegenerationAt"
     @noMoreOpenQuests="onLevelHasNoMoreOpenQuests">
   </LevelRenderer>
@@ -33,7 +34,7 @@
 import useTopicDataStorage from '@/composables/learning_data/useTopicDataStorage';
 import { useArrayUtils } from '@/composables/useArrayUtils';
 import { topics } from '@/data/levelTemplates';
-import type { LevelTemplate, Progression, Topic } from '@/types';
+import { LevelProperty, type LevelTemplate, type Progression, type Topic } from '@/types';
 import { onMounted, ref } from 'vue';
 import LevelRenderer from './LevelRenderer.vue';
 import { globalDataStore } from '@/stores/globalData';
@@ -43,7 +44,7 @@ const { pickRandom } = useArrayUtils()
 const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
 
-const currentTopic = ref(undefined as Topic | undefined)
+const currentTopic = ref(topics[0] as Topic | undefined)
 
 const lastPlayedTopic = ref(undefined as Topic | undefined)
 
@@ -66,6 +67,10 @@ function selectTopic() {
 function selectLevel() {
   if (currentTopic.value !== undefined) {
     currentLevel.value = getNextLevelForTopic(currentTopic.value)
+    if (currentLevel.value === undefined) {
+      // cope with broken levels (or tutorial topic, which just has one) by selecting a new topic
+      selectTopic()
+    }
     levelRegenerationAt.value = Date.now()
   }
   isModePickingWhatToPlayNext.value = false
@@ -75,7 +80,7 @@ function selectLevel() {
 function onLevelHasNoMoreOpenQuests() {
   if (currentTopic.value !== undefined) {
     const isTimeForChoice = iterateTopicProgress(currentTopic.value)
-    if (isTimeForChoice) {
+    if (isTimeForChoice && !currentLevel.value?.props?.includes(LevelProperty.IsIntroTutorial)) {
       isModePickingWhatToPlayNext.value = true
     } else {
       selectLevel()
@@ -87,7 +92,9 @@ onMounted(() => {
   if (loadSpecificTopicWithIndex !== undefined) {
     currentTopic.value = topics[loadSpecificTopicWithIndex]
   } else {
-    selectTopic()
+    // this was the old approach, but as of now, we're just autoloading
+    // feed dog, and if it was played already on the device, simply skip it
+    // selectTopic()
   }
   selectLevel()
 })

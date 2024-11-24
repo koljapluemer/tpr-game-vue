@@ -68,12 +68,22 @@ export enum LevelTemplateName {
   place_cut_lemon_broccoli,
   place_cut_onion,
   place_cut_watermelon,
-  place_cut_watermelon_onion
+  place_cut_watermelon_onion,
+  feed_dog
 }
 
 // TODO: add the cutting level progression
 
 export const topics: Topic[] = [
+  {
+    id: "intro",
+    progressions: [
+      [
+        LevelTemplateName.feed_dog
+      ]
+    ],
+    finalPracticeRotation: []
+  },
   {
     id: "packing-car-shoes-bottle-suitcase",
     progressions: [
@@ -726,5 +736,15 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.cat_food]], [[ItemName.cat_food]], [[]]
       ]
     ]
+  },
+  // tut
+  {
+    id: LevelTemplateName.feed_dog,
+    grid: [
+      [
+        [[ItemName.cat_food]], [[ItemName.dog]]
+      ]
+    ],
+    props: [LevelProperty.IsIntroTutorial]
   }
 ]

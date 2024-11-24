@@ -50,7 +50,8 @@ export enum ItemName {
   onion_half,
   lemon,
   lemon_halves,
-  bowl
+  bowl,
+  dog
 }
 
 export const items: Item[] = [
@@ -251,6 +252,12 @@ export const items: Item[] = [
     primaryKey: 'CAT',
     color: 'GREY',
     images: ['cat_grey'],
+    passiveAffordances: [PassiveAffordance.Takes]
+  },
+  {
+    id: ItemName.dog,
+    primaryKey: 'DOG',
+    images: ['dog'],
     passiveAffordances: [PassiveAffordance.Takes]
   },
   // advanced push pull

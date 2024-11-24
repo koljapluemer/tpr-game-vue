@@ -83,7 +83,11 @@ export default function () {
         if (topicData.rotationMode === RotationMode.ClimbingProgressions) {
             levelId = topic.progressions[topicData.indexOfCurrentProgression][topicData.indexOfCurrentLevel]
         } else {
-            levelId = pickRandom(topic.finalPracticeRotation)
+            if (topic.finalPracticeRotation.length === 0) {
+                return undefined
+            } else {
+                levelId = pickRandom(topic.finalPracticeRotation)
+            }
         }
 
         if (levelId !== undefined) {

@@ -40,7 +40,8 @@ export enum LevelProperty {
   DisableSecondaryKeyUsage,
   GenerateRelativePositions,
   AllowColorIdentifiersEvenIfOnlyItemOfType,
-  OnlyAllowRelationalIDsIfTheyExist
+  OnlyAllowRelationalIDsIfTheyExist,
+  IsIntroTutorial
 }
 
 export type FieldProperty = {
