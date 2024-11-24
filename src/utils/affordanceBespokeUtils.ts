@@ -50,6 +50,23 @@ export function executeActionEffects(action: AlchemyAction) {
                 }
             }
         }
+        // OPEN/CLOSE (PUSH/PULL)
+        if (action.affordance === CapabilityPartnered.Pushes) {
+            if (receiverField.card?.item.load_when_pushed) {
+                const newCardWithItem = getCardBasedOnItemId(receiverField.card?.item.load_when_pushed)
+                if (newCardWithItem) {
+                    receiverField.card = newCardWithItem
+                }
+            }
+        }
+        if (action.affordance === CapabilityPartnered.Pulls) {
+            if (receiverField.card?.item.load_when_pulled) {
+                const newCardWithItem = getCardBasedOnItemId(receiverField.card?.item.load_when_pulled)
+                if (newCardWithItem) {
+                    receiverField.card = newCardWithItem
+                }
+            }
+        }
         // BOARDING (e.g. a bus)
         if (action.affordance === CapabilityPartnered.Boards) {
             senderField.card = undefined

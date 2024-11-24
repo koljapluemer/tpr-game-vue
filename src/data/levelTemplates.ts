@@ -72,6 +72,7 @@ export const topics: Topic[] = [
       LevelTemplateName.mixed_in_suitcase,
     ]
   },
+  // NEXT: more of these
   {
     id: "cutting-fruits",
     progressions: [

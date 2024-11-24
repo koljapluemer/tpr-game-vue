@@ -72,7 +72,7 @@ export const items: Item[] = [
     id: ItemName.car_black,
     primaryKey: 'CAR',
     secondaryKeys: [],
-    images: ['car_black-Photoroom'],
+    images: ['car_black'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
     color: 'BLACK',
   },
@@ -80,7 +80,7 @@ export const items: Item[] = [
     id: ItemName.car_blue,
     primaryKey: 'CAR',
     secondaryKeys: [],
-    images: ['car_blue_bmw_crop', 'car_blue-Photoroom'],
+    images: ['car_blue_bmw', 'car_blue'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
     color: 'BLUE',
@@ -89,7 +89,7 @@ export const items: Item[] = [
     id: ItemName.car_green,
     primaryKey: 'CAR',
     secondaryKeys: [],
-    images: ['car_green-Photoroom'],
+    images: ['car_green'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
     color: 'GREEN',
@@ -99,7 +99,7 @@ export const items: Item[] = [
     primaryKey: 'FAN',
     secondaryKeys: [],
     isMovable: true,
-    images: ['fan_crop'],
+    images: ['fan'],
     activeAffordances: [CapabilityPartnered.StoresInMedium],
   },
   {
@@ -107,7 +107,7 @@ export const items: Item[] = [
     primaryKey: 'GLOBE',
     isMovable: true,
     secondaryKeys: [],
-    images: ['globe_crop'],
+    images: ['globe'],
     activeAffordances: [CapabilityPartnered.StoresInMedium],
   },
   {
@@ -115,7 +115,7 @@ export const items: Item[] = [
     primaryKey: 'POTTED_PLANT',
     isMovable: true,
     secondaryKeys: [],
-    images: ['pot_plant_crop'],
+    images: ['pot_plant'],
     activeAffordances: [CapabilityPartnered.StoresInMedium],
   },
   {
@@ -123,7 +123,7 @@ export const items: Item[] = [
     primaryKey: 'SUITCASE',
     isMovable: true,
     secondaryKeys: [],
-    images: ['suitcas2_crop'],
+    images: ['suitcas2'],
     passiveAffordances: [PassiveAffordance.IsStorageSmall],
 
     activeAffordances: [CapabilityPartnered.StoresInMedium],
@@ -133,7 +133,7 @@ export const items: Item[] = [
     primaryKey: 'SUITCASE',
     isMovable: true,
     secondaryKeys: [],
-    images: ['suitcase1_crop'],
+    images: ['suitcase1'],
     passiveAffordances: [PassiveAffordance.IsStorageSmall],
 
     activeAffordances: [CapabilityPartnered.StoresInMedium],
@@ -146,12 +146,12 @@ export const items: Item[] = [
     images: ['melon_whole'],
     activeAffordances: [CapabilityPartnered.StoresInSmall, CapabilityPartnered.StoresInMedium],
   },
-  { id: ItemName.house, primaryKey: 'HOUSE', images: ['house_crop', 'house_front'] },
+  { id: ItemName.house, primaryKey: 'HOUSE', images: ['house', 'house_front'] },
   {
     id: ItemName.car_old_movable,
     isMovable: true,
     primaryKey: 'CAR',
-    images: ['car_blue_old_crop'],
+    images: ['car_blue_old'],
     activeAffordances: [CapabilityPartnered.Parkable],
     color: 'BLUE',
   },
@@ -203,7 +203,7 @@ export const items: Item[] = [
     id: ItemName.bus_large_yellow_red,
     primaryKey: 'BUS',
     isMovable: false,
-    images: ['bus_big_crop'],
+    images: ['bus_big'],
     passiveAffordances: [PassiveAffordance.IsBoardable]
   },
   {
@@ -252,7 +252,7 @@ export const items: Item[] = [
   {
     id: ItemName.box_open,
     primaryKey: 'CARDBOARD_BOX',
-    images: ['box-open'],
+    images: ['box-opened'],
   },
   {
     id: ItemName.door_red_ajar,
@@ -273,7 +273,7 @@ export const items: Item[] = [
     id: ItemName.door_red_open,
     primaryKey: 'DOOR_PUSH_TO_OPEN',
     images: ['door-red-open'],
-    load_when_unlocked: ItemName.door_red_ajar,
+    load_when_pulled: ItemName.door_red_ajar,
     passiveAffordances: [PassiveAffordance.Pullable]
   },
   {
@@ -318,7 +318,7 @@ export const items: Item[] = [
     id: ItemName.key,
     primaryKey: "KEY_OLD",
     isMovable: true,
-    images: ['key_crop'],
+    images: ['key'],
     activeAffordances: [CapabilityPartnered.Unlocks, CapabilityPartnered.Locks]
   }
 ] as const
