@@ -45,6 +45,8 @@ export enum LevelTemplateName {
   park_right_building,
   park_right_left_building,
   feed_3_cats,
+  feed_2_cats,
+  feed_1_cat,
   car_open,
   car_close,
   car_unlock_open,
@@ -117,12 +119,14 @@ export const topics: Topic[] = [
         LevelTemplateName.cut_fruit_1,
         LevelTemplateName.cut_avocado,
         LevelTemplateName.cut_kiwi_avocado,
+      ],[
         LevelTemplateName.place_kiwi_bowl,
         LevelTemplateName.place_avocado_bowl,
         LevelTemplateName.place_kiwi_avocado,
         LevelTemplateName.place_kiwi_avocado,
         LevelTemplateName.place_cut_kiwi_avocado,
         LevelTemplateName.place_cut_kiwi_avocado,
+      ],[
         LevelTemplateName.place_cut_lemon,
         LevelTemplateName.place_cut_broccoli,
         LevelTemplateName.place_cut_lemon_broccoli,
@@ -178,14 +182,6 @@ export const topics: Topic[] = [
   },
   {
     id: "park-behind-left-right-front",
-    // park_front_building,
-    // park_left_building,
-    // park_front_left_building,
-    // park_behind_building,
-    // park_behind_left_building,
-    // park_behind_front_left_building,
-    // park_right_building,
-    // park_right_left_building,
     progressions: [
       [
         LevelTemplateName.park_car ,
@@ -194,6 +190,10 @@ export const topics: Topic[] = [
         LevelTemplateName.park_front_left_building ,
         LevelTemplateName.park_front_left_building ,
         LevelTemplateName.park_behind_building ,
+        LevelTemplateName.park_behind_left_building ,
+        LevelTemplateName.park_behind_left_building ,
+      ], 
+      [
         LevelTemplateName.park_behind_left_building ,
         LevelTemplateName.park_behind_left_building ,
         LevelTemplateName.park_right_building ,
@@ -209,7 +209,18 @@ export const topics: Topic[] = [
     id: "feeding-colorful-cats",
     progressions: [
       [
-        LevelTemplateName.feed_3_cats
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_1_cat,
+        LevelTemplateName.feed_2_cats,
+        LevelTemplateName.feed_2_cats,
+        LevelTemplateName.feed_2_cats,
+        LevelTemplateName.feed_2_cats,
+        LevelTemplateName.feed_3_cats,
+        LevelTemplateName.feed_3_cats,
       ]
     ],
     finalPracticeRotation: [LevelTemplateName.feed_3_cats]
@@ -736,6 +747,29 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.cat_food]], [[ItemName.cat_food]], [[]]
       ]
     ]
+  },
+  {
+    id: LevelTemplateName.feed_2_cats,
+    grid: [
+      [
+       [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]], [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.cat_food]], [[ItemName.cat_food]],
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.feed_1_cat,
+    grid: [
+      [
+       [colorFulCats, [{name: FieldPropertyName.ForceUniqueItem}]]
+      ],
+      [
+        [[ItemName.cat_food]],
+      ]
+    ],
+    props: [LevelProperty.AllowColorIdentifiersEvenIfOnlyItemOfType]
   },
   // tut
   {
