@@ -32,6 +32,7 @@ import SoundEffectPlayer from "./SoundEffectPlayer.vue";
 import QuestRenderer from "./QuestRenderer.vue";
 import { StandardSound } from "@/data/standardSounds";
 import { useOnlyQuestsThatArePlayable } from "@/debugSettings";
+import { globalDataStore } from "@/stores/globalData";
 
 
 
@@ -42,17 +43,12 @@ const props = defineProps<{
 const emit = defineEmits(['noMoreOpenQuests'])
 
 const grid = ref(undefined as Grid | undefined)
-
 const currentQuest = ref(undefined as Quest | undefined)
-const lastQuestKey = ref(undefined as string | undefined)
-
 const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
-
 const timeoutId = ref(undefined as number | undefined)
 
 const maximumQuestsToBePlayedInThisLevel = ref(5)
 const questsPlayedInThisLevel = ref(0)
-
 
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
@@ -121,10 +117,10 @@ function startRandomQuest() {
         setIdentifiersForFields(grid.value, props.level.props)
 
     const availableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
-    const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== lastQuestKey.value)
+    const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== globalDataStore.lastQuestKey)
     if (questsWithoutLast.length > 0 &&  questsPlayedInThisLevel.value < maximumQuestsToBePlayedInThisLevel.value ) {
         currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
-        lastQuestKey.value = getQuestKey(currentQuest.value)
+        globalDataStore.lastQuestKey = getQuestKey(currentQuest.value)
     } else {
         // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
         emit("noMoreOpenQuests")
