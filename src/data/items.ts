@@ -66,7 +66,7 @@ export const items: Item[] = [
     secondaryKeys: [],
     images: ['car_black-Photoroom'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
-    color: 'black',
+    color: 'BLACK',
   },
   {
     id: ItemName.car_blue,
@@ -75,7 +75,7 @@ export const items: Item[] = [
     images: ['car_blue_bmw_crop', 'car_blue-Photoroom'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
-    color: 'blue',
+    color: 'BLUE',
   },
   {
     id: ItemName.car_green,
@@ -84,7 +84,7 @@ export const items: Item[] = [
     images: ['car_green-Photoroom'],
     passiveAffordances: [PassiveAffordance.IsStorageMedium, PassiveAffordance.IsStorageSmall],
 
-    color: 'green',
+    color: 'GREEN',
   },
   {
     id: ItemName.fan,
@@ -145,7 +145,7 @@ export const items: Item[] = [
     primaryKey: 'CAR',
     images: ['car_blue_old_crop'],
     activeAffordances: [CapabilityPartnered.Parkable],
-    color: 'blue',
+    color: 'BLUE',
   },
   {
     id: ItemName.parking_lot,

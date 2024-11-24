@@ -21,9 +21,9 @@ const { pickRandom } = useArrayUtils()
 const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
 
-// const currentTopic = ref(undefined as Topic | undefined)
+const currentTopic = ref(undefined as Topic | undefined)
+// const currentTopic = ref(topics[5] as Topic | undefined)
 
-const currentTopic = ref(topics[5] as Topic | undefined)
 const lastPlayedTopic = ref(undefined as Topic | undefined)
 
 const currentLevel = ref(undefined as LevelTemplate | undefined)
@@ -61,7 +61,8 @@ function onLevelHasNoMoreOpenQuests() {
 }
 
 onMounted(() => {
-  // selectTopic()
+  // uncomment selectTopic when testing levels
+  selectTopic()
   selectLevel()
 })
 

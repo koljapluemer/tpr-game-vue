@@ -52,11 +52,15 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
                 }
                 // COLOR
                 if (keysColorAllowed[key]) {
+                    // only allow color coding when multiple objects of same type exist though,
+                    // or if we explicitly allowed it
+                    if (keyCount[key] > 1 || levelProps?.includes(LevelProperty.AllowColorIdentifiersEvenIfOnlyItemOfType)) {
                         // TODO: this currently assumes that every object of every color just exists once
                         // needs refactor or additional loop to actually react correctly to "2 brown cats -> feed A brown cat"
                         const id = 'THE__' + field.card.item.color + '__' + field.card.item.primaryKey
                         field.identifiers.push(id)
                         identifiers.push(id)
+                    }
                 }
             }
        

@@ -60,7 +60,8 @@ export function executeActionEffects(action: AlchemyAction) {
             receiverField.card?.images.push(
                 {
                     name: senderCard.images[0].name,
-                    zIndex: 1
+                    zIndex: 1,
+                    scale: 0.3
                 }
             )
             senderField.card = undefined
@@ -70,7 +71,7 @@ export function executeActionEffects(action: AlchemyAction) {
     }
 }
 
-function getCardBasedOnItemId(id: ItemName | undefined): Card | undefined {
+function getCardBasedOnItemId(id: ItemName | undefined, generateSmallImage = false): Card | undefined {
     if (id === undefined) {
         return undefined
     } else {
@@ -81,7 +82,7 @@ function getCardBasedOnItemId(id: ItemName | undefined): Card | undefined {
                 images: [{
                     name: item.images[0],
                     zIndex: 0,
-                    scale: 0.3
+                    scale: generateSmallImage? 0.3 : 1
                 }
                 ]
             }

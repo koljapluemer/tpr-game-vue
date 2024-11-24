@@ -27,6 +27,7 @@ function _play(href: string) {
     // Play the sound if not already playing
     audio.currentTime = 0;
     audio.play();
+    audio.volume = 0.35;
     isPlaying.value = true;
 
 }

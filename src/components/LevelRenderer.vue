@@ -20,12 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
 import { LevelProperty, type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
 import { setIdentifiersForFields } from "@/utils/identifierUtils";
 import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/alchemyUtils";
-import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, isQuestStillPossible } from "@/utils/questUtils";
+import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey, isQuestStillPossible } from "@/utils/questUtils";
 import { getGridFromLevelTemplate } from "@/utils/gridUtils";
 import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
 import SoundEffectPlayer from "./SoundEffectPlayer.vue";
@@ -45,18 +45,23 @@ const availableActions = ref([] as AlchemyAction[])
 const availableQuests = ref([] as Quest[])
 
 const currentQuest = ref(undefined as Quest | undefined)
-const lastQuest = ref(undefined as Quest | undefined)
+const lastQuestKey = ref(undefined as string | undefined)
 
 const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
 
-const columns = ref(2)
-const rows = ref(2)
+const timeoutId = ref(undefined as number | undefined)
 
-grid.value = getGridFromLevelTemplate(props.level)
-updateGrid()
-startRandomQuestFromList()
+
+
 
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
+
+onMounted(() => {
+    grid.value = getGridFromLevelTemplate(props.level)
+    updateGrid()
+    startRandomQuestFromList()
+
+})
 
 function onDragStart(field: Field) {
     if (typeof field.card !== "undefined") {
@@ -80,17 +85,16 @@ function onDropOn(field: Field) {
                     questWasDone = actionFulfilledQuest(action, currentQuest.value)
                     if (questWasDone) {
                         endCurrentQuest(true)
-                        break
+                        return
                     }
 
                 }
                 if (!questWasDone) {
                     setIdentifiersForFields(grid.value, props.level.props)
+                    requestPlayStandard(StandardSound.Wrong)
+
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
                         endCurrentQuest(false)
-                        requestPlayStandard(StandardSound.Failure)
-                    } else {
-                        requestPlayStandard(StandardSound.Wrong)
                     }
                 }
             }
@@ -123,10 +127,10 @@ const flatGrid = computed((): Field[] => {
 
 
 function startRandomQuestFromList() {
-    const questsWithoutLast = availableQuests.value.filter(quest => quest != lastQuest.value)
+    const questsWithoutLast = availableQuests.value.filter(quest => getQuestKey(quest) !== lastQuestKey.value)
     if (questsWithoutLast.length > 0) {
         currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
-        lastQuest.value = currentQuest.value
+        lastQuestKey.value = getQuestKey(currentQuest.value)
     } else {
         emit("noMoreOpenQuests")
     }
@@ -137,7 +141,10 @@ function endCurrentQuest(questWasSuccessful: boolean) {
         handleSuccess()
     }
     currentQuest.value = undefined
-    setTimeout(startRandomQuestFromList, 1000);
+    if (timeoutId !== undefined) {
+        clearTimeout(timeoutId.value)
+    }
+    timeoutId.value  = setTimeout(startRandomQuestFromList, 1000);
 }
 
 

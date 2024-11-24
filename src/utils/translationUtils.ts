@@ -43,10 +43,8 @@ export function logRequiredTranslationKeysForGame() {
 
                     gridsToPlayThrough.forEach( grid =>{
                         let actions = getActionableActionsOnGrid(grid)
-                        // console.log('actions', actions)
                         while (actions.length > 0) {
                             const quests = getAvailableQuestsBasedOnLevel(level, grid, false)
-                            // console.log('quests', quests)
                             quests.forEach(quest => {
                                 questKeys.push(getQuestKey(quest))
                             })

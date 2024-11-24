@@ -24,7 +24,7 @@
         Your browser does not support the audio tag.
     </audio>
 
-    <small>{{ getQuestKey(props.quest) }}</small>
+    <!-- <small>{{ getQuestKey(props.quest) }}</small> -->
 </template>
 
 <script setup lang="ts">

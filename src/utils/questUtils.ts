@@ -28,6 +28,7 @@ export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid,
         return getTranslationForKey(getQuestKey(quest)) !== undefined
     })
 
+
     if (returnOnlyPlayable) {
         return questsThatArePlayable
     } else {
