@@ -10,6 +10,7 @@ export enum CapabilityPartnered {
   Giveable,
   Pushes,
   Pulls,
+  Placeable,
 }
 
 
@@ -24,7 +25,8 @@ export enum PassiveAffordance {
   IsBoardable,
   Takes,
   Pushable,
-  Pullable
+  Pullable,
+  ThingsCanBePlacedOnThis
 }
 
 
@@ -39,7 +41,8 @@ export const affordancePartnerings = {
   [CapabilityPartnered.Boards]: PassiveAffordance.IsBoardable,
   [CapabilityPartnered.Giveable]: PassiveAffordance.Takes,
   [CapabilityPartnered.Pulls]: PassiveAffordance.Pullable,
-  [CapabilityPartnered.Pushes]: PassiveAffordance.Pushable
+  [CapabilityPartnered.Pushes]: PassiveAffordance.Pushable,
+  [CapabilityPartnered.Placeable]: PassiveAffordance.ThingsCanBePlacedOnThis,
 
 } as const
 
@@ -55,5 +58,6 @@ export const capabilityVerbs = {
   [CapabilityPartnered.Boards]: "BOARD",
   [CapabilityPartnered.Giveable]: "GIVE",
   [CapabilityPartnered.Pulls]: "PULL",
-  [CapabilityPartnered.Pushes]: "PUSH"
+  [CapabilityPartnered.Pushes]: "PUSH",
+  [CapabilityPartnered.Placeable]: "PLACE_ON/IN"
 }

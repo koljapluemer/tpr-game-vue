@@ -38,7 +38,19 @@ export enum ItemName {
   car_mustang_ajar,
   door_red_open,
   door_red_closed,
-  door_red_ajar
+  door_red_ajar,
+  // cut stuff
+  avocado,
+  avocado_half,
+  broccoli,
+  broccoli_half,
+  watermelon,
+  watermelon_cut,
+  onion,
+  onion_half,
+  lemon,
+  lemon_halves,
+  bowl
 }
 
 export const items: Item[] = [
@@ -320,5 +332,103 @@ export const items: Item[] = [
     isMovable: true,
     images: ['key'],
     activeAffordances: [CapabilityPartnered.Unlocks, CapabilityPartnered.Locks]
-  }
+  },
+  // avocado,
+  // avocado_half,
+  // broccoli,
+  // broccoli_half,
+  // watermelon,
+  // watermelon_cut,
+  // onion,
+  // onion_half,
+  // lemon,
+  // lemon_halves,
+  // bowl
+  {
+    id: ItemName.avocado ,
+    primaryKey: 'AVOCADO',
+    isMovable: true,
+    images: ['avocado'],
+    load_when_cut: ItemName.avocado_half,
+    passiveAffordances: [PassiveAffordance.IsCuttable],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.avocado_half ,
+    primaryKey: 'AVOCADO_CUT',
+    isMovable: true,
+    images: ['avocado_cut'],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.broccoli ,
+    primaryKey: 'BROCCOLI',
+    isMovable: true,
+    images: ['broccoli'],
+    load_when_cut: ItemName.broccoli_half,
+    passiveAffordances: [PassiveAffordance.IsCuttable],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.broccoli_half ,
+    primaryKey: 'BROCCOLI_CUT',
+    isMovable: true,
+    images: ['broccoli_half'],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.watermelon ,
+    primaryKey: 'WATERMELON',
+    isMovable: true,
+    images: ['melon_whole'],
+    load_when_cut: ItemName.watermelon_cut,
+    passiveAffordances: [PassiveAffordance.IsCuttable],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.watermelon_cut ,
+    primaryKey: 'WATERMELON_CUT',
+    isMovable: true,
+    images: ['melon_cut'],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+
+  },
+  {
+    id: ItemName.onion ,
+    primaryKey: 'ONION',
+    isMovable: true,
+    images: ['onion'],
+    load_when_cut: ItemName.onion_half,
+    passiveAffordances: [PassiveAffordance.IsCuttable],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.onion_half ,
+    primaryKey: 'ONION_CUT',
+    isMovable: true,
+    images: ['onion_cut'],
+  },
+  {
+    id: ItemName.lemon ,
+    primaryKey: 'LEMON',
+    isMovable: true,
+    images: ['lemon'],
+    load_when_cut: ItemName.lemon_halves,
+    passiveAffordances: [PassiveAffordance.IsCuttable],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.lemon_halves ,
+    primaryKey: 'LEMON_CUT',
+    isMovable: true,
+    images: ['lemon_cut'],
+    activeAffordances: [CapabilityPartnered.Placeable] 
+  },
+  {
+    id: ItemName.bowl,
+    primaryKey: 'BOWL',
+    isMovable: true,
+    images: ['bowl_1', 'bowl_2', 'bowl_3'],
+    passiveAffordances: [PassiveAffordance.ThingsCanBePlacedOnThis]
+  },
 ] as const

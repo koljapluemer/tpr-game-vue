@@ -24,11 +24,12 @@
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- <small>{{ getQuestKey(props.quest) }}</small> -->
+    <small v-if="showQuestKeyOnScreen">{{ getQuestKey(props.quest) }}</small>
 </template>
 
 <script setup lang="ts">
 
+import { showQuestKeyOnScreen } from '@/debugSettings';
 import { translationStore } from '@/stores/translationStore';
 import type { Quest } from '@/types';
 import { getQuestKey } from '@/utils/questUtils';

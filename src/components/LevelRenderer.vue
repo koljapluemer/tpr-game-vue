@@ -58,8 +58,6 @@ let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 onMounted(() => {
     grid.value = getGridFromLevelTemplate(props.level)
-    const nrOfInitiallyAvailableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
-    maximumQuestsToBePlayedInThisLevel.value = Math.max(3, Math.min(maximumQuestsToBePlayedInThisLevel.value, nrOfInitiallyAvailableQuests.length))
     startRandomQuest()
 
 })

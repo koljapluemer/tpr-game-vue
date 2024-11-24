@@ -15,6 +15,8 @@ const colorfulCars: ItemName[] = [ItemName.car_black, ItemName.car_blue, ItemNam
 const colorFulCats: ItemName[] = [ItemName.cat_brown, ItemName.cat_grey, ItemName.cat_white]
 const colorfulSuitcases = [ItemName.suitcase_blue, ItemName.suitcase_white]
 const basicPackingMix: ItemName[] = [ItemName.shoes, ItemName.water_bottle, ...colorfulSuitcases]
+const cuttableFruits: ItemName[] = [ItemName.kiwi, ItemName.avocado, ItemName.broccoli, ItemName.lemon, ItemName.watermelon, ItemName.onion]
+const cuttableFruitsWithBowl: ItemName[] = [ItemName.kiwi, ItemName.avocado, ItemName.broccoli, ItemName.lemon, ItemName.watermelon, ItemName.onion, ItemName.bowl]
 
 const carLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push, ItemName.car_keys, ItemName.hand_pull], [{name: FieldPropertyName.ForceUniqueItem}]]
 const doorLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push, ItemName.key, ItemName.hand_pull], [{name: FieldPropertyName.ForceUniqueItem}]]
@@ -45,6 +47,7 @@ export enum LevelTemplateName {
   door_close_lock,
   door_close_lock_all,
   box_open,
+  cut_fruits_bowl_all,
 }
 
 export const topics: Topic[] = [
@@ -81,7 +84,7 @@ export const topics: Topic[] = [
       ]
     ],
     finalPracticeRotation: [
-      LevelTemplateName.cut_fruit_1,
+      LevelTemplateName.cut_fruits_bowl_all,
     ]
   },
   {
@@ -140,7 +143,7 @@ export const topics: Topic[] = [
     finalPracticeRotation: [LevelTemplateName.feed_3_cats]
   }
 ]
-
+// CUTTING FRUITS
 export const levelTemplates: LevelTemplate[] = [
   {
     id: LevelTemplateName.cut_fruit_1,
@@ -161,6 +164,18 @@ export const levelTemplates: LevelTemplate[] = [
       [[thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar], [thingsThatFitInCar]],
     ],
   },
+  {
+    id: LevelTemplateName.cut_fruits_bowl_all,
+    grid: [
+      [
+        [[ItemName.knife, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]], [[ItemName.knife, ItemName.bowl], [{name:FieldPropertyName.ForceUniqueItem}]], [[]]
+      ],
+      [
+        [cuttableFruits], [cuttableFruitsWithBowl], [cuttableFruitsWithBowl]
+      ]
+    ]
+  },
+
   // first progression
   {
     id: LevelTemplateName.bottle_in_suitcase,
