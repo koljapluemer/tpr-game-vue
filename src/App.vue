@@ -3,7 +3,6 @@ import { onMounted, ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { translationStore } from "./stores/translationStore";
 import { LanguageCode, type LanguageCodeType } from "./types";
-import { logRequiredTranslationKeysForGame } from "./utils/translationUtils";
 
 
 const languageSelected = ref()
@@ -29,7 +28,7 @@ onMounted(()=> {
       @change="requestLangChange($event)">
       <option v-for="(code, lang) in LanguageCode" :value="code">{{ lang }}</option>
     </select>
-    <small>v.2024-11-24.1</small>
+    <small>v.2024-11-24.2</small>
   </footer>
 </template>
 

@@ -45,7 +45,6 @@ const emit = defineEmits(['noMoreOpenQuests'])
 const grid = ref(undefined as Grid | undefined)
 const currentQuest = ref(undefined as Quest | undefined)
 const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
-const timeoutId = ref(undefined as number | undefined)
 
 const maximumQuestsToBePlayedInThisLevel = ref(5)
 const questsPlayedInThisLevel = ref(0)
@@ -135,10 +134,6 @@ function endCurrentQuest(questWasSuccessful: boolean) {
         handleSuccess()
     }
     currentQuest.value = undefined
-    if (timeoutId !== undefined) {
-        clearTimeout(timeoutId.value)
-    }
-    timeoutId.value  = setTimeout(startRandomQuest, 1000);
 }
 
 
