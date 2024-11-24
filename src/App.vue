@@ -14,7 +14,6 @@ function requestLangChange(event: any) {
 
 onMounted(()=> {
   // logRequiredTranslationKeysForGame()
-
 })
 
 
@@ -30,7 +29,7 @@ onMounted(()=> {
       @change="requestLangChange($event)">
       <option v-for="(code, lang) in LanguageCode" :value="code">{{ lang }}</option>
     </select>
-    <small>v.2024-11-23.3</small>
+    <small>v.2024-11-24.1</small>
   </footer>
 </template>
 
