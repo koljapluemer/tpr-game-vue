@@ -20,8 +20,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import GameRenderer from "./GameRenderer.vue";
+import { skipPlayButtonAtBeginning } from "@/debugSettings";
 
 
-const gameStarted = ref(true)
+
+const gameStarted = ref(skipPlayButtonAtBeginning)
 
 </script>
