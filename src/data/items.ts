@@ -30,7 +30,15 @@ export enum ItemName {
   cat_food,
   cat_grey,
   cat_brown,
-  cat_white
+  cat_white,
+  hand_push,
+  hand_pull,
+  box_closed,
+  box_open,
+  car_mustang_ajar,
+  door_red_open,
+  door_red_closed,
+  door_red_ajar
 }
 
 export const items: Item[] = [
@@ -169,23 +177,7 @@ export const items: Item[] = [
     images: ['shoes'],
     activeAffordances: [CapabilityPartnered.StoresInSmall, CapabilityPartnered.StoresInMedium],
   },
-  {
-    id: ItemName.car_mustang_closed,
-    primaryKey: 'CAR',
-    isMovable: false,
-    images: ['mustang-closed'],
-    passiveAffordances: [PassiveAffordance.Unlockable],
-    load_when_unlocked: ItemName.car_mustang_open
 
-  },
-  {
-    id: ItemName.car_mustang_open,
-    primaryKey: 'CAR',
-    isMovable: false,
-    images: ['mustang-open'],
-    passiveAffordances: [PassiveAffordance.Lockable],
-    load_when_locked: ItemName.car_mustang_closed
-  },
   {
     id: ItemName.car_keys,
     primaryKey: 'CAR_KEYS',
@@ -249,4 +241,77 @@ export const items: Item[] = [
     images: ['cat_grey'],
     passiveAffordances: [PassiveAffordance.Takes]
   },
+  // advanced push pull
+  {
+    id: ItemName.box_closed,
+    primaryKey: 'CARDBOARD_BOX',
+    images: ['box-closed'],
+    passiveAffordances: [PassiveAffordance.Pullable],
+    load_when_pulled: ItemName.box_open
+  },
+  {
+    id: ItemName.box_open,
+    primaryKey: 'CARDBOARD_BOX',
+    images: ['box-open'],
+  },
+  {
+    id: ItemName.door_red_ajar,
+    primaryKey: 'DOOR_PUSH_TO_OPEN',
+    images: ['door-red-ajar'],
+    load_when_locked: ItemName.door_red_closed,
+    load_when_pushed: ItemName.door_red_open,
+    passiveAffordances: [PassiveAffordance.Lockable, PassiveAffordance.Pushable]
+  },
+  {
+    id: ItemName.door_red_closed,
+    primaryKey: 'DOOR_PUSH_TO_OPEN',
+    images: ['door-red-closed'],
+    load_when_unlocked: ItemName.door_red_ajar,
+    passiveAffordances: [PassiveAffordance.Unlockable]
+  },
+  {
+    id: ItemName.door_red_open,
+    primaryKey: 'DOOR_PUSH_TO_OPEN',
+    images: ['door-red-open'],
+    load_when_unlocked: ItemName.door_red_ajar,
+    passiveAffordances: [PassiveAffordance.Pullable]
+  },
+  {
+    id: ItemName.car_mustang_ajar,
+    primaryKey: 'CAR',
+    images: ['mustang-closed'],
+    passiveAffordances: [PassiveAffordance.Lockable, PassiveAffordance.Pullable],
+    load_when_locked: ItemName.car_mustang_closed,
+    load_when_pulled: ItemName.car_mustang_open
+  },
+  {
+    id: ItemName.car_mustang_closed,
+    primaryKey: 'CAR',
+    isMovable: false,
+    images: ['mustang-closed'],
+    passiveAffordances: [PassiveAffordance.Unlockable],
+    load_when_unlocked: ItemName.car_mustang_ajar
+  },
+  {
+    id: ItemName.car_mustang_open,
+    primaryKey: 'CAR',
+    isMovable: false,
+    images: ['mustang-open'],
+    passiveAffordances: [PassiveAffordance.Pushable],
+    load_when_pushed: ItemName.car_mustang_ajar
+  },
+  {
+    id: ItemName.hand_pull,
+    primaryKey: "HAND",
+    isMovable: true,
+    images: ['hand_pull'],
+    activeAffordances: [CapabilityPartnered.Pulls]
+  },
+  {
+    id: ItemName.hand_push,
+    primaryKey: "HAND",
+    isMovable: true,
+    images: ['hand_push'],
+    activeAffordances: [CapabilityPartnered.Pushes]
+  }
 ] as const

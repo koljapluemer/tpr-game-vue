@@ -1,7 +1,7 @@
 // STATIC DATA
 
 import type { CapabilityPartnered, PassiveAffordance } from './data/affordances'
-import type { ItemName } from './data/items'
+import { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'
 
 export const LanguageCode = {
@@ -24,6 +24,8 @@ export type Item = {
   load_when_cut?: ItemName
   load_when_locked?: ItemName
   load_when_unlocked?: ItemName
+  load_when_pushed?: ItemName
+  load_when_pulled?: ItemName
 }
 
 export enum FieldPropertyName {

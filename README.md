@@ -8,7 +8,11 @@
 cat translations.csv | python -c 'import csv, json, sys; print(json.dumps([dict(r) for r in csv.DictReader(sys.stdin)]))' > translations.json
 ```
 
-## Adding A Level
+## Dev/Content
+
+- some useful settings in `src/debugSettings.ts`
+
+### Adding A Level
 
 - add the images you want in `public/assets/items`, make sure they're `webp` and nicely named
 - go to `data/affordances.ts` and add all new affordances you may need, name-wise (you probably need to interact with all 3 data structures)
@@ -18,8 +22,6 @@ cat translations.csv | python -c 'import csv, json, sys; print(json.dumps([dict(
     - then, add the template definition (mostly spicy grid stuff) in the big data structure at the bottom
         - make sure the insane array nesting is fine
     - create a topic, with at least one array of one level template in progressions and one level in final 
-- manually cheese the line `const currentTopic = ref(topics[5] as Topic | undefined)` in `GameRenderer.vue` to directly test the component
-- way down in the same file, set `availableQuests.value = getAvailableQuestsBasedOnLevel(props.level, grid.value, false)` to `false` for the last argument to allow quests that don't have translations
 - get the missing keys by playing, then right clicking the warn message in console and go 'copy object'
 - paste this in `translation_scripts/missing_keys.txt`
 - run `01_add_missing_keys_to_csv.py`

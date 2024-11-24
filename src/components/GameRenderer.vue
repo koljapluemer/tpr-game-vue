@@ -37,13 +37,13 @@ import type { LevelTemplate, Progression, Topic } from '@/types';
 import { onMounted, ref } from 'vue';
 import LevelRenderer from './LevelRenderer.vue';
 import { globalDataStore } from '@/stores/globalData';
+import { loadSpecificTopicWithIndex } from '@/debugSettings';
 
 const { pickRandom } = useArrayUtils()
 const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
 
 const currentTopic = ref(undefined as Topic | undefined)
-// const currentTopic = ref(topics[5] as Topic | undefined)
 
 const lastPlayedTopic = ref(undefined as Topic | undefined)
 
@@ -84,8 +84,11 @@ function onLevelHasNoMoreOpenQuests() {
 }
 
 onMounted(() => {
-  // uncomment selectTopic when testing levels
-  selectTopic()
+  if (loadSpecificTopicWithIndex !== undefined) {
+    currentTopic.value = topics[loadSpecificTopicWithIndex]
+  } else {
+    selectTopic()
+  }
   selectLevel()
 })
 
