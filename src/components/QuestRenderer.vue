@@ -1,5 +1,4 @@
 <template>
-    <div class="flex flex-row gap-2 items-center card bg-base-200 shadow-xl p-2 my-2">
         <button class="btn btn-circle btn-sm btn-secondary" @click="playQuestAudio">
             <svg v-if="!questSoundPlaying" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
@@ -17,7 +16,7 @@
         <div class="card-title text-3xl">
             {{ questPrompt }}
         </div>
-    </div>
+    
 
     <audio class="audio" v-if="questAudio" id="prompt-audio" @ended="questSoundPlaying = false">
         <source :src="questAudio" type=" audio/mpeg">
