@@ -54,7 +54,6 @@ function getImageStyle(img: CardImage): string {
 
   let style = `max-width: 100%; max-height: 100%;left: 50%;transform: translate(-50%, -50%);top: 50%;`
   if (img.scale != undefined) {
-    console.log('scale set')
     // TODO: this check doesn't work but nevermind for now
     style += `transform: scale(${img.scale});`;
   }

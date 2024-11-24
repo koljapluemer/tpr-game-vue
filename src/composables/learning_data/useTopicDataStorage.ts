@@ -18,7 +18,6 @@ export default function () {
     const updateDataForWithNewTopicData = (data: LearningDataForTopic) => {
         const key = generateKeyForTopicId(data.topicId)
         topicLearningData.value[key] = data
-        console.log('saved topic learning data, is now', topicLearningData.value)
     }
 
     const getDataForTopicId = (id: string): LearningDataForTopic | undefined => {
@@ -40,16 +39,13 @@ export default function () {
             const currentProgression = topic.progressions[topicData.indexOfCurrentProgression]
             const maxIndexForLevelsInCurrentProgression = currentProgression.length - 1
             if (topicData.indexOfCurrentLevel < maxIndexForLevelsInCurrentProgression) {
-                console.log('setting topic to next level in progression')
                 topicData.indexOfCurrentLevel += 1
             } else {
                 if (topicData.indexOfCurrentProgression < maxIndexForProgressions) {
-                    console.log('setting topic to first level for next progression')
                     topicData.indexOfCurrentLevel = 0
                     topicData.indexOfCurrentProgression += 1
                     goodMomentToChangeTopic = true
                 } else {
-                    console.log('finish progressions in this topic, from now on rotation')
                     topicData.rotationMode = RotationMode.FinalRotation
                     goodMomentToChangeTopic = true
                 }

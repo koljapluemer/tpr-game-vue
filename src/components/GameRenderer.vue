@@ -33,9 +33,7 @@ const isModePickingWhatToPlayNext = ref(false)
 
 function selectTopic() {
   const topicsWithoutLastPlayed = (topics.filter((topic) => topic.id !== lastPlayedTopic.value?.id))
-  console.log('topics w/o last played', topicsWithoutLastPlayed, 'last played', lastPlayedTopic.value)
   currentTopic.value = pickRandom(topicsWithoutLastPlayed)
-  console.log('picked topic', currentTopic)
   lastPlayedTopic.value = currentTopic.value
   selectLevel()
   isModePickingWhatToPlayNext.value = false
@@ -46,14 +44,12 @@ function selectLevel() {
   if (currentTopic.value !== undefined) {
     currentLevel.value = getNextLevelForTopic(currentTopic.value)
     levelRegenerationAt.value = Date.now()
-    console.log('picked new level', currentLevel.value)
   }
   isModePickingWhatToPlayNext.value = false
 
 }
 
 function onLevelHasNoMoreOpenQuests() {
-  console.log('out of quests')
   if (currentTopic.value !== undefined) {
     const isTimeForChoice = iterateTopicProgress(currentTopic.value)
     if (isTimeForChoice) {

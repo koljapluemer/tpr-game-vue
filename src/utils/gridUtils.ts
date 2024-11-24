@@ -19,11 +19,9 @@ export function getGridFromLevelTemplate(levelTemplate: LevelTemplate): Grid {
       if (cell[0].length > 0) {
         let itemsThatCanBeSpawned = cell[0]
         if (doesFieldHaveProperty(cell, FieldPropertyName.ForceUniqueItem)) {
-          console.log('forcing unique item for this field')
           itemsThatCanBeSpawned = itemsThatCanBeSpawned.filter(item => {
             return !itemsAlreadyInPlay.includes(item)
           })
-          console.log('items that can be spawned after redux', itemsThatCanBeSpawned)
         }
         const randomItemName = pickRandom(itemsThatCanBeSpawned)
         if (randomItemName !== undefined) {

@@ -26,7 +26,6 @@ export const translationStore = reactive({
     },
 
     changeLangCode(code: LanguageCodeType) {
-        console.log('code changed', code)
         this.activeLanguageCode = code
     },
 

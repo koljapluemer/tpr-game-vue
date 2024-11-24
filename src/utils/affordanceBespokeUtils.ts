@@ -8,7 +8,6 @@ import { scan } from "rxjs"
 
 
 export function executeActionEffects(action: AlchemyAction) {
-    console.log('execute action effects for action', action)
 
     const senderField = action.sender
     const receiverField = action.receiver
@@ -16,7 +15,6 @@ export function executeActionEffects(action: AlchemyAction) {
     const senderCard = senderField.card
     const receiverCard = receiverField.card
     if (senderCard && receiverCard) {
-        console.log('got sender and receiver')
         // CUTTING
         if (affordance === CapabilityPartnered.Cuts) {
             const cardWithCutItem = getCardBasedOnItemId(receiverField.card?.item.load_when_cut)

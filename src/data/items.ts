@@ -138,7 +138,7 @@ export const items: Item[] = [
     images: ['melon_whole'],
     activeAffordances: [CapabilityPartnered.StoresInSmall, CapabilityPartnered.StoresInMedium],
   },
-  { id: ItemName.house, primaryKey: 'house', images: ['house_crop', 'house_front'] },
+  { id: ItemName.house, primaryKey: 'HOUSE', images: ['house_crop', 'house_front'] },
   {
     id: ItemName.car_old_movable,
     isMovable: true,
