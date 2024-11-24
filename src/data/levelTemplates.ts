@@ -34,7 +34,16 @@ export enum LevelTemplateName {
   board_a_bus,
   board_bus_front_back,
   board_bus_front_back_middle,
+  park_car,
   park_around_building,
+  park_front_building,
+  park_left_building,
+  park_front_left_building,
+  park_behind_building,
+  park_behind_left_building,
+  park_behind_front_left_building,
+  park_right_building,
+  park_right_left_building,
   feed_3_cats,
   car_open,
   car_close,
@@ -159,9 +168,29 @@ export const topics: Topic[] = [
   },
   {
     id: "park-behind-left-right-front",
+    // park_front_building,
+    // park_left_building,
+    // park_front_left_building,
+    // park_behind_building,
+    // park_behind_left_building,
+    // park_behind_front_left_building,
+    // park_right_building,
+    // park_right_left_building,
     progressions: [
       [
-      LevelTemplateName.park_around_building
+        LevelTemplateName.park_car ,
+        LevelTemplateName.park_front_building ,
+        LevelTemplateName.park_left_building ,
+        LevelTemplateName.park_front_left_building ,
+        LevelTemplateName.park_front_left_building ,
+        LevelTemplateName.park_behind_building ,
+        LevelTemplateName.park_behind_left_building ,
+        LevelTemplateName.park_behind_left_building ,
+        LevelTemplateName.park_right_building ,
+        LevelTemplateName.park_right_left_building ,
+        LevelTemplateName.park_right_left_building ,
+        LevelTemplateName.park_around_building,
+        LevelTemplateName.park_around_building
       ]
     ],
     finalPracticeRotation: [LevelTemplateName.park_around_building]
@@ -537,7 +566,6 @@ export const levelTemplates: LevelTemplate[] = [
       ],
     ]
   },
-  // parking
   {
     id: LevelTemplateName.park_around_building,
     grid: [
@@ -548,8 +576,143 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[ItemName.house]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]]
       ],
       [
-        [[ItemName.car_old_movable]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[]]
+        [[]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[]]
       ],
+      [
+        [[ItemName.car_old_movable]], [[]], [[]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_behind_front_left_building,
+    grid: [
+      [
+        [[]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]   ]
+      ],
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[ItemName.house]], 
+      ],
+      [
+         [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]]
+      ],
+      [
+        [[ItemName.car_old_movable]], [[]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_left_building,
+    grid: [
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 1}}]], [[ItemName.house]], 
+      ],
+      [
+        [[ItemName.car_old_movable]], [[]]
+      ],
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_right_building,
+    grid: [
+      [
+        [[ItemName.house]],   [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 0}}]],
+      ],
+      [
+        [[ItemName.car_old_movable]], [[]]
+      ],
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_front_left_building,
+    grid: [
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 1}}]], [[ItemName.house]],  ],
+      [
+        [[]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 1}}]]
+      ],
+      [
+        [[ItemName.car_old_movable]], [[]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_behind_building,
+    grid: [
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 0}}]]
+      ],
+      [
+        [[ItemName.house]]
+      ],
+      [
+        [[ItemName.car_old_movable]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_front_building,
+    
+    grid: [
+      [
+        [[ItemName.house]]
+      ],
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 0}}]]
+      ],
+    
+      [
+        [[ItemName.car_old_movable]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_behind_left_building,
+    grid: [
+      [
+        [[]], [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]   ]
+      ],
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 1, col: 1}}]], [[ItemName.house]], 
+      ],
+      [
+        [[ItemName.car_old_movable]], [[]]
+      ],
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_right_left_building,
+    grid: [
+      [
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 1}}]],
+        [[ItemName.house]],
+        [[ItemName.parking_lot], [{name: FieldPropertyName.IdentifyPositionInRelationToCoordinate, data: {row: 0, col: 1}}]],
+
+      ],
+      [
+        [[]],
+        [[ItemName.car_old_movable]],
+        [[]]
+      ]
+    ],
+    props: [LevelProperty.OnlyAllowRelationalIDsIfTheyExist]
+  },
+  {
+    id: LevelTemplateName.park_car,
+    grid: [
+      [
+        [[ItemName.parking_lot]]
+      ],
+      [
+        [[ItemName.car_old_movable]]
+      ]
     ]
   },
   // cats

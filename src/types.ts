@@ -39,7 +39,8 @@ export enum LevelProperty {
   DisableMovementQuests,
   DisableSecondaryKeyUsage,
   GenerateRelativePositions,
-  AllowColorIdentifiersEvenIfOnlyItemOfType
+  AllowColorIdentifiersEvenIfOnlyItemOfType,
+  OnlyAllowRelationalIDsIfTheyExist
 }
 
 export type FieldProperty = {

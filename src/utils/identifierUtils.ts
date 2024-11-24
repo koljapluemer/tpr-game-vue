@@ -41,14 +41,31 @@ export function setIdentifiersForFields(grid: Grid, levelProps?: LevelProperty[]
                 // GENERAL KEYS
                 const key = field.card.item.primaryKey
 
-                if (keyCount[key] == 1) {
-                    const id = 'THE__' + field.card.item.primaryKey
-                    field.identifiers.push(id)
-                    identifiers.push(id)
-                } else {
-                      const id = 'A__' + field.card.item.primaryKey
-                      field.identifiers.push(id)
-                    identifiers.push(id)
+                // sometimes we want only stuff like 'the x behind the y' and not just 'a y'
+                // ...this check prevents general key gen if this is the case
+                let excludeBasedOnRelationalIdRule = false 
+
+                if (levelProps?.includes(LevelProperty.OnlyAllowRelationalIDsIfTheyExist)) {
+                    if (
+                        field.fieldProperties?.some(prop => {
+                            return prop.name == FieldPropertyName.IdentifyPositionInRelationToCoordinate
+                        })
+                    ) {
+                        excludeBasedOnRelationalIdRule = true
+                    }
+                }
+
+                if (!excludeBasedOnRelationalIdRule) {
+
+                    if (keyCount[key] == 1) {
+                        const id = 'THE__' + field.card.item.primaryKey
+                        field.identifiers.push(id)
+                        identifiers.push(id)
+                    } else {
+                        const id = 'A__' + field.card.item.primaryKey
+                        field.identifiers.push(id)
+                        identifiers.push(id)
+                    }
                 }
                 // COLOR
                 if (keysColorAllowed[key]) {
