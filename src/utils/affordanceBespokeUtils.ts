@@ -4,7 +4,6 @@ import type { AlchemyAction, Card, CardImage, Field } from "@/types"
 import { getItemByID } from "./itemUtils"
 import { CapabilityPartnered } from "@/data/affordances"
 import type { ItemName } from "@/data/items"
-import { scan } from "rxjs"
 import { useArrayUtils } from "@/composables/useArrayUtils"
 
 const {getRandomInt} = useArrayUtils()
