@@ -1,6 +1,6 @@
 // levelTemplates.js
 
-import { type FieldProperty, FieldPropertyName, LevelProperty, type LevelTemplate, type Topic } from '@/types'
+import { type FieldProperty, FieldPropertyName, LevelProperty, type LevelTemplate, type LevelTemplateGridRowField, type Topic } from '@/types'
 import { ItemName } from './items'
 
 const thingsThatFitInCar: ItemName[] = [
@@ -16,6 +16,9 @@ const colorFulCats: ItemName[] = [ItemName.cat_brown, ItemName.cat_grey, ItemNam
 const colorfulSuitcases = [ItemName.suitcase_blue, ItemName.suitcase_white]
 const basicPackingMix: ItemName[] = [ItemName.shoes, ItemName.water_bottle, ...colorfulSuitcases]
 
+const carLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push, ItemName.car_keys, ItemName.hand_pull], [{name: FieldPropertyName.ForceUniqueItem}]]
+const doorLockInteractionStuff: LevelTemplateGridRowField = [[ItemName.hand_push, ItemName.key, ItemName.hand_pull], [{name: FieldPropertyName.ForceUniqueItem}]]
+
 export enum LevelTemplateName {
   cut_fruit_1,
   pack_car_x,
@@ -27,12 +30,21 @@ export enum LevelTemplateName {
   shoes_in_car,
   bottle_in_car,
   shoes_suitcase_etc_mixed_in_car,
-  car_lock_unlock,
   board_a_bus,
   board_bus_front_back,
   board_bus_front_back_middle,
   park_around_building,
-  feed_3_cats
+  feed_3_cats,
+  car_open,
+  car_close,
+  car_unlock_open,
+  car_close_lock,
+  car_close_lock_all,
+  door_unlock,
+  door_unlock_open,
+  door_close_lock,
+  door_close_lock_all,
+  box_open,
 }
 
 export const topics: Topic[] = [
@@ -74,9 +86,21 @@ export const topics: Topic[] = [
   {
     id: "lock-unlock",
     progressions: [
-      [LevelTemplateName.car_lock_unlock]
+      [
+        LevelTemplateName.box_open,
+        LevelTemplateName.car_open,
+        LevelTemplateName.car_close,
+        LevelTemplateName.car_close_lock,
+        LevelTemplateName.car_close_lock_all,
+        LevelTemplateName.car_close_lock_all,
+        LevelTemplateName.door_unlock,
+        LevelTemplateName.door_unlock_open,
+        LevelTemplateName.door_close_lock,
+        LevelTemplateName.door_close_lock_all,
+        LevelTemplateName.door_close_lock_all,
+      ]
     ],
-    finalPracticeRotation: [LevelTemplateName.car_lock_unlock]
+    finalPracticeRotation: [LevelTemplateName.car_close_lock_all, LevelTemplateName.door_close_lock_all]
   },
   {
     id: "bus-boarding",
@@ -180,15 +204,111 @@ export const levelTemplates: LevelTemplate[] = [
       [[basicPackingMix], [basicPackingMix], [basicPackingMix]]
     ],
   },
-  // lock/unlock
+  // LOCK_UNLOCK
+  //   car_open,
+  // car_close,
+  // car_unlock_open,
+  // car_close_lock,
+  // door_unlock,
+  // door_unlock_open,
+  // door_close_lock,
+  // box_open,
+  // box_close
   {
-    id: LevelTemplateName.car_lock_unlock,
+    id: LevelTemplateName.car_open,
     grid: [
       [
-        [[ItemName.car_keys]]
+        [[ItemName.hand_pull]],
+        [[ItemName.car_mustang_ajar]]
+    ]]
+  },
+  {
+    id: LevelTemplateName.car_close,
+    grid: [
+      [
+        [[ItemName.hand_push]],
+        [[ItemName.car_mustang_open]]
+    ]]
+  },
+  {
+    id: LevelTemplateName.car_unlock_open,
+    grid: [
+      [
+        [[ItemName.car_mustang_closed]], [[]]
       ],
       [
-        [[ItemName.car_mustang_closed]]
+      [[ItemName.hand_pull]], [[ItemName.car_keys]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.car_close_lock,
+    grid: [
+      [
+        [[ItemName.car_mustang_open]], [[]]
+      ],
+      [
+      [[ItemName.hand_push]], [[ItemName.car_keys]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.car_close_lock_all,
+    grid: [
+      [
+        [[]], [[ItemName.car_mustang_open, ItemName.car_mustang_closed]], [[]]
+      ],
+      [
+        carLockInteractionStuff, carLockInteractionStuff, carLockInteractionStuff
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.door_unlock,
+    grid: [
+      [
+        [[ItemName.door_red_closed]], [[ItemName.key]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.door_unlock_open,
+    grid: [
+      [
+        [[ItemName.door_red_closed]], [[]]
+      ],
+      [
+        [[ItemName.key]], [[ItemName.hand_push]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.door_close_lock,
+    grid: [
+      [
+        [[ItemName.door_red_open]], [[]]
+      ],
+      [
+        [[ItemName.key]], [[ItemName.hand_pull]]
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.door_close_lock_all,
+    grid: [
+      [
+        [[ItemName.door_red_open, ItemName.door_red_closed, ItemName.door_red_ajar]], [[]], [[]]
+      ],
+      [
+        doorLockInteractionStuff, doorLockInteractionStuff, doorLockInteractionStuff 
+      ]
+    ]
+  },
+  {
+    id: LevelTemplateName.box_open,
+    grid: [
+      [
+        [[ItemName.box_closed]], [[ItemName.hand_pull]]
       ]
     ]
   },

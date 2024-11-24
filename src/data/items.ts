@@ -313,5 +313,12 @@ export const items: Item[] = [
     isMovable: true,
     images: ['hand_push'],
     activeAffordances: [CapabilityPartnered.Pushes]
+  },
+  {
+    id: ItemName.key,
+    primaryKey: "KEY_OLD",
+    isMovable: true,
+    images: ['key_crop'],
+    activeAffordances: [CapabilityPartnered.Unlocks, CapabilityPartnered.Locks]
   }
 ] as const
