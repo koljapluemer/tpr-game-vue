@@ -76,7 +76,6 @@ function getCardBasedOnItemId(id: ItemName | undefined, generateSmallImage = fal
         return undefined
     } else {
         const item = getItemByID(id)
-        console.log('setting item', item)
         if (item !== undefined) {
             const card = {
                 item: item,

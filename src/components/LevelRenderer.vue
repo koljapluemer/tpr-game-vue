@@ -59,9 +59,7 @@ let fieldWhereMovementStartedFrom: Field | undefined = undefined
 onMounted(() => {
     grid.value = getGridFromLevelTemplate(props.level)
     const nrOfInitiallyAvailableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
-    console.log('quests that can be played', nrOfInitiallyAvailableQuests)
     maximumQuestsToBePlayedInThisLevel.value = Math.max(3, Math.min(maximumQuestsToBePlayedInThisLevel.value, nrOfInitiallyAvailableQuests.length))
-    console.log('setting quest max to', maximumQuestsToBePlayedInThisLevel.value)
     startRandomQuest()
 
 })
@@ -121,18 +119,15 @@ const flatGrid = computed((): Field[] => {
 
 function startRandomQuest() {
     questsPlayedInThisLevel.value += 1
-    console.log('quests played', questsPlayedInThisLevel.value)
     if (grid.value !== undefined) {
         setIdentifiersForFields(grid.value, props.level.props)
 
     const availableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
-    console.log('quests', availableQuests)
     const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== lastQuestKey.value)
     if (questsWithoutLast.length > 0 &&  questsPlayedInThisLevel.value < maximumQuestsToBePlayedInThisLevel.value ) {
         currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
         lastQuestKey.value = getQuestKey(currentQuest.value)
     } else {
-        console.log('ending level, no more quests or max quests exceeded')
         // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
         emit("noMoreOpenQuests")
     }

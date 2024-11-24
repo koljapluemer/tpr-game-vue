@@ -188,7 +188,7 @@ export const levelTemplates: LevelTemplate[] = [
         [[ItemName.car_keys]]
       ],
       [
-        [[ItemName.car_mustang_open]]
+        [[ItemName.car_mustang_closed]]
       ]
     ]
   },
