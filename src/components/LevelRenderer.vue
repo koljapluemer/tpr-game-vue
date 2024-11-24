@@ -134,6 +134,7 @@ function endCurrentQuest(questWasSuccessful: boolean) {
         handleSuccess()
     }
     currentQuest.value = undefined
+    setTimeout(startRandomQuest, 1000);
 }
 
 

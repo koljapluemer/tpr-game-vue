@@ -78,11 +78,14 @@ function selectLevel() {
 }
 
 function onLevelHasNoMoreOpenQuests() {
+  console.log('no more quests')
   if (currentTopic.value !== undefined) {
     const isTimeForChoice = iterateTopicProgress(currentTopic.value)
     if (isTimeForChoice && !currentLevel.value?.props?.includes(LevelProperty.IsIntroTutorial)) {
+      console.log('setting topic choice')
       isModePickingWhatToPlayNext.value = true
     } else {
+      console.log('setting next lvl')
       selectLevel()
     }
   }
