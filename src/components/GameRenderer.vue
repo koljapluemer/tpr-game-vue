@@ -39,16 +39,22 @@ import { onMounted, ref } from 'vue';
 import LevelRenderer from './LevelRenderer.vue';
 import { globalDataStore } from '@/stores/globalData';
 import { loadSpecificTopicWithIndex } from '@/debugSettings';
+import { useFirestore } from '@/composables/useFireStore';
+import { useLocalStorage } from '@/composables/useLocalStorage';
+import { v4 as uuidv4 } from 'uuid';
 
 const { pickRandom } = useArrayUtils()
 const { getNextLevelForTopic, iterateTopicProgress } = useTopicDataStorage()
 
+const { writeToCollection }  = useFirestore();
 
 const currentTopic = ref(topics[0] as Topic | undefined)
 
 const lastPlayedTopic = ref(undefined as Topic | undefined)
 
 const currentLevel = ref(undefined as LevelTemplate | undefined)
+const userId  = ref(undefined as string | undefined)
+
 
 const levelRegenerationAt = ref(Date.now())
 const isModePickingWhatToPlayNext = ref(false)
@@ -70,8 +76,17 @@ function selectLevel() {
     if (currentLevel.value === undefined) {
       // cope with broken levels (or tutorial topic, which just has one) by selecting a new topic
       selectTopic()
+      return
     }
     levelRegenerationAt.value = Date.now()
+    writeToCollection('learning-data', {
+      type: 'level-started',
+      timestamp: Date.now(),
+      level: currentLevel.value?.id,
+      topic: currentTopic.value.id,
+      userId: userId.value
+    })
+    
   }
   isModePickingWhatToPlayNext.value = false
 
@@ -92,6 +107,12 @@ function onLevelHasNoMoreOpenQuests() {
 }
 
 onMounted(() => {
+  // user id
+  const storedValue = localStorage.getItem('userid');
+  userId.value = storedValue ? storedValue : uuidv4();
+  localStorage.setItem('userid', userId.value!)
+
+
   if (loadSpecificTopicWithIndex !== undefined) {
     currentTopic.value = topics[loadSpecificTopicWithIndex]
   } else {

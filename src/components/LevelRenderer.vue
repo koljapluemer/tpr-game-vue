@@ -37,6 +37,8 @@ import { StandardSound } from "@/data/standardSounds";
 import { useOnlyQuestsThatArePlayable } from "@/debugSettings";
 import { globalDataStore } from "@/stores/globalData";
 
+import { v4 as uuidv4 } from 'uuid';
+import { useFirestore } from "@/composables/useFireStore";
 
 
 const props = defineProps<{
@@ -51,6 +53,16 @@ const soundEffectPlayer = ref<InstanceType<typeof SoundEffectPlayer>>()
 
 const maximumQuestsToBePlayedInThisLevel = ref(5)
 const questsPlayedInThisLevel = ref(0)
+
+const userId = ref(undefined as undefined | string)
+
+const { writeToCollection }  = useFirestore();
+const levelStats = ref({
+    questCount: 0,
+    actionCount: 0,
+    wrongActionCount: 0
+})
+
 
 enum FeedbackState {
     neutral,
@@ -73,8 +85,14 @@ const questFeedbackClass = computed(():string => {
 let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 onMounted(() => {
+    const storedValue = localStorage.getItem('userid');
+    userId.value = storedValue ? storedValue: uuidv4();
+    localStorage.setItem('userid', userId.value!)
     grid.value = getGridFromLevelTemplate(props.level)
     startRandomQuest()
+
+
+
 
 })
 
@@ -87,6 +105,7 @@ function onDragStart(field: Field) {
 function onDropOn(field: Field) {
     // not sure how there would ever be a drop on without the movement field set
     if (fieldWhereMovementStartedFrom) {
+        levelStats.value.actionCount += 1
         const simplyMovedToEmptyField = executeMoveToField(fieldWhereMovementStartedFrom, field)
         if (!simplyMovedToEmptyField) {
             const actionsThatHappenend = getActionsForWhenFieldIsDroppedOnField(fieldWhereMovementStartedFrom, field)
@@ -107,7 +126,7 @@ function onDropOn(field: Field) {
                     setIdentifiersForFields(grid.value, props.level.props)
                     requestPlayStandard(StandardSound.Wrong)
                     console.log('wrong action')
-
+                    levelStats.value.wrongActionCount += 1
                     if (!isQuestStillPossible(currentQuest.value, grid.value)) {
                         endCurrentQuest(false)
                     }
@@ -134,6 +153,7 @@ const flatGrid = computed((): Field[] => {
 function startRandomQuest() {
     currentQuest.value = undefined
     questsPlayedInThisLevel.value += 1
+    levelStats.value.questCount += 1
     if (grid.value !== undefined) {
         setIdentifiersForFields(grid.value, props.level.props)
 
@@ -144,6 +164,12 @@ function startRandomQuest() {
         currentFeedbackState.value = FeedbackState.neutral
         globalDataStore.lastQuestKey = getQuestKey(currentQuest.value)
     } else {
+        writeToCollection('learning-data', {
+            level: props.level.id,
+            userId: userId.value,
+            stats: levelStats.value,
+            timestamp: Date.now()
+        })
         // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
         emit("noMoreOpenQuests")
     }
