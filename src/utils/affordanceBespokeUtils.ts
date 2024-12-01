@@ -1,13 +1,17 @@
-// if we have no elegant way of handling stuff like cutting, we can at least quarantine in a file
-
+// ...if we have no elegant way of handling stuff like cutting, we can at least quarantine in a file
 import type { AlchemyAction, Card, CardImage, Field } from "@/types"
 import { getItemByID } from "./itemUtils"
 import { CapabilityPartnered } from "@/data/affordances"
 import type { ItemName } from "@/data/items"
 import { useArrayUtils } from "@/composables/useArrayUtils"
 
+
 const {getRandomInt} = useArrayUtils()
 
+/**
+ * Handles interactions "visually" — e.g., when a cutting interaction is confirmed between
+ * a KNIFE and a KIWI, this actually loads the cut kiwi image
+ */
 export function executeActionEffects(action: AlchemyAction) {
 
     const senderField = action.sender
@@ -95,6 +99,10 @@ export function executeActionEffects(action: AlchemyAction) {
     }
 }
 
+/**
+ * Creates a CardImage objects with the bells and whistles
+ * and options occasionally required for stuff like "parking" a car somewhere etc.
+**/
 function getImage(imageName:string, scale=0.3, rotateRandomly = false): CardImage {
     let rotation = 0;
     if (rotateRandomly) {
@@ -108,6 +116,8 @@ function getImage(imageName:string, scale=0.3, rotateRandomly = false): CardImag
     }
 }
 
+//  * Creates a new Card object when we just have an Item
+//  * (useful as a shortcut)
 function getCardBasedOnItemId(id: ItemName | undefined, generateSmallImage = false): Card | undefined {
     if (id === undefined) {
         return undefined
@@ -129,6 +139,8 @@ function getCardBasedOnItemId(id: ItemName | undefined, generateSmallImage = fal
     return undefined
 }
 
+//  * A helper function moving a Card from one field to another, leaving the OG field empty
+//  * occasionally needed by executeActionEffects, thus abstracted
 export function executeMoveToField(originalField: Field, targetField: Field): boolean {
     let moveToEmptyHappened = false
     if (targetField.card === undefined) {
