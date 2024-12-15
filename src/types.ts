@@ -1,5 +1,6 @@
 // STATIC DATA
 
+import type { Capability } from './0_classes/capabilities/Capability'
 import type { CapabilityPartnered, PassiveAffordance } from './data/affordances'
 import { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'
@@ -9,6 +10,9 @@ export const LanguageCode = {
 }
 
 export type LanguageCodeType = (typeof LanguageCode)[keyof typeof LanguageCode]
+
+
+
 
 export type Item = {
   id: ItemName
