@@ -1,9 +1,7 @@
 import { type Quest, type AlchemyAction, type Grid, type Field, type LevelTemplate, LevelProperty } from "@/types";
-import { toRaw } from "vue";
 import { getActionableActionsOnGrid } from "./alchemyUtils";
 import { CapabilityPartnered, capabilityVerbs } from "@/data/affordances";
 import { getTranslationForKey } from "./translationUtils";
-import { translationStore } from "@/stores/translationStore";
 
 
 export function getAvailableQuestsBasedOnLevel(level: LevelTemplate, grid: Grid, returnOnlyPlayable = false): Quest[] {
