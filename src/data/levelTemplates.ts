@@ -71,7 +71,8 @@ export enum LevelTemplateName {
   place_cut_onion,
   place_cut_watermelon,
   place_cut_watermelon_onion,
-  feed_dog
+  feed_dog,
+  books_in_backpack
 }
 
 // TODO: add the cutting level progression
@@ -224,6 +225,18 @@ export const topics: Topic[] = [
       ]
     ],
     finalPracticeRotation: [LevelTemplateName.feed_3_cats]
+  },
+  // new stuff 24-12
+  {
+    id: "place-books",
+    progressions: [
+      [
+        LevelTemplateName.books_in_backpack
+      ]
+    ],
+    finalPracticeRotation: [
+      LevelTemplateName.books_in_backpack
+    ]
   }
 ]
 
@@ -780,5 +793,15 @@ export const levelTemplates: LevelTemplate[] = [
       ]
     ],
     props: [LevelProperty.IsIntroTutorial]
+  },
+  // new stuff (24-12)
+  // books
+  {
+    id: LevelTemplateName.books_in_backpack,
+    grid: [
+      [
+        [[ItemName.book_stack]], [colorfulSuitcases]
+      ]
+    ]
   }
 ]

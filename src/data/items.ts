@@ -51,7 +51,8 @@ export enum ItemName {
   lemon,
   lemon_halves,
   bowl,
-  dog
+  dog,
+  book_stack
 }
 
 export const items: Item[] = [
@@ -438,4 +439,11 @@ export const items: Item[] = [
     images: ['bowl_1', 'bowl_2', 'bowl_3'],
     passiveAffordances: [PassiveAffordance.ThingsCanBePlacedOnThis]
   },
+  {
+    id: ItemName.book_stack,
+    primaryKey: 'BOOKS',
+    isMovable: true,
+    images: ['books'],
+    activeAffordances: [CapabilityPartnered.StoresInMedium, CapabilityPartnered.StoresInLarge]
+  }
 ] as const

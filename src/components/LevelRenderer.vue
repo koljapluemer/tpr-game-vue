@@ -1,15 +1,15 @@
 <template>
     <div class="flex flex-col items-center w-full h-full max-h-full max-w-full">
-        <div class="min-h-20 h-20" >
-    <div :class="'flex flex-row gap-2 items-center card  shadow-xl p-2 my-2 bg-base-200 ' + questFeedbackClass" v-if="currentQuest" :key="getQuestKey(currentQuest)"> 
-        <QuestRenderer :quest="currentQuest" ></QuestRenderer>
-</div>
+        <div class="min-h-20 h-20">
+            <div :class="'flex flex-row gap-2 items-center card  shadow-xl p-2 my-2 bg-base-200 ' + questFeedbackClass"
+                v-if="currentQuest" :key="getQuestKey(currentQuest)">
+                <QuestRenderer :quest="currentQuest"></QuestRenderer>
+            </div>
         </div>
 
         <div id="grid"
             class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 "
-            :class="currentFeedbackState === FeedbackState.correct ? questFeedbackClass:''"
-            v-if="grid">
+            :class="currentFeedbackState === FeedbackState.correct ? questFeedbackClass : ''" v-if="grid">
             <div class="flex flex-row gap-2 justify-center" v-for="row in grid">
                 <FieldRenderer @startedDraggingFromField="onDragStart(field)" @droppedOnField="onDropOn(field)"
                     :field="field" :cellSize="cellSize" v-for="field of row"></FieldRenderer>
@@ -34,7 +34,7 @@ import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBesp
 import SoundEffectPlayer from "./SoundEffectPlayer.vue";
 import QuestRenderer from "./QuestRenderer.vue";
 import { StandardSound } from "@/data/standardSounds";
-import { useOnlyQuestsThatArePlayable } from "@/debugSettings";
+import { skipWritingToFirebase, useOnlyQuestsThatArePlayable } from "@/debugSettings";
 import { globalDataStore } from "@/stores/globalData";
 
 import { v4 as uuidv4 } from 'uuid';
@@ -56,7 +56,7 @@ const questsPlayedInThisLevel = ref(0)
 
 const userId = ref(undefined as undefined | string)
 
-const { writeToCollection }  = useFirestore();
+const { writeToCollection } = useFirestore();
 const levelStats = ref({
     questCount: 0,
     actionCount: 0,
@@ -72,12 +72,12 @@ enum FeedbackState {
 
 const currentFeedbackState = ref(FeedbackState.neutral)
 
-const questFeedbackClass = computed(():string => {
-    if (currentFeedbackState.value == FeedbackState.error)  {
-    return "flash-yellow"
+const questFeedbackClass = computed((): string => {
+    if (currentFeedbackState.value == FeedbackState.error) {
+        return "flash-yellow"
     } else if (currentFeedbackState.value == FeedbackState.correct) {
-    return "green-shine"
-    } else  {
+        return "green-shine"
+    } else {
         return ""
     }
 })
@@ -86,7 +86,7 @@ let fieldWhereMovementStartedFrom: Field | undefined = undefined
 
 onMounted(() => {
     const storedValue = localStorage.getItem('userid');
-    userId.value = storedValue ? storedValue: uuidv4();
+    userId.value = storedValue ? storedValue : uuidv4();
     localStorage.setItem('userid', userId.value!)
     grid.value = getGridFromLevelTemplate(props.level)
     startRandomQuest()
@@ -157,25 +157,25 @@ function startRandomQuest() {
     if (grid.value !== undefined) {
         setIdentifiersForFields(grid.value, props.level.props)
 
-    const availableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
-    const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== globalDataStore.lastQuestKey)
-    if (questsWithoutLast.length > 0 &&  questsPlayedInThisLevel.value < maximumQuestsToBePlayedInThisLevel.value ) {
-        currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
-        currentFeedbackState.value = FeedbackState.neutral
-        globalDataStore.lastQuestKey = getQuestKey(currentQuest.value)
+        const availableQuests = getAvailableQuestsBasedOnLevel(props.level, grid.value, useOnlyQuestsThatArePlayable)
+        const questsWithoutLast = availableQuests.filter(quest => getQuestKey(quest) !== globalDataStore.lastQuestKey)
+        if (questsWithoutLast.length > 0 && questsPlayedInThisLevel.value < maximumQuestsToBePlayedInThisLevel.value) {
+            currentQuest.value = questsWithoutLast[Math.floor((Math.random() * questsWithoutLast.length))]
+            currentFeedbackState.value = FeedbackState.neutral
+            globalDataStore.lastQuestKey = getQuestKey(currentQuest.value)
+        } else {
+            if (!skipWritingToFirebase) writeToCollection('learning-data', {
+                level: props.level.id,
+                userId: userId.value,
+                stats: levelStats.value,
+                timestamp: Date.now()
+            })
+            // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
+            emit("noMoreOpenQuests")
+        }
     } else {
-        writeToCollection('learning-data', {
-            level: props.level.id,
-            userId: userId.value,
-            stats: levelStats.value,
-            timestamp: Date.now()
-        })
-        // TODO: rename this maybe, since it's also triggered when max quests per level are exceeded
-        emit("noMoreOpenQuests")
+        console.warn('level grid undefined, this should never happen')
     }
-} else {
-    console.warn('level grid undefined, this should never happen')
-}
 }
 
 function endCurrentQuest(questWasSuccessful: boolean) {
@@ -216,36 +216,40 @@ const cellSize = computed(() => {
 </script>
 
 <style>
-
 .flash-yellow {
-  animation: flashYellow 1s ease-in-out;
+    animation: flashYellow 1s ease-in-out;
 }
 
 @keyframes flashYellow {
-  0% {
-    background-color: rgba(219, 39, 39, 0.6)
-  }
-  100% {
-    background-color: transparent;
-  }
+    0% {
+        background-color: rgba(219, 39, 39, 0.6)
+    }
+
+    100% {
+        background-color: transparent;
+    }
 }
 
 .green-shine {
-  animation: greenShine 1.1s ease-in-out;
+    animation: greenShine 1.1s ease-in-out;
 }
 
 @keyframes greenShine {
-  0% {
-    background-color: #d4edda; /* Soft green */
-    box-shadow: 0 0 10px 5px rgba(72, 239, 128, 0.8);
-  }
-  50% {
-    background-color: #c3e6cb; /* Slightly brighter green */
-    box-shadow: 0 0 15px 10px rgba(72, 239, 128, 0.6);
-  }
-  100% {
-    background-color: transparent;
-    box-shadow: none;
-  }
+    0% {
+        background-color: #d4edda;
+        /* Soft green */
+        box-shadow: 0 0 10px 5px rgba(72, 239, 128, 0.8);
+    }
+
+    50% {
+        background-color: #c3e6cb;
+        /* Slightly brighter green */
+        box-shadow: 0 0 15px 10px rgba(72, 239, 128, 0.6);
+    }
+
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
 }
 </style>
