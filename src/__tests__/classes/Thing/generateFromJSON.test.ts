@@ -1,4 +1,5 @@
 import { Thing } from "@/classes/Thing"
+import { ThingParser } from "@/classes/ThingParser"
 import { expect, test } from "vitest"
 
 const kiwiTemplate = {
@@ -13,6 +14,6 @@ const kiwiTemplate = {
 }
 
 test('JSON generation of kiwi Thing: called kiwi', () => {
-    const thing = Thing.createFromJsonSourcedDict(kiwiTemplate)
+    const thing = ThingParser.parseThingFromDict(kiwiTemplate)
     expect(thing?.key).toEqual("KIWI")
 })
