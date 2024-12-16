@@ -25,15 +25,15 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
-import { LevelProperty, type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "@/types";
-import { setIdentifiersForFields } from "@/utils/identifierUtils";
-import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "@/utils/alchemyUtils";
-import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey, isQuestStillPossible } from "@/utils/questUtils";
-import { getGridFromLevelTemplate } from "@/utils/gridUtils";
-import { executeActionEffects, executeMoveToField } from "@/utils/affordanceBespokeUtils";
+import { LevelProperty, type AlchemyAction, type Card, type Field, type Grid, type LevelTemplate, type Quest } from "_old/types";
+import { setIdentifiersForFields } from "_old/utils/identifierUtils";
+import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField } from "_old/utils/alchemyUtils";
+import { actionFulfilledQuest, getAvailableQuestsBasedOnLevel, getQuestKey, isQuestStillPossible } from "_old/utils/questUtils";
+import { getGridFromLevelTemplate } from "_old/utils/gridUtils";
+import { executeActionEffects, executeMoveToField } from "_old/utils/affordanceBespokeUtils";
 import SoundEffectPlayer from "./SoundEffectPlayer.vue";
 import QuestRenderer from "./QuestRenderer.vue";
-import { StandardSound } from "@/data/standardSounds";
+import { StandardSound } from "_old/data/standardSounds";
 import { skipWritingToFirebase, useOnlyQuestsThatArePlayable } from "@/debugSettings";
 import { globalDataStore } from "@/stores/globalData";
 

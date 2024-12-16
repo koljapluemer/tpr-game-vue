@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { translationStore } from "./stores/translationStore";
-import { LanguageCode, type LanguageCodeType } from "./types";
+import { LanguageCode, type LanguageCodeType } from "../_old/types";
 
 
 const languageSelected = ref()

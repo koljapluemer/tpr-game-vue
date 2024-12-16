@@ -38,8 +38,8 @@
 <script setup lang="ts">
 import useTopicDataStorage from '@/composables/learning_data/useTopicDataStorage';
 import { useArrayUtils } from '@/composables/useArrayUtils';
-import { topics } from '@/data/levelTemplates';
-import { LevelProperty, type LevelTemplate, type Progression, type Topic } from '@/types';
+import { topics } from '_old/data/levelTemplates';
+import { LevelProperty, type LevelTemplate, type Progression, type Topic } from '_old/types';
 import { onMounted, ref } from 'vue';
 import LevelRenderer from './LevelRenderer.vue';
 import { globalDataStore } from '@/stores/globalData';

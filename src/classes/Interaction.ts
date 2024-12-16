@@ -1,14 +1,12 @@
-import type { Affordance } from "@/0_new_data/new_types"
-import type { RefactorCard } from "./RefactorCard"
 
-export class RefactorAction  {
-    #sender: RefactorCard
+export class Interaction  {
+    #sender: Card
     #affordance: Affordance
     #senderKeys: string[]
-    #receiver: RefactorCard
+    #receiver: Card
     #receiverKeys: string[]
 
-    constructor(sender:RefactorCard, receiver:RefactorCard, affordance:Affordance) {
+    constructor(sender:Card, receiver:Card, affordance:Affordance) {
         this.#sender = sender
         this.#receiver = receiver
         this.#affordance = affordance

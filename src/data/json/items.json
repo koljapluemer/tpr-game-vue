@@ -1,0 +1,24 @@
+{
+    "KIWI": {
+        "secondaryKeys": [],
+        "images": ["kiwi_uncut"],
+        "capabilities": [],
+        "affordances": [
+            [0, "KIWI_HALVES"]
+        ],
+        "isMovable": true
+    },
+    "KNIFE": {
+        "secondaryKeys": [],
+        "images": ["cupboard"],
+        "capabilities": ["CUT"],
+        "affordances": [],
+        "isMovable": true
+    },
+    "KIWI_HALVES": {
+        "secondaryKeys": [],
+        "images":["knife"],
+        "isMovable": true,
+        "capabilities": []
+    }   
+}

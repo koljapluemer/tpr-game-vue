@@ -4,16 +4,16 @@ import { mount } from '@vue/test-utils'
 import App from '@/App.vue'
 
 
-import { getGridFromLevelTemplate } from '@/utils/gridUtils'
-import { ItemName } from '@/data/items';
+import { getGridFromLevelTemplate } from '_old/utils/gridUtils'
+import { ItemName } from '_old/data/items';
 import test from 'node:test';
-import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '@/utils/alchemyUtils';
-import { LevelProperty, type Field, type Grid, type Level, type LevelTemplate } from '@/types';
-import { CapabilityPartnered, PassiveAffordance } from '@/data/affordances';
-import { getAvailableQuestsBasedOnLevel } from '@/utils/questUtils';
-import { LevelTemplateName } from '@/data/levelTemplates';
-import { getLevelTemplateByID } from '@/utils/levelUtils';
-import { setIdentifiersForFields } from '@/utils/identifierUtils';
+import { getActionableActionsOnGrid, getActionsForWhenFieldIsDroppedOnField, IsPartneredCapabilityActionableOnField } from '_old/utils/alchemyUtils';
+import { LevelProperty, type Field, type Grid, type Level, type LevelTemplate } from '_old/types';
+import { CapabilityPartnered, PassiveAffordance } from '_old/data/affordances';
+import { getAvailableQuestsBasedOnLevel } from '_old/utils/questUtils';
+import { LevelTemplateName } from '_old/data/levelTemplates';
+import { getLevelTemplateByID } from '_old/utils/levelUtils';
+import { setIdentifiersForFields } from '_old/utils/identifierUtils';
 
 
 const kiwiField: Field = {
