@@ -90,10 +90,6 @@ onMounted(() => {
     localStorage.setItem('userid', userId.value!)
     grid.value = getGridFromLevelTemplate(props.level)
     startRandomQuest()
-
-
-
-
 })
 
 function onDragStart(field: Field) {

@@ -10,20 +10,24 @@ type AffordancePackage = {
 // watch out: this can't be typed. do not do stupid things, I guess
 // gonna do runtime validation on the class that creates items, or something
 export const ThingTemplates = {
-    "ukulele": {
-        primaryKey: "UKULELE",
+    "KIWI": {
         secondaryKeys: [],
-        images: ['ukulele'],
+        images: ['kiwi_uncut'],
         capabilities: [],
         affordances: [],
         isMovable: true
     },
-    "cupboard": {
-        primaryKey: "CUPBOARD",
+    "KNIFE": {
         secondaryKeys: [],
         images: ['cupboard'],
         capabilities: [],
-        affordances: []
+        affordances: [],
+        isMovable: true
+    },
+    "KIVI_HALVES": {
+        secondaryKeys: [],
+        images:['knife'],
+        isMovable: true
     }
 } as const
 

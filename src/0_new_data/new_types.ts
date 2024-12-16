@@ -13,7 +13,6 @@ export enum Affordance {
     ThingsCanBePlacedOnThis
 }
 
-
 // stuff like color, size, ...
 export type ThingProperty = [name:string, value:string|number]
 
