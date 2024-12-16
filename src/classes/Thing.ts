@@ -3,6 +3,9 @@ import type { AffordancePackage } from "./AffordancPackage";
 import type { Capability } from "./capabilities/Capability"
 import type { ThingPropertyDict } from "./ThingProperty";
 
+import { z } from "zod";
+import { ThingParser } from "./ThingParser";
+
 export class Thing {
     constructor(
         public readonly key: string,
@@ -14,14 +17,14 @@ export class Thing {
         public readonly images: string[]
     ) { }
 
-    public static createFromJsonSourcedDict(thingList: any):Thing {
-        const thing = new Thing("banana", [], [], [], false, {}, [])
-        return thing
-    }
 
     get randomImage(): string | undefined {
         return pickRandom(this.images)
     }
 
+
+    public static createFromJsonSourcedDict(thingData: Object): Thing | undefined {
+        return ThingParser.parseThingFromDict(thingData)
+    }
 
 } 

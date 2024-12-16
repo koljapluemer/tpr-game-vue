@@ -12,12 +12,7 @@ const kiwiTemplate = {
     "isMovable": true
 }
 
-test('JSON generation of Thing: method return well formed', () => {
-    const thing = Thing.createFromJsonSourcedDict({})
-    expect(thing).toBeInstanceOf(Thing)
-})
-
 test('JSON generation of kiwi Thing: called kiwi', () => {
-    const thing = Thing.createFromJsonSourcedDict({})
-    expect(thing.key).toEqual("KIWI")
+    const thing = Thing.createFromJsonSourcedDict(kiwiTemplate)
+    expect(thing?.key).toEqual("KIWI")
 })
