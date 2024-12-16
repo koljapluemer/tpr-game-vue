@@ -13,7 +13,7 @@ export class RefactorAction  {
         this.#receiver = receiver
         this.#affordance = affordance
 
-        this.#receiverKeys = receiver.#keys
-        this.#senderKeys = sender.#keys
+        this.#receiverKeys = receiver.keys
+        this.#senderKeys = sender.keys
     }
   }
