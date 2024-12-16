@@ -14,9 +14,9 @@ export class Thing {
         public readonly images: string[]
     ) { }
 
-    public static createFromThingList(thingList: any) {
-        // TODO: here, load in my thing data, which I edit not sure how yet
-        // how about massive overengineering :)
+    public static createFromJSONDict(thingList: any):Thing {
+        const thing = new Thing("banana", [], [], [], false, {}, [])
+        return thing
     }
 
     get randomImage(): string | undefined {
