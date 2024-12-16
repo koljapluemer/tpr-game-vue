@@ -1,10 +1,23 @@
-{
-    "cut-kiwi-basic": {
+[
+    {
+        "name": "cut-kiwi-basic",
         "grid": [
             [
-                [["KIWI", "KNIFE"]], [["KIWI", "KNIFE"], "force-unique"]
+                [
+                    [
+                        "KIWI",
+                        "KNIFE"
+                    ]
+                ],
+                [
+                    [
+                        "KIWI",
+                        "KNIFE"
+                    ],
+                    "force-unique"
+                ]
             ]
         ],
         "props": []
     }
-}
+]

@@ -14,7 +14,7 @@ export class Thing {
         public readonly images: string[]
     ) { }
 
-    public static createFromJSONDict(thingList: any):Thing {
+    public static createFromJsonSourcedDict(thingList: any):Thing {
         const thing = new Thing("banana", [], [], [], false, {}, [])
         return thing
     }

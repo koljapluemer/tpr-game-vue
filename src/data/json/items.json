@@ -1,24 +1,38 @@
-{
-    "KIWI": {
+[
+    {
+        "key": "KIWI",
         "secondaryKeys": [],
-        "images": ["kiwi_uncut"],
+        "images": [
+            "kiwi_uncut"
+        ],
         "capabilities": [],
         "affordances": [
-            [0, "KIWI_HALVES"]
+            [
+                0,
+                "KIWI_HALVES"
+            ]
         ],
         "isMovable": true
     },
-    "KNIFE": {
+    {
+        "key": "KNIFE",
         "secondaryKeys": [],
-        "images": ["cupboard"],
-        "capabilities": ["CUT"],
+        "images": [
+            "cupboard"
+        ],
+        "capabilities": [
+            "CUT"
+        ],
         "affordances": [],
         "isMovable": true
     },
-    "KIWI_HALVES": {
+    {
+        "key": "KIWI_HALVES",
         "secondaryKeys": [],
-        "images":["knife"],
+        "images": [
+            "knife"
+        ],
         "isMovable": true,
         "capabilities": []
-    }   
-}
+    }
+]

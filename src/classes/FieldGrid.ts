@@ -33,7 +33,7 @@ export class FieldGrid {
         return uniqueActions
     }
 
-    public static createFromJSONDict(dict: any): FieldGrid {
+    public static createFromJsonSourcedDict(dict: any): FieldGrid {
         try {
             return new FieldGrid([])
         } catch (e) {
