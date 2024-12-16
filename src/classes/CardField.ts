@@ -3,6 +3,7 @@ import { CardImage } from "./CardImage"
 import type { FieldProperty } from "./FieldProperty"
 import type { Thing } from "./Thing"
 import { Interaction } from "./Interaction"
+import type { Affordance } from "./Affordance"
 
 export class CardField {
     #thing: Thing | undefined
@@ -18,9 +19,14 @@ export class CardField {
         return (this.#thing !== undefined)
     }
 
-    set thing(thing: Thing) {
+    get keys(): string[] {
+        // TODO: here we're gonna have painful interaction with the FieldGrid/Level
+        return this.#thing? [this.#thing.key] : []
+    }
+
+    set thing(thing: Thing | undefined) {
         this.#thing = thing
-        if (thing.randomImage) {
+        if (thing?.randomImage) {
             this.#images = [new CardImage(thing.randomImage, 0)]
         }
     }
@@ -31,8 +37,8 @@ export class CardField {
 
         const interactions: Interaction[] = []
 
-        droppedField.thing.capabilities.forEach(capability => {
-            this.#thing!.affordancePackages.forEach(pkg => {
+        droppedField.thing?.capabilities.forEach(capability => {
+            this.#thing?.affordancePackages.forEach(pkg => {
                 if (capability.isPartneredWithAffordance(pkg.affordance)) {
                     interactions.push(
                         new Interaction(droppedField, this, pkg.affordance)
@@ -42,5 +48,16 @@ export class CardField {
         })
 
         return interactions
+    }
+
+    reactToInteractionHappenedToMeWithAffordance(affordance:Affordance) {
+        const relevantAffordancePackage = this.#thing?.affordancePackages.find(
+            pkg => pkg.affordance === affordance
+        )
+        if (relevantAffordancePackage) {
+            if (relevantAffordancePackage.thingToChangeTo) {
+                this.thing = relevantAffordancePackage.thingToChangeTo
+            }
+        } 
     }
 }

@@ -13,11 +13,11 @@ export class CapabilityCut extends Capability {
     }
 
     public enactOnReceivingField(field: CardField) {
-        field.changeCardToOtherThingAccordingToAffordance(Affordance.IsCuttable)
+        field.reactToInteractionHappenedToMeWithAffordance(Affordance.IsCuttable)
     }
 
     public enactOnSendingField(field: CardField) {
-        // trigger cutting side effect
+        
     }
 
 

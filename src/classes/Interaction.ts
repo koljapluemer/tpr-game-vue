@@ -1,12 +1,14 @@
+import type { Affordance } from "./Affordance"
+import type { CardField } from "./CardField"
 
 export class Interaction  {
-    #sender: Card
+    #sender: CardField
     #affordance: Affordance
     #senderKeys: string[]
-    #receiver: Card
+    #receiver: CardField
     #receiverKeys: string[]
 
-    constructor(sender:Card, receiver:Card, affordance:Affordance) {
+    constructor(sender:CardField, receiver:CardField, affordance:Affordance) {
         this.#sender = sender
         this.#receiver = receiver
         this.#affordance = affordance
