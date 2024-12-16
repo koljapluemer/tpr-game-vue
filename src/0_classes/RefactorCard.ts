@@ -1,16 +1,17 @@
 import type { CardImage, Item, RefactorItem } from "@/types"
 import type { Capability } from "./capabilities/Capability"
+import type { Thing } from "@/0_new_data/thing_templates/things"
 
 export class RefactorCard  {
-    item: RefactorItem
+    thing: RefactorItem
     images: CardImage[] 
 
-    constructor(item: Item, images:CardImage[]) {
-        this.item = item
+    constructor(thing: Thing, images:CardImage[]) {
+        this.thing = item
         this.images = images
     }
 
     get capabilities():Capability[] {
-        return this.item.ca
+        return this.thing.capabilities
     }
 }

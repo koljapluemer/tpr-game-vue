@@ -9,13 +9,14 @@ type AffordancePackage = {
 
 // watch out: this can't be typed. do not do stupid things, I guess
 // gonna do runtime validation on the class that creates items, or something
-export const Things = {
+export const ThingTemplates = {
     "ukulele": {
         primaryKey: "UKULELE",
         secondaryKeys: [],
         images: ['ukulele'],
         capabilities: [],
-        affordances: []
+        affordances: [],
+        isMovable: true
     },
     "cupboard": {
         primaryKey: "CUPBOARD",
@@ -27,6 +28,6 @@ export const Things = {
 } as const
 
 
-export type Thing = keyof typeof Things
+export type ThingTemplate = keyof typeof ThingTemplates
 
 // TODO: keep rebuilding by making this knife and kiwi, and keep adding
