@@ -49,21 +49,26 @@ export class ThingParser {
     }
 
     private static parseCapabilities(dict: Record<string, any>): Capability[] {
-        const capabilities: Capability[] = []
-        if (isArrayOfStrings(dict["capabilities"])) {
-            dict["capabilities"].forEach((possibleCapabilityName: string) => {
-                const capability = Capability.createBasedOnKey(possibleCapabilityName)
-                if (capability) {
-                    capabilities.push(capability)
-                } else {
-                    console.warn('invalid capability:', possibleCapabilityName)
-                }
-            });
-            return capabilities
-        } else {
+        if (!isArrayOfStrings(dict["capabilities"])) {
             console.warn('capabilities string has wrong shape:', dict["capabilties"])
+            return []
         }
+
+        const capabilities: Capability[] = []
+        dict["capabilities"].forEach((possibleCapabilityName: string) => {
+            const capability = this.createCapabilityIfValid(possibleCapabilityName)
+            if (capability) capabilities.push(capability)
+        });
         return capabilities
+    }
+
+    private static createCapabilityIfValid(key: string): Capability | undefined {
+        const capability = Capability.createBasedOnKey(key)
+        if (capability) {
+            return capability
+        } else {
+            console.warn('invalid capability:', key)
+        }
     }
 
     private static parseImages(dict: Record<string, any>): string[] {
