@@ -1,9 +1,9 @@
 import { pickRandom } from "@/utils/arrayUtils"
 import { CardImage } from "./CardImage"
 import type { FieldProperty } from "./FieldProperty"
-import type { Thing } from "./Thing"
+import { Thing } from "./Thing"
 import { Interaction } from "./Interaction"
-import type { Affordance } from "./Affordance"
+import type { AffordanceName } from "./Affordance"
 
 export class CardField {
     #thing: Thing | undefined
@@ -21,7 +21,7 @@ export class CardField {
 
     get keys(): string[] {
         // TODO: here we're gonna have painful interaction with the FieldGrid/Level
-        return this.#thing? [this.#thing.key] : []
+        return this.#thing ? [this.#thing.key] : []
     }
 
     set thing(thing: Thing | undefined) {
@@ -50,14 +50,14 @@ export class CardField {
         return interactions
     }
 
-    reactToInteractionHappenedToMeWithAffordance(affordance:Affordance) {
+    reactToInteractionHappenedToMeWithAffordance(affordance: Affordance) {
         const relevantAffordancePackage = this.#thing?.affordancePackages.find(
             pkg => pkg.affordance === affordance
         )
         if (relevantAffordancePackage) {
-            if (relevantAffordancePackage.thingToChangeTo) {
-                this.thing = relevantAffordancePackage.thingToChangeTo
+            if (relevantAffordancePackage.keyOfThingToChangeTo) {
+                this.thing = Thing.getThingByKey(relevantAffordancePackage.keyOfThingToChangeTo)
             }
-        } 
+        }
     }
 }

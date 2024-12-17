@@ -33,14 +33,4 @@ export class FieldGrid {
         return uniqueActions
     }
 
-    public static createFromJsonSourcedDict(dict: any): FieldGrid {
-        try {
-            return new FieldGrid([])
-        } catch (e) {
-            console.error('Could not generate FieldGrid from JSON dict; returning empty. Error:', e)
-            return new FieldGrid([])
-        }
-    }
-
-
 }

@@ -1,10 +1,7 @@
 import { pickRandom } from "@/utils/arrayUtils";
-import type { AffordancePackage } from "./AffordancPackage";
+import type { AffordancePackage } from "./AffordancePackage";
 import type { Capability } from "./capabilities/Capability"
 import type { ThingPropertyDict } from "./ThingProperty";
-
-import { z } from "zod";
-import { ThingParser } from "./ThingParser";
 
 export class Thing {
     constructor(
@@ -15,16 +12,24 @@ export class Thing {
         public readonly isMovable: boolean,
         public readonly props: ThingPropertyDict,
         public readonly images: string[]
-    ) { }
+    ) {
+        Thing.instances.push(this)
+    }
+
+    private static instances: Thing[] = []
+
 
 
     get randomImage(): string | undefined {
         return pickRandom(this.images)
     }
 
-
-    public static createFromJsonSourcedDict(thingData: Object): Thing | undefined {
-        return ThingParser.parseThingFromDict(thingData)
+    private static getAllThings(): Thing[] {
+        return this.instances
     }
 
+    public static getThingByKey(key: string): Thing | undefined {
+        const thing = this.getAllThings().find(thing => thing.key === key )
+        return thing
+    }
 } 
