@@ -1,13 +1,12 @@
 import type { AffordanceName } from "@/classes/Affordance";
 import type { CardField } from "../CardField";
-import { Interaction } from "../Interaction";
 import { CapabilityCut } from "./CapabilityCut";
 
 export abstract class Capability {
 
-    public abstract get partneredAffordances(): Affordance[]
+    public abstract get partneredAffordances(): AffordanceName[]
 
-    public isPartneredWithAffordance(affordance: Affordance): boolean {
+    public isPartneredWithAffordance(affordance: AffordanceName): boolean {
         return this.partneredAffordances.includes(affordance)
     }
 

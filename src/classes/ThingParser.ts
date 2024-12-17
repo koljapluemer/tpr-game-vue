@@ -2,7 +2,7 @@ import { Thing } from "./Thing";
 import type { AffordancePackage } from "./AffordancePackage";
 import { isValidAffordanceName } from "./Affordance";
 import { getEnumValueIfValid, isArrayOfStrings, isRecordOfStrings, isTupleOfOneOrTwoStrings, isTupleOfTwoStrings } from "@/utils/parsingUtils";
-import type { Capability } from "./capabilities/Capability";
+import { Capability } from "./capabilities/Capability";
 import type { ThingPropertyDict } from "./ThingProperty";
 
 
@@ -49,7 +49,21 @@ export class ThingParser {
     }
 
     private static parseCapabilities(dict: Record<string, any>): Capability[] {
-        return []
+        const capabilities: Capability[] = []
+        if (isArrayOfStrings(dict["capabilities"])) {
+            dict["capabilities"].forEach((possibleCapabilityName: string) => {
+                const capability = Capability.createBasedOnKey(possibleCapabilityName)
+                if (capability) {
+                    capabilities.push(capability)
+                } else {
+                    console.warn('invalid capability:', possibleCapabilityName)
+                }
+            });
+            return capabilities
+        } else {
+            console.warn('capabilities string has wrong shape:', dict["capabilties"])
+        }
+        return capabilities
     }
 
     private static parseImages(dict: Record<string, any>): string[] {
@@ -58,12 +72,9 @@ export class ThingParser {
     }
 
     private static parseAffordancePackages(dict: Record<string, any>): AffordancePackage[] {
-        console.log('packages...', dict["affordances"])
         const packages: AffordancePackage[] = []
         if (Array.isArray(dict["affordances"])) {
-            console.log('is array')
             dict["affordances"].forEach(potentialPackage => {
-                console.log('checking package')
                 if (isTupleOfOneOrTwoStrings(potentialPackage) && isValidAffordanceName(potentialPackage[0])) {
                     packages.push(
                         {
