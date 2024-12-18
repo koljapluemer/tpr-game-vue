@@ -18,6 +18,10 @@ export function isString(data: any): boolean {
     return typeof data === 'string';
 }
 
+export function isArray(data:any): boolean {
+    return Array.isArray(data)
+}
+
 
 export function isTupleOfTwoStrings(input: unknown): input is [string, string] {
     return (
@@ -45,7 +49,6 @@ export function isTupleOfNumberAndNumberOrJustOneString(input: unknown): input i
         (input.length === 1 || input.length === 2) && // Check the length is 1 or 2
         typeof input[0] === "number" &&
         (input[1] === undefined || typeof input[1] === "string" )
-
     );
 }
 

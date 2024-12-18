@@ -18,7 +18,7 @@ export class ThingTemplateParser {
         const parsedImages = this.parseImages(dict)
 
         if (!parsedKey || parsedImages.length === 0) {
-            console.log('cannot create Thing from string because required props missing', dict)
+            console.warn('cannot create Thing from string because required props missing', dict)
             return undefined
         }
 

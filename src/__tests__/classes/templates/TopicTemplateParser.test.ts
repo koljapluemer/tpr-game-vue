@@ -2,25 +2,37 @@ import { TopicTemplate } from "@/classes/templates/TopicTemplate";
 import { TopicTemplateParser } from "@/classes/templates/TopicTemplateParser";
 import { expect, test } from "vitest";
 import { simpleKnifeLevelTemplate } from "./LevelTemplateParser.test";
+import { knifeObject } from "@/__tests__/data/knife";
+import { kiwiObject } from "@/__tests__/data/kiwi";
 
 const basicTopicDict = {
-    "name": "cut-kiwi-demo",
+    "name": "topic-1",
     "progressions": [
         [
-            "cut-kiwi-basic"
+            "cut-kiwi-demo"
         ]
     ],
-    "finalRotation": []
+    "finalRotation": ["cut-kiwi-demo"]
 }
 
 const basicTopic = new TopicTemplate (
-    "cut-kiwi-demo",
+    "topic-1",
     [[simpleKnifeLevelTemplate]],
-    []
+    [simpleKnifeLevelTemplate]
 
 )
 
-test('basic template parsing works', () => {
-    const topic = TopicTemplateParser.parseFromDict({basicTopic: basicTopicDict})
-    expect(topic).toEqual(basicTopic)
+test('basic template parsing works: comparing name', () => {
+    const topic = TopicTemplateParser.parseFromDict(basicTopicDict)
+    expect(topic?.name).toEqual(basicTopic.name)
+})
+
+test('basic template parsing works: comparing progressions prop', () => {
+    const topic = TopicTemplateParser.parseFromDict(basicTopicDict)
+    expect(topic?.progressions).toEqual(basicTopic.progressions)
+})
+
+test('basic template parsing works: comparing finalRotation prop', () => {
+    const topic = TopicTemplateParser.parseFromDict(basicTopicDict)
+    expect(topic?.finalRotation).toEqual(basicTopic.finalRotation)
 })

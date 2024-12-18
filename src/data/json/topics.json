@@ -1,11 +1,13 @@
 [
     {
-        "name": "cut-kiwi-demo",
+        "name": "topic-1",
         "progressions": [
           [
-            "cut-kiwi-basic"
+            "cut-kiwi-demo"
           ]
         ],
-        "finalRotation": []
+        "finalRotation": [
+            "cut-kiwi-demo"
+        ]
       }
 ]
