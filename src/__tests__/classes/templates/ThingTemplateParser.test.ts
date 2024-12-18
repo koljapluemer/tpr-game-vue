@@ -36,7 +36,6 @@ test('JSON generation of knife Thing: secondaryKeys correctly parsed', () => {
 
 
 
-
 test('JSON generation of kiwi Thing: affordancePackages correctly parsed', () => {
     const thing = ThingTemplateParser.parseThingFromDict(kiwiTemplate);
     expect(thing?.affordancePackages).toEqual(kiwiObject.affordancePackages);

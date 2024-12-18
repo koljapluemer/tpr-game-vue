@@ -23,7 +23,7 @@ export class TopicTemplateParser {
     }
 
 
-    static parseProgressions(dict: Record<string, any>): LevelTemplate[][] | undefined {
+    private static parseProgressions(dict: Record<string, any>): LevelTemplate[][] | undefined {
         const progressions: LevelTemplate[][] = []
 
         // checking if well formed
@@ -46,7 +46,7 @@ export class TopicTemplateParser {
         return progressions
     }
 
-    static parseFinalRotation(dict: Record<string, any>): LevelTemplate[] | undefined {
+    private static parseFinalRotation(dict: Record<string, any>): LevelTemplate[] | undefined {
         const finalRotation: LevelTemplate[] = []
         if (!isArray(dict["finalRotation"])) return undefined
 
