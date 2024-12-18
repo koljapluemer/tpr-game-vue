@@ -1,5 +1,5 @@
 import type { AffordancePackage } from "@/classes/AffordancePackage"
-import { Thing } from "@/classes/Thing"
+import { ThingTemplate } from "@/classes/Thing"
 
 export const kiwiTemplate = {
     "key": "KIWI",
@@ -14,12 +14,12 @@ export const kiwiTemplate = {
 
 
 
-const kiwiCutObject = new Thing("KIWI_HALVES", ["FRUIT"], [], [], true, {}, ["kiwi_cut"])
+const kiwiCutObject = new ThingTemplate("KIWI_HALVES", ["FRUIT"], [], [], true, {}, ["kiwi_cut"])
 
 const kiwiAffordancePackage: AffordancePackage = {
     affordance: "IsCuttable",
     keyOfThingToChangeTo: kiwiCutObject.key
 }
 
-export const kiwiObject = new Thing("KIWI", ["FRUIT"], [], [kiwiAffordancePackage], true, {}, ["kiwi_uncut"])
+export const kiwiObject = new ThingTemplate("KIWI", ["FRUIT"], [], [kiwiAffordancePackage], true, {}, ["kiwi_uncut"])
 

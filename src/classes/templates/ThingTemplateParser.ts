@@ -1,13 +1,12 @@
-import { Thing } from "./Thing";
-import type { AffordancePackage } from "./AffordancePackage";
-import { isValidAffordanceName } from "./Affordance";
+import { ThingTemplate, type ThingPropertyDict } from "./ThingTemplate";
+import type { AffordancePackage } from "../AffordancePackage";
+import { isValidAffordanceName } from "../Affordance";
 import { getEnumValueIfValid, isArrayOfStrings, isRecordOfStrings, isTupleOfOneOrTwoStrings, isTupleOfTwoStrings } from "@/utils/parsingUtils";
-import { Capability } from "./capabilities/Capability";
-import type { ThingPropertyDict } from "./ThingProperty";
+import { Capability } from "../capabilities/Capability";
 
 
-export class ThingParser {
-    public static parseThingFromDict(dict: Record<string, any>): Thing | undefined {
+export class ThingTemplateParser {
+    public static parseThingFromDict(dict: Record<string, any>): ThingTemplate | undefined {
         const parsedKey = this.parseKey(dict)
         const parsedSecondaryKeys = this.parseSecondaryKeys(dict)
         const parsedCapabilities = this.parseCapabilities(dict)
@@ -22,7 +21,7 @@ export class ThingParser {
             return undefined
         }
 
-        return new Thing(
+        return new ThingTemplate(
             parsedKey,
             parsedSecondaryKeys,
             parsedCapabilities,
@@ -31,7 +30,6 @@ export class ThingParser {
             parsedProps,
             parsedImages
         )
-
     }
 
 
@@ -100,6 +98,5 @@ export class ThingParser {
         return {}
     }
 
-
-
 }
+

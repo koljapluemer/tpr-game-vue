@@ -1,16 +1,16 @@
 import { pickRandom } from "@/utils/arrayUtils"
 import { CardImage } from "./CardImage"
 import type { FieldProperty } from "./FieldProperty"
-import { Thing } from "./Thing"
+import { ThingTemplate } from "./templates/ThingTemplate"
 import { Interaction } from "./Interaction"
 import type { AffordanceName } from "./Affordance"
 
 export class CardField {
-    #thing: Thing | undefined
+    #thing: ThingTemplate | undefined
     #props: FieldProperty[] = []
     #images: CardImage[] = []
 
-    constructor(thing: Thing | undefined, props: FieldProperty[] = []) {
+    constructor(thing: ThingTemplate | undefined, props: FieldProperty[] = []) {
         this.#thing = thing
         this.#props = props
     }
@@ -24,7 +24,7 @@ export class CardField {
         return this.#thing ? [this.#thing.key] : []
     }
 
-    set thing(thing: Thing | undefined) {
+    set thing(thing: ThingTemplate | undefined) {
         this.#thing = thing
         if (thing?.randomImage) {
             this.#images = [new CardImage(thing.randomImage, 0)]
@@ -50,13 +50,13 @@ export class CardField {
         return interactions
     }
 
-    reactToInteractionHappenedToMeWithAffordance(affordance: Affordance) {
+    reactToInteractionHappenedToMeWithAffordance(affordance: AffordanceName) {
         const relevantAffordancePackage = this.#thing?.affordancePackages.find(
             pkg => pkg.affordance === affordance
         )
         if (relevantAffordancePackage) {
             if (relevantAffordancePackage.keyOfThingToChangeTo) {
-                this.thing = Thing.getThingByKey(relevantAffordancePackage.keyOfThingToChangeTo)
+                this.thing = ThingTemplate.getThingByKey(relevantAffordancePackage.keyOfThingToChangeTo)
             }
         }
     }

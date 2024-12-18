@@ -1,5 +1,5 @@
 import type { AffordanceName } from "./Affordance"
-import type { Thing } from "./Thing"
+import type { ThingTemplate } from "./templates/ThingTemplate"
 
 export type AffordancePackage = {
     affordance: AffordanceName,

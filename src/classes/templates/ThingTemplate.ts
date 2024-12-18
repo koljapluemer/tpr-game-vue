@@ -1,9 +1,8 @@
 import { pickRandom } from "@/utils/arrayUtils";
-import type { AffordancePackage } from "./AffordancePackage";
-import type { Capability } from "./capabilities/Capability"
-import type { ThingPropertyDict } from "./ThingProperty";
+import type { AffordancePackage } from "../AffordancePackage";
+import type { Capability } from "../capabilities/Capability"
 
-export class Thing {
+export class ThingTemplate {
     constructor(
         public readonly key: string,
         public readonly secondaryKeys: string[],
@@ -13,10 +12,10 @@ export class Thing {
         public readonly props: ThingPropertyDict,
         public readonly images: string[]
     ) {
-        Thing.instances.push(this)
+        ThingTemplate.instances.push(this)
     }
 
-    private static instances: Thing[] = []
+    private static instances: ThingTemplate[] = []
 
 
 
@@ -24,12 +23,16 @@ export class Thing {
         return pickRandom(this.images)
     }
 
-    private static getAllThings(): Thing[] {
+    private static getAllThings(): ThingTemplate[] {
         return this.instances
     }
 
-    public static getThingByKey(key: string): Thing | undefined {
+    public static getThingByKey(key: string): ThingTemplate | undefined {
         const thing = this.getAllThings().find(thing => thing.key === key )
         return thing
     }
 } 
+
+export type ThingPropertyDict = {
+    [key: string]: string | number;
+};
