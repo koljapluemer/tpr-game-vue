@@ -7,7 +7,7 @@ import { FieldGrid } from "../FieldGrid"
 export class LevelTemplate {
     constructor(
         public readonly name:string,
-        private readonly grid: LevelTemplateCell[],
+        private readonly grid: LevelTemplateCell[][],
         private readonly props: LevelProp[]
     ) {}
 
