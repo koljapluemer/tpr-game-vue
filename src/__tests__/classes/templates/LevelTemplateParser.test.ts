@@ -34,13 +34,24 @@ const simpleKnifeLevelTemplate = new LevelTemplate(
 )
 
 
-test('JSON generation of FieldGrid | simple kiwi level: correct name', () => {
+test('JSON generation of LevelTemplate | simple kiwi level: correct name', () => {
     const levelTemplate = LevelTemplateParser.parseFromDict(simpleKiwiKnifeLevel)
     expect(levelTemplate?.name).toEqual(simpleKnifeLevelTemplate.name)
 })
 
 
-test('JSON generation of FieldGrid | simple kiwi level: correct grid row count', () => {
+test('JSON generation of LevelTemplate | simple kiwi level: correct grid row count', () => {
     const levelTemplate = LevelTemplateParser.parseFromDict(simpleKiwiKnifeLevel)
     expect(levelTemplate?.gridData.length).toEqual(1)
+})
+
+test('JSON generation of LevelTemplate | simple kiwi level: correct count of cells in 1st row', () => {
+    const levelTemplate = LevelTemplateParser.parseFromDict(simpleKiwiKnifeLevel)
+    expect(levelTemplate?.gridData[0].length).toEqual(2)
+})
+
+test('JSON generation of LevelTemplate | simple kiwi level: field cell comparison', () => {
+    const levelTemplate = LevelTemplateParser.parseFromDict(simpleKiwiKnifeLevel)
+    expect(levelTemplate?.gridData[0][0]).toEqual(knifeCell)
+    expect(levelTemplate?.gridData[0][1]).toEqual(kiwiCell)
 })

@@ -15,6 +15,7 @@ export class ThingTemplate {
         ThingTemplate.instances.push(this)
     }
 
+
     private static instances: ThingTemplate[] = []
 
 
@@ -28,7 +29,9 @@ export class ThingTemplate {
     }
 
     public static getThingByKey(key: string): ThingTemplate | undefined {
-        const thing = this.getAllThings().find(thing => thing.key === key )
+        // WARNING: this fails with a === comparison
+        // if have not the slightest idea why
+        const thing = this.getAllThings().find(thing => thing.key == key )
         return thing
     }
 } 
