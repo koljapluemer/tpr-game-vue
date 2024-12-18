@@ -1,6 +1,6 @@
 <template>
 
-    <header class="p-2">
+    <header class="p-2 m-auto">
         <ul class="menu menu-horizontal bg-base-200 rounded-box">
             <li>
                 <a>

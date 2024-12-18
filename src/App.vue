@@ -8,7 +8,7 @@ import Footer from "./components/misc/Footer.vue";
 <template>
   <Header />
 
-  <main class="grow">
+  <main class="grow m-auto">
     <RouterView />
   </main>
 
