@@ -1,5 +1,5 @@
 import type { AffordancePackage } from "@/classes/AffordancePackage"
-import { ThingTemplate } from "@/classes/Thing"
+import { ThingTemplate } from "@/classes/templates/ThingTemplate"
 
 export const kiwiTemplate = {
     "key": "KIWI",

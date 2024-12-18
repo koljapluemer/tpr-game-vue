@@ -1,5 +1,5 @@
 import { CapabilityCut } from "@/classes/capabilities/CapabilityCut"
-import { ThingTemplate } from "@/classes/Thing"
+import { ThingTemplate } from "@/classes/templates/ThingTemplate"
 
 
 export const knifeTemplate = {
@@ -12,7 +12,7 @@ export const knifeTemplate = {
     }
 }
 
-export const knifeObject: ThingTemplate = new ThingTemplate(
+export const knifeObject = new ThingTemplate(
     "KNIFE",
     [],
     [new CapabilityCut()],

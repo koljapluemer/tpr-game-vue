@@ -1,5 +1,5 @@
-import { kiwiObject, kiwiTemplate } from "@/__tests__/data/kiwi"
-import { knifeObject, knifeTemplate } from "@/__tests__/data/knife"
+import { kiwiObject, kiwiTemplate } from "@/__tests__/data/kiwi";
+import { knifeObject, knifeTemplate } from "@/__tests__/data/knife";
 import { ThingTemplateParser } from "@/classes/templates/ThingTemplateParser";
 import { expect, test } from "vitest"
 
