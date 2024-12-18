@@ -18,6 +18,10 @@ export class CardField {
         return (this.#thing !== undefined)
     }
 
+    get images() {
+        return this.#images
+    }
+
     get keys(): string[] {
         // TODO: here we're gonna have painful interaction with the FieldGrid/Level
         return this.#thing ? [this.#thing.key] : []

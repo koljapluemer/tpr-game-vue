@@ -50,13 +50,11 @@ export class TopicTemplateParser {
         if (!isArray(dict["finalRotation"])) return undefined
 
         dict["finalRotation"].forEach((potentialLevelTemplateName: any) => {
-            console.log('rotation checking potential level template name', potentialLevelTemplateName)
             if (!isString(potentialLevelTemplateName)) {
                 console.warn('level name property is not a string', potentialLevelTemplateName)
                 return undefined
             } 
             const level = LevelTemplate.getByName(potentialLevelTemplateName)
-            console.log('for the name', potentialLevelTemplateName, 'got level', level)
             if (level) finalRotation.push(level)
 
         });

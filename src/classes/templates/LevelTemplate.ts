@@ -20,7 +20,6 @@ export class LevelTemplate {
     }
 
     public static getByName(name: string): LevelTemplate | undefined {
-        console.log('checking name', name, 'against all levels', this.getAll())
         // WARNING: this fails with a === comparison
         // if have not the slightest idea why
         const level = this.getAll().find(level => level.name == name )
