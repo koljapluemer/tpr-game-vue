@@ -15,7 +15,7 @@ const basicTopicDict = {
     "finalRotation": ["cut-kiwi-demo"]
 }
 
-const basicTopic = new TopicTemplate (
+const basicTopic = new TopicTemplate(
     "topic-1",
     [[simpleKnifeLevelTemplate]],
     [simpleKnifeLevelTemplate]
@@ -35,4 +35,25 @@ test('basic template parsing works: comparing progressions prop', () => {
 test('basic template parsing works: comparing finalRotation prop', () => {
     const topic = TopicTemplateParser.parseFromDict(basicTopicDict)
     expect(topic?.finalRotation).toEqual(basicTopic.finalRotation)
+})
+
+
+const dictWithOnlyProgressions = {
+    "progressions": [
+        ["a"], ["a"], ["a"], ["a"], ["a"]
+    ]
+}
+
+test('TopicTemplateParser progression parse works: length match', () => {
+    const prg = TopicTemplateParser.parseProgressions(dictWithOnlyProgressions)
+    expect(prg?.length).toEqual(5)
+})
+
+const dictWithOnlyRotation = {
+    "finalRotation": ["a", "b", "c", "d"]
+}
+
+test('TopicTemplateParser rotation parse works: length match', () => {
+    const prg = TopicTemplateParser.parseFinalRotation(dictWithOnlyRotation)
+    expect(prg?.length).toEqual(4)
 })
