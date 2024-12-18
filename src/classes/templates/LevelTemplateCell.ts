@@ -15,7 +15,7 @@ export class LevelTemplateCell {
     public static createFromArrayOfThingNames(thingNames: string[]): LevelTemplateCell | undefined {
         const possibleThings: ThingTemplate[] = []
         thingNames.forEach(thingName => {
-            const thing = ThingTemplate.getThingByKey(thingName)
+            const thing = ThingTemplate.getByKey(thingName)
             if (!thing) {
                 console.warn('illegal/unknown thingname', thingName)
                 return undefined

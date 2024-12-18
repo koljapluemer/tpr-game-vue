@@ -9,6 +9,7 @@ export class TopicTemplate {
         public readonly progressions: LevelTemplate[][],
         public readonly finalRotation: LevelTemplate[]
     ) {
+        console.info('topic template rotation', finalRotation)
         TopicTemplate.instances.push(this)
     }
 
@@ -18,7 +19,7 @@ export class TopicTemplate {
         return this.instances
     }
 
-    public static getThingByName(name: string): TopicTemplate | undefined {
+    public static getByName(name: string): TopicTemplate | undefined {
         // WARNING: this fails with a === comparison
         // if have not the slightest idea why
         const topic = this.getAll().find(topic => topic.name == name)

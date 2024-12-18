@@ -15,14 +15,15 @@ export class LevelTemplate {
 
     private static instances: LevelTemplate[] = []
 
-    private static getAllLevelTemplates(): LevelTemplate[] {
+    public static getAll(): LevelTemplate[] {
         return this.instances
     }
 
-    public static getThingByName(name: string): LevelTemplate | undefined {
+    public static getByName(name: string): LevelTemplate | undefined {
+        console.log('checking name', name, 'against all levels', this.getAll())
         // WARNING: this fails with a === comparison
         // if have not the slightest idea why
-        const level = this.getAllLevelTemplates().find(level => level.name == name )
+        const level = this.getAll().find(level => level.name == name )
         return level
     }
 

@@ -23,14 +23,14 @@ export class ThingTemplate {
         return pickRandom(this.images)
     }
 
-    private static getAllThings(): ThingTemplate[] {
+    public static getAll(): ThingTemplate[] {
         return this.instances
     }
 
-    public static getThingByKey(key: string): ThingTemplate | undefined {
+    public static getByKey(key: string): ThingTemplate | undefined {
         // WARNING: this fails with a === comparison
         // if have not the slightest idea why
-        const thing = ThingTemplate.getAllThings().find(thing => thing.key == key )
+        const thing = ThingTemplate.getAll().find(thing => thing.key == key )
         return thing
     }
 } 

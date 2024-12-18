@@ -61,7 +61,7 @@ export class CardField {
         )
         if (relevantAffordancePackage) {
             if (relevantAffordancePackage.keyOfThingToChangeTo) {
-                this.thing = ThingTemplate.getThingByKey(relevantAffordancePackage.keyOfThingToChangeTo)
+                this.thing = ThingTemplate.getByKey(relevantAffordancePackage.keyOfThingToChangeTo)
             }
         }
     }

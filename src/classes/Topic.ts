@@ -8,6 +8,7 @@ export class Topic {
         public readonly progressions: LevelTemplate[][],
         public readonly finalRotation: LevelTemplate[]
     ) {
+        console.info('topic rotation', finalRotation)
         Topic.instances.push(this)
     }
 

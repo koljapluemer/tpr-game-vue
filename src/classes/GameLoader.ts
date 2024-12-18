@@ -10,6 +10,8 @@ import { LevelTemplateParser } from "./templates/LevelTemplateParser"
 import { TopicTemplateParser } from "./templates/TopicTemplateParser"
 import { TopicTemplate } from "./templates/TopicTemplate"
 import { Topic } from "./Topic"
+import { ThingTemplate } from "./templates/ThingTemplate"
+import { LevelTemplate } from "./templates/LevelTemplate"
 
 export class GameLoader {
     public static loadFromDataSources():boolean {
@@ -36,6 +38,10 @@ export class GameLoader {
                 Topic.createFromTopicTemplate(template)
             }
         )
+
+        console.info('things are now', ThingTemplate.getAll())
+        console.info('levels are now', LevelTemplate.getAll())
+        console.info('topics are now', Topic.getAll())
     }
 
 }
