@@ -4,9 +4,10 @@
         <div id="grid"
             class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 ">
             Level Grid
-            <!-- <div class="flex flex-row gap-2 justify-center" v-for="row in level.grid">
-                Cell !
-            </div> -->
+            <div class="flex flex-row gap-2 justify-center" v-for="row in grid">
+                row
+                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="'40'" ></FieldRenderer>
+            </div>
 
         </div>
     </div>
@@ -15,13 +16,18 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import type { Level } from "@/classes/Level";
 import type { CardField } from "@/classes/CardField";
+import FieldRenderer from "./FieldRenderer.vue";
 
 
 const props = defineProps<{
-    level: Level;
+    grid: CardField[][];
 }>();
+
+onMounted( () => {
+    console.log('getting rendered with level', props.grid)
+    console.log('level has a grid, I hope', props.grid)
+})
 
 const onDragStart = (field:CardField) => {
     console.log('wow a drag')
@@ -36,11 +42,11 @@ const cellSize = computed(() => {
     let size = 300
     let maxWidth = 100000
     let maxHeight = 100000
-    if (props.level.grid[0].length !== undefined) {
-        maxWidth = (window.screen.width / props.level.grid[0]?.length) * 0.85;
+    if (props.grid[0].length !== undefined) {
+        maxWidth = (window.screen.width / props.grid[0]?.length) * 0.85;
     }
-    if (props.level.grid.length !== undefined) {
-        maxHeight = (window.screen.height / props.level.grid.length) - 170 * 0.7;
+    if (props.grid.length !== undefined) {
+        maxHeight = (window.screen.height / props.grid.length) - 170 * 0.7;
     }
     size = Math.min(size, maxWidth, maxHeight)
     return `${size}px`

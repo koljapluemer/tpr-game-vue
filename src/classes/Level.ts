@@ -23,6 +23,12 @@ export class Level {
         return this.#grid
     }
 
+    public getGrid(): CardField[][] {
+        return this.#grid
+    }
+
+    
+
     public static createFromLevelTemplate(template: LevelTemplate): Level {
         return new Level(
             this.getGridFromTemplate(template)
