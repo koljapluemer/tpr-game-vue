@@ -1,8 +1,8 @@
-import { GameDataParser } from "@/classes/templates/GameDataParser"
+import { GameLoader } from "@/classes/GameLoader"
 import { expect, test } from "vitest"
 
 test('GameDataParser runs', () => {
-    const hasRun = GameDataParser.load()
+    const hasRun = GameLoader.load()
 
     expect(hasRun).toBeTruthy()
 })

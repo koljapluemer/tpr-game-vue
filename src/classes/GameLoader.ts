@@ -7,7 +7,7 @@ import levelData from "@/data/json/levels.json"
 import { ThingTemplateParser } from "./ThingTemplateParser"
 import { LevelTemplateParser } from "./LevelTemplateParser"
 
-export class GameDataParser {
+export class GameLoader {
     public static load():boolean {
         let loadSuccessful = true
 
@@ -19,7 +19,7 @@ export class GameDataParser {
             LevelTemplateParser.parseFromDict(level)
         })
 
-        return true
+        return loadSuccessful
     } 
 
 }

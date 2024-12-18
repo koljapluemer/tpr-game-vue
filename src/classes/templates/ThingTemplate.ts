@@ -19,7 +19,6 @@ export class ThingTemplate {
     private static instances: ThingTemplate[] = []
 
 
-
     get randomImage(): string | undefined {
         return pickRandom(this.images)
     }
