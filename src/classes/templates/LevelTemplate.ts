@@ -19,4 +19,9 @@ export class LevelTemplate {
         // as a level
         return new FieldGrid([])
     }
+
+    // should be rarely needed, except for tests
+    get gridData():LevelTemplateCell[][] {
+        return this.grid
+    }
 }

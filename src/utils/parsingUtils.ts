@@ -14,6 +14,10 @@ export function isRecordOfStrings(input: unknown): input is Record<string, strin
     );
 }
 
+export function isString(data: any): boolean {
+    return typeof data === 'string';
+}
+
 
 export function isTupleOfTwoStrings(input: unknown): input is [string, string] {
     return (
