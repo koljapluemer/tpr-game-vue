@@ -4,8 +4,8 @@
 
 import itemData from "@/data/json/items.json"
 import levelData from "@/data/json/levels.json"
-import { ThingTemplateParser } from "./ThingTemplateParser"
-import { LevelTemplateParser } from "./LevelTemplateParser"
+import { ThingTemplateParser } from "./templates/ThingTemplateParser"
+import { LevelTemplateParser } from "./templates/LevelTemplateParser"
 
 export class GameLoader {
     public static load():boolean {

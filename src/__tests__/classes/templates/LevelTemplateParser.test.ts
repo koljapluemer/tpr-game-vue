@@ -8,7 +8,7 @@ import { LevelTemplateParser } from "@/classes/templates/LevelTemplateParser"
 import { expect, test } from "vitest"
 
 const simpleKiwiKnifeLevel = {
-    "name": "cut-the-kiwi",
+    "name": "cut-kiwi-demo",
     "grid": [
         [
             [["KNIFE"]], [["KIWI"]]
@@ -25,8 +25,8 @@ const kiwiCell = new LevelTemplateCell(
     [kiwiObject]
 )
 
-const simpleKnifeLevelTemplate = new LevelTemplate(
-    "cut-the-kiwi",
+export const simpleKnifeLevelTemplate = new LevelTemplate(
+    "cut-kiwi-demo",
     [
         [knifeCell, kiwiCell]
     ],
