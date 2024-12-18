@@ -40,7 +40,7 @@ test('basic template parsing works: comparing finalRotation prop', () => {
 
 const dictWithOnlyProgressions = {
     "progressions": [
-        ["a"], ["a"], ["a"], ["a"], ["a"]
+        ["cut-kiwi-demo"], ["cut-kiwi-demo"], ["cut-kiwi-demo"], ["cut-kiwi-demo"], ["cut-kiwi-demo"]
     ]
 }
 
@@ -50,7 +50,7 @@ test('TopicTemplateParser progression parse works: length match', () => {
 })
 
 const dictWithOnlyRotation = {
-    "finalRotation": ["a", "b", "c", "d"]
+    "finalRotation": ["cut-kiwi-demo", "cut-kiwi-demo", "cut-kiwi-demo", "cut-kiwi-demo"]
 }
 
 test('TopicTemplateParser rotation parse works: length match', () => {

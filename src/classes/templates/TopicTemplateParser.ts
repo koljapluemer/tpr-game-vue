@@ -10,9 +10,8 @@ export class TopicTemplateParser {
 
         // the implicit equal here is intentional
         // empty arrays or an empty string as name is illegal, not just strict undefined
+        // TODO: however, this doesn't fail empty arrays it seems :)
         if (!name || !progressions || !finalRotations) {
-            console.warn('could not parse topic template', dict)
-            console.warn('data I got:', name, progressions, finalRotations)
             return undefined
         }
 
@@ -56,6 +55,7 @@ export class TopicTemplateParser {
             if (level) finalRotation.push(level)
 
         });
+
 
         return finalRotation
     }
