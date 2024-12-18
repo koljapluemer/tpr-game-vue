@@ -1,5 +1,5 @@
-import { isArrayOfStrings, isString } from "@/utils/parsingUtils";
-import type { FieldGrid } from "../FieldGrid";
+import { isArray, isArrayOfStrings, isString } from "@/utils/parsingUtils";
+import type { Level } from "../Level";
 import { LevelTemplate } from "./LevelTemplate";
 import { LevelTemplateCell } from "./LevelTemplateCell";
 import { ThingTemplate } from "./ThingTemplate";
@@ -28,12 +28,24 @@ export class LevelTemplateParser {
         }
 
         dict["grid"].forEach(row => {
-            if (!Array.isArray(row)) {
+            if (!isArray(row)) {
                 return
             }
-            row.forEach(cell => {
-                if (!isArrayOfStrings(cell)) {
+            row.forEach((cell: (string | any[])[]) => {
+                if (!Array.isArray(cell)) {
                     return
+                } else {
+                    // there must be at least one possible item, in the 1st slot 
+                    if (cell.length === 0) {
+                        return
+                    } else {
+                        if (!isArray(cell[0])) {
+                            return
+                        } else {
+                            if (!isArrayOfStrings(cell[0])) return
+                        }
+                    }
+
                 }
             })
         })
@@ -43,13 +55,15 @@ export class LevelTemplateParser {
         const templateGrid: LevelTemplateCell[][] = []
         dict["grid"].forEach(rowData => {
             const row: LevelTemplateCell[] = []
-            rowData.forEach((cellData: string[]) => {
-                const cell = LevelTemplateCell.createFromArrayOfThingNames(cellData)
-                if (!cell) {
-                    console.warn('illegal cell in grid, stopping parse of level template')
-                    return undefined
-                } else {
-                    row.push(cell)
+            rowData.forEach((cellData:any) => {
+                if (isArray(cellData) && isArrayOfStrings(cellData[0])) {
+                    const cell = LevelTemplateCell.createFromArrayOfThingNames(cellData[0])
+                    if (!cell) {
+                        console.warn('illegal cell in grid, stopping parse of level template')
+                        return undefined
+                    } else {
+                        row.push(cell)
+                    }
                 }
             })
             templateGrid.push(row)

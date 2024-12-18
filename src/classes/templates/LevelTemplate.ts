@@ -1,7 +1,7 @@
 import type { LevelProp } from "@/__tests__/classes/props/LevelProp"
 import type { ThingTemplate } from "./ThingTemplate"
 import type { LevelTemplateCell } from "./LevelTemplateCell"
-import { FieldGrid } from "../FieldGrid"
+import { Level } from "../Level"
 
 
 export class LevelTemplate {
@@ -26,15 +26,6 @@ export class LevelTemplate {
         return level
     }
 
-
-    get randomlyGeneratedFieldGrid():FieldGrid {
-        // here we're going to use our template grid,
-        // and our props
-        // and pick random cells after the rules we have set,
-        // giving a "definitive" actual grid back, which is then used
-        // as a level
-        return new FieldGrid([])
-    }
 
     // should be rarely needed, except for tests
     get gridData():LevelTemplateCell[][] {

@@ -1,7 +1,7 @@
 <template>
 
     <div class="flex flex-col gap-2 mt-10">
-        <router-link to="/" v-for="topic in topics">
+        <router-link :to="'/topic/' + topic.name + '/play'" v-for="topic in topics">
             <button class="btn btn-lg">{{ topic.name }}</button>
         </router-link>
     </div>
@@ -16,8 +16,6 @@ import { onMounted, ref } from 'vue';
 const topics = ref<Topic[]>([])
 
 onMounted(() => {
-    GameLoader.loadFromDataSources()
-    GameLoader.createGameData()
     topics.value = Topic.getAll()
 })
 

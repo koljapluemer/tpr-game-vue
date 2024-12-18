@@ -30,7 +30,7 @@ export class ThingTemplate {
     public static getThingByKey(key: string): ThingTemplate | undefined {
         // WARNING: this fails with a === comparison
         // if have not the slightest idea why
-        const thing = this.getAllThings().find(thing => thing.key == key )
+        const thing = ThingTemplate.getAllThings().find(thing => thing.key == key )
         return thing
     }
 } 

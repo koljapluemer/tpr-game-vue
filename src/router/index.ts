@@ -1,3 +1,4 @@
+import PlayTopicView from '@/views/PlayTopicView.vue'
 import TopicListView from '@/views/TopicListView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -9,6 +10,11 @@ const router = createRouter({
       name: 'topics',
       component: TopicListView,
     },
+    {
+      path: '/topic/:name/play',
+      name: 'topic-play',
+      component: PlayTopicView
+    }
   ],
 })
 

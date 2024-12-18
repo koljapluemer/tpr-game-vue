@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import Header from "./components/misc/Header.vue";
 import Footer from "./components/misc/Footer.vue";
+import { onMounted } from "vue";
+import { GameLoader } from "./classes/GameLoader";
 
+onMounted(() => {
+  GameLoader.loadFromDataSources()
+  GameLoader.createGameData()
+})
 
 </script>
 

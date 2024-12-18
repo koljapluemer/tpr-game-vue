@@ -4,15 +4,14 @@ import type { FieldProperty } from "./FieldProperty"
 import { ThingTemplate } from "./templates/ThingTemplate"
 import { Interaction } from "./Interaction"
 import type { Affordance } from "./Affordance"
+import type { LevelTemplateCell } from "./templates/LevelTemplateCell"
 
 export class CardField {
     #thing: ThingTemplate | undefined
-    #props: FieldProperty[] = []
     #images: CardImage[] = []
 
-    constructor(thing: ThingTemplate | undefined, props: FieldProperty[] = []) {
+    constructor(thing: ThingTemplate | undefined) {
         this.#thing = thing
-        this.#props = props
     }
 
     get hasThingOnIt(): boolean {
@@ -29,6 +28,12 @@ export class CardField {
         if (thing?.randomImage) {
             this.#images = [new CardImage(thing.randomImage, 0)]
         }
+    }
+
+    public static createFromLevelTemplateCell(template:LevelTemplateCell):CardField {
+        return new CardField(
+            template.randomThing
+        )
     }
 
     public getInteractionsGeneratedByDroppingFieldOnMe(droppedField: CardField): Interaction[] {
