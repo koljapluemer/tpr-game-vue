@@ -7,7 +7,7 @@ export const kiwiTemplate = {
     "images": ["kiwi_uncut"],
     "capabilities": [],
     "affordances": [
-        ["IsCuttable", "KIWI_HALVES"]
+        [0, "KIWI_HALVES"]
     ],
     "isMovable": true
 }
@@ -17,7 +17,7 @@ export const kiwiTemplate = {
 const kiwiCutObject = new ThingTemplate("KIWI_HALVES", ["FRUIT"], [], [], true, {}, ["kiwi_cut"])
 
 const kiwiAffordancePackage: AffordancePackage = {
-    affordance: "IsCuttable",
+    affordance: 0,
     keyOfThingToChangeTo: kiwiCutObject.key
 }
 

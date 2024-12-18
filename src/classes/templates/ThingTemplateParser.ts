@@ -1,8 +1,9 @@
 import { ThingTemplate, type ThingPropertyDict } from "./ThingTemplate";
 import type { AffordancePackage } from "../AffordancePackage";
-import { isValidAffordanceName } from "../Affordance";
-import { getEnumValueIfValid, isArrayOfStrings, isRecordOfStrings, isTupleOfOneOrTwoStrings, isTupleOfTwoStrings } from "@/utils/parsingUtils";
+import { getEnumValueIfValid, isArrayOfStrings, isRecordOfStrings, isTupleOfNumberAndNumberOrJustOneString, isTupleOfOneOrTwoStrings, isTupleOfTwoStrings } from "@/utils/parsingUtils";
 import { Capability } from "../capabilities/Capability";
+import { Affordance } from "../Affordance";
+import { CapabilityFactory } from "../capabilities/CapabilityFactory";
 
 
 export class ThingTemplateParser {
@@ -61,7 +62,7 @@ export class ThingTemplateParser {
     }
 
     private static createCapabilityIfValid(key: string): Capability | undefined {
-        const capability = Capability.createBasedOnKey(key)
+        const capability = CapabilityFactory.createBasedOnKey(key)
         if (capability) {
             return capability
         } else {
@@ -78,7 +79,7 @@ export class ThingTemplateParser {
         const packages: AffordancePackage[] = []
         if (Array.isArray(dict["affordances"])) {
             dict["affordances"].forEach(potentialPackage => {
-                if (isTupleOfOneOrTwoStrings(potentialPackage) && isValidAffordanceName(potentialPackage[0])) {
+                if (isTupleOfNumberAndNumberOrJustOneString(potentialPackage) && Affordance[potentialPackage[0]]) {
                     packages.push(
                         {
                             affordance: potentialPackage[0],

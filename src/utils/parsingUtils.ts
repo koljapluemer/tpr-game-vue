@@ -28,6 +28,9 @@ export function isTupleOfTwoStrings(input: unknown): input is [string, string] {
     );
 }
 
+
+
+
 export function isTupleOfOneOrTwoStrings(input: unknown): input is [string] | [string, string] {
     return (
         Array.isArray(input) && // Check it's an array
@@ -35,6 +38,17 @@ export function isTupleOfOneOrTwoStrings(input: unknown): input is [string] | [s
         input.every((el) => typeof el === "string") // All elements are strings
     );
 }
+
+export function isTupleOfNumberAndNumberOrJustOneString(input: unknown): input is [number] | [number, string] {
+    return (
+        Array.isArray(input) && // Check it's an array
+        (input.length === 1 || input.length === 2) && // Check the length is 1 or 2
+        typeof input[0] === "number" &&
+        (input[1] === undefined || typeof input[1] === "string" )
+
+    );
+}
+
 
 export function getEnumValueIfValid<T extends Record<string, string | number>>(
     enumObj: T,

@@ -3,7 +3,7 @@ import { CardImage } from "./CardImage"
 import type { FieldProperty } from "./FieldProperty"
 import { ThingTemplate } from "./templates/ThingTemplate"
 import { Interaction } from "./Interaction"
-import type { AffordanceName } from "./Affordance"
+import type { Affordance } from "./Affordance"
 
 export class CardField {
     #thing: ThingTemplate | undefined
@@ -50,7 +50,7 @@ export class CardField {
         return interactions
     }
 
-    reactToInteractionHappenedToMeWithAffordance(affordance: AffordanceName) {
+    reactToInteractionHappenedToMeWithAffordance(affordance: Affordance) {
         const relevantAffordancePackage = this.#thing?.affordancePackages.find(
             pkg => pkg.affordance === affordance
         )

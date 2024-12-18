@@ -1,4 +1,4 @@
-import { AffordanceName } from "@/classes/Affordance"
+import { Affordance } from "../Affordance"
 import type { CardField } from "../CardField"
 import { Capability } from "./Capability"
 
@@ -9,16 +9,15 @@ export class CapabilityCut extends Capability {
     }
 
     public get partneredAffordances() {
-        return [AffordanceName.IsCuttable]
+        return [Affordance.IsCuttable]
     }
 
     public enactOnReceivingField(field: CardField) {
-        field.reactToInteractionHappenedToMeWithAffordance(AffordanceName.IsCuttable)
+        field.reactToInteractionHappenedToMeWithAffordance(Affordance.IsCuttable)
     }
 
     public enactOnSendingField(field: CardField) {
         
     }
-
 
 }

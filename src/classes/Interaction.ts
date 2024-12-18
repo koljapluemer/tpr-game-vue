@@ -1,4 +1,4 @@
-import type { AffordanceName } from "./Affordance"
+import type { Affordance } from "./Affordance"
 import type { CardField } from "./CardField"
 
 export class Interaction  {
