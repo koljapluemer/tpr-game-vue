@@ -13,5 +13,9 @@ export const gameDataStore = reactive({
     setTopics(topics: Topic[]) {
         this.topics = topics
         console.info('set topics, they are now', this.topics)
+    },
+
+    getTopicByName(name: string): Topic | undefined {
+        return this.topics.find(topic => topic.name === name)
     }
 })

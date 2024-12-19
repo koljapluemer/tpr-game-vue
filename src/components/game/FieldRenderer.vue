@@ -6,11 +6,12 @@
 
 
 <script setup lang="ts">
-import type { CardField } from '@/models_frontend/CardField';
+import type { Field } from '@/models_frontend/Field';
+
 
 
 const props = defineProps<{
-    field: CardField,
+    field: Field,
     cellSize: string
 }>();
 

@@ -4,7 +4,7 @@
         <div id="grid"
             class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 ">
             Level Grid
-            <div class="flex flex-row gap-2 justify-center" v-for="row in grid">
+            <div class="flex flex-row gap-2 justify-center" v-for="row in level.grid">
                 row
                 <FieldRenderer v-for="cell in row" :field="cell" :cell-size="'40'" ></FieldRenderer>
             </div>
@@ -16,24 +16,25 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import type { CardField } from "@/models_frontend/CardField";
 import FieldRenderer from "./FieldRenderer.vue";
+import type { Level } from "@/models_frontend/Level";
+import type { Field } from "@/models_frontend/Field";
 
 
 const props = defineProps<{
-    grid: CardField[][];
+    level: Level;
 }>();
 
 onMounted( () => {
-    console.log('getting rendered with level', props.grid)
-    console.log('level has a grid, I hope', props.grid)
+    // console.log('getting rendered with level', props.level.grid)
+    // console.log('level has a grid, I hope', props.level.grid)
 })
 
-const onDragStart = (field:CardField) => {
+const onDragStart = (field:Field) => {
     console.log('wow a drag')
 }
 
-const onDropOn = (field:CardField) => {
+const onDropOn = (field:Field) => {
     console.log('wow drag stopped')
 }
 
@@ -42,11 +43,11 @@ const cellSize = computed(() => {
     let size = 300
     let maxWidth = 100000
     let maxHeight = 100000
-    if (props.grid[0].length !== undefined) {
-        maxWidth = (window.screen.width / props.grid[0]?.length) * 0.85;
+    if (props.level.grid[0].length !== undefined) {
+        maxWidth = (window.screen.width / props.level.grid[0]?.length) * 0.85;
     }
-    if (props.grid.length !== undefined) {
-        maxHeight = (window.screen.height / props.grid.length) - 170 * 0.7;
+    if (props.level.grid.length !== undefined) {
+        maxHeight = (window.screen.height / props.level.grid.length) - 170 * 0.7;
     }
     size = Math.min(size, maxWidth, maxHeight)
     return `${size}px`

@@ -1,5 +1,5 @@
 import type { Affordance } from "../models_shared/Affordance"
-import type { Field } from "./CardField"
+import type { Field } from "./Field"
 
 export type Interaction = {
     sender: Field

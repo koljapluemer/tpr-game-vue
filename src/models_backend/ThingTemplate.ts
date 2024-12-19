@@ -1,6 +1,6 @@
+import type { AffordancePackage } from "@/models_shared/AffordancePackage";
+import type { Capability } from "@/models_shared/capabilities/Capability";
 import { pickRandom } from "@/utils/arrayUtils";
-import type { AffordancePackage } from "../AffordancePackage";
-import type { Capability } from "../capabilities/Capability"
 
 export class ThingTemplate {
     constructor(

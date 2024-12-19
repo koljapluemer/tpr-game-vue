@@ -1,4 +1,4 @@
-import { changeFieldAccordingToActivatedAffordance, type Field } from "@/models_frontend/CardField"
+import { changeFieldAccordingToActivatedAffordance, type Field } from "@/models_frontend/Field"
 import { Affordance } from "../Affordance"
 import { Capability } from "./Capability"
 

@@ -1,4 +1,4 @@
-import type { Field } from "@/models_frontend/CardField";
+import type { Field } from "@/models_frontend/Field";
 import type { Affordance } from "@/models_shared/Affordance";
 
 export abstract class Capability {
