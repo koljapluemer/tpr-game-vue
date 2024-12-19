@@ -2,6 +2,7 @@ import type { Affordance } from "../models_shared/Affordance"
 import { ThingTemplate } from "@/models_backend/ThingTemplate"
 import { createInteraction, type Interaction } from "./Interaction"
 import type { CardImage } from "./CardImage"
+import { LevelTemplateCell } from "@/models_backend/LevelTemplateCell"
 
 export type Field = {
     thing: ThingTemplate | undefined
@@ -28,15 +29,20 @@ export function getInteractionsGeneratedByDroppingFieldOnField(senderField: Fiel
     return interactions
 }
 
-export function changeFieldAccordingToActivatedAffordance(field: Field, affordance: Affordance) {
+export function getChangedFieldAccordingToReceivedAffordance(field: Field, affordance: Affordance):Field |undefined {
     const relevantAffordancePackage = field.thing?.affordancePackages.find(
         pkg => pkg.affordance === affordance
     )
+    console.info('affordance pkg', relevantAffordancePackage)
     if (relevantAffordancePackage) {
         if (relevantAffordancePackage.keyOfThingToChangeTo) {
+            console.info('trying to change to', relevantAffordancePackage.keyOfThingToChangeTo)
             // TODO: may die because vue hates classes
             field.thing = ThingTemplate.getByKey(relevantAffordancePackage.keyOfThingToChangeTo)
+            console.info('thing:', field.thing)
+            const template = LevelTemplateCell.createFromThingName(relevantAffordancePackage.keyOfThingToChangeTo)
+            if (template) return template.createFieldBasedOnMe()
         }
     }
+    return undefined
 }
-

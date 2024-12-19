@@ -39,16 +39,16 @@ export class LevelTemplateCell {
 
     }
 
-    public generateFieldBasedOnMe(): Field {
+    public createFieldBasedOnMe(): Field {
         switch (this.randomThing) {
             case undefined:
-                return LevelTemplateCell.generateEmptyField()
+                return LevelTemplateCell.createEmptyField()
             default:
-                return this.generateFieldWithThing()
+                return this.createFieldWithMyThing()
         }
     }
 
-    public static generateEmptyField(): Field {
+    public static createEmptyField(): Field {
         return {
             thing: undefined,
             images: [],
@@ -56,13 +56,13 @@ export class LevelTemplateCell {
         }
     }
 
-    private generateFieldWithThing(): Field {
-        if (!this.randomThing) return LevelTemplateCell.generateEmptyField()
+    private createFieldWithMyThing(): Field {
+        if (!this.randomThing) return LevelTemplateCell.createEmptyField()
         const randomThing = this.randomThing
         const randomImageName = randomThing.randomImage
         if (!randomImageName) {
             console.warn('thing has no images', randomThing)
-            return LevelTemplateCell.generateEmptyField()
+            return LevelTemplateCell.createEmptyField()
         }
         return {
             thing: randomThing,

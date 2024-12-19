@@ -12,4 +12,6 @@ export abstract class Capability {
     public abstract enactOnReceivingField(field:Field):void
     public abstract enactOnSendingField(field:Field):void
 
+    public abstract shouldBeResetAfterAction():boolean
+
 }

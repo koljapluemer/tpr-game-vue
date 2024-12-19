@@ -16,7 +16,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
 import type { Level } from "@/models_frontend/Level";
-import { changeFieldAccordingToActivatedAffordance, getInteractionsGeneratedByDroppingFieldOnField, type Field } from "@/models_frontend/Field";
+import { getChangedFieldAccordingToReceivedAffordance, getInteractionsGeneratedByDroppingFieldOnField, type Field } from "@/models_frontend/Field";
 import { LevelTemplateCell } from "@/models_backend/LevelTemplateCell";
 
 
@@ -40,16 +40,26 @@ const onDropOn = (field: Field, coords: [number, number]) => {
     console.info('level registered drop', fieldBeingDragged.value, 'on', field)
     if (!field.thing) {
         console.info('drop on empty field')
-        field = fieldBeingDragged.value
-        props.level.grid[coords[0]][coords[1]]! = fieldBeingDragged.value
-    
-        props.level.grid[fieldBeingDraggedCoords.value[0]][fieldBeingDraggedCoords.value[1]] = LevelTemplateCell.generateEmptyField()
+        props.level.grid[coords[0]][coords[1]] = fieldBeingDragged.value
+        props.level.grid[fieldBeingDraggedCoords.value[0]][fieldBeingDraggedCoords.value[1]] = LevelTemplateCell.createEmptyField()
     } else {
         console.info('drop on occupied')
         const interactions = getInteractionsGeneratedByDroppingFieldOnField(fieldBeingDragged.value, field)
         interactions.forEach(interaction => {
-            changeFieldAccordingToActivatedAffordance(field, interaction.affordance)
+            const newField = getChangedFieldAccordingToReceivedAffordance(field, interaction.affordance)
+            console.info('new field', newField)
+            if (newField) {
+                props.level.grid[coords[0]][coords[1]] = newField
+            } else {
+                console.info('new field undefined')
+            }
         })
+        console.log('field data of dragged', fieldBeingDragged.value)
+        props.level.grid[fieldBeingDraggedCoords.value[0]][fieldBeingDraggedCoords.value[1]]  = {
+            thing: fieldBeingDragged.value.thing,
+            images: fieldBeingDragged.value.images,
+            keys: fieldBeingDragged.value.keys
+        }
     }
 
 }

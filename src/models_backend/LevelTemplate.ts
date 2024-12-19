@@ -41,7 +41,7 @@ export class LevelTemplate {
     private generateRandomizedGrid(): Field[][] {
         return this.grid.map(row => {
             return row.map(cell => {
-                return cell.generateFieldBasedOnMe()
+                return cell.createFieldBasedOnMe()
             })
         })
     }
