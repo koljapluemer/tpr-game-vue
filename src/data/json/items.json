@@ -18,7 +18,7 @@
         "key": "KNIFE",
         "secondaryKeys": [],
         "images": [
-            "cupboard"
+            "knife"
         ],
         "capabilities": [
             "CUT"
@@ -30,7 +30,7 @@
         "key": "KIWI_HALVES",
         "secondaryKeys": [],
         "images": [
-            "knife"
+            "kiwi_cut"
         ],
         "isMovable": true,
         "capabilities": []

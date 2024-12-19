@@ -1,12 +1,25 @@
 <template>
-    <div class="card p-2 bg-blue">
-        cell
+    <div class="bg-blue-200 p-1 aspect-square" @dragover.prevent :style="{
+        height: cellSize,
+        width: cellSize
+    }">
+
+        <div class="grow relative h-full w-full card rounded shadow-md bg-base-100" v-if="field.thing" :style="isBeingDragged
+            ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
+            : ''
+            " :draggable="isMovable" style='touch-action: none;'>
+            <img v-for="img of field.images" :key="img.name" :src="'/assets/items/' + img.name + '.webp'"
+                class="object-contain absolute" :style="getImageStyle(img)" alt="" draggable="false" />
+        </div>
+
     </div>
 </template>
 
 
 <script setup lang="ts">
+import type { CardImage } from '@/models_frontend/CardImage';
 import type { Field } from '@/models_frontend/Field';
+import { computed, ref } from 'vue';
 
 
 
@@ -14,6 +27,29 @@ const props = defineProps<{
     field: Field,
     cellSize: string
 }>();
+
+
+function getImageStyle(img: CardImage): string {
+
+    let styleString = `max-width: 100%; max-height: 100%;left: 50%;top: 50%;`
+    let transformString = 'transform: translate(-50%, -50%) '
+    if (img.scale != undefined) {
+        // TODO: this check doesn't work but nevermind for now
+        transformString += ` scale(${img.scale}) `;
+    }
+    if (img.rotation != undefined) {
+        transformString += `rotate(${img.rotation}deg)`
+    }
+    styleString += transformString + ';'
+    return styleString
+}
+
+const isBeingDragged = ref(false)
+
+
+const isMovable = computed((): boolean => {
+    return true
+})
 
 
 

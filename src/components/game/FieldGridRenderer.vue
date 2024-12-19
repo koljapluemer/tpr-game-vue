@@ -6,7 +6,7 @@
             Level Grid
             <div class="flex flex-row gap-2 justify-center" v-for="row in level.grid">
                 row
-                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="'40'" ></FieldRenderer>
+                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="cellSize" ></FieldRenderer>
             </div>
 
         </div>
