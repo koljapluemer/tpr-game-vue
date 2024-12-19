@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-blue-200 p-1 aspect-square" @dragover.prevent :style="{
+    <div class="bg-base-200 p-1 aspect-square" @dragover.prevent @drop="onDrop($event)" :style="{
         height: cellSize,
         width: cellSize
     }">
@@ -7,7 +7,7 @@
         <div class="grow relative h-full w-full card rounded shadow-md bg-base-100" v-if="field.thing" :style="isBeingDragged
             ? 'transform: translateX(-9999px); transition: 0.01s; background-color: transparent'
             : ''
-            " :draggable="isMovable" style='touch-action: none;'>
+            " draggable="true" @dragstart="onDragStart($event)" style='touch-action: none;'>
             <img v-for="img of field.images" :key="img.name" :src="'/assets/items/' + img.name + '.webp'"
                 class="object-contain absolute" :style="getImageStyle(img)" alt="" draggable="false" />
         </div>
@@ -21,12 +21,18 @@ import type { CardImage } from '@/models_frontend/CardImage';
 import type { Field } from '@/models_frontend/Field';
 import { computed, ref } from 'vue';
 
+// const emit = defineEmits<{
+//     startedDraggingFromField: [field: Field],
+//     droppedOnField: [field: Field]
+// }>();
 
 
 const props = defineProps<{
     field: Field,
     cellSize: string
 }>();
+
+const emit = defineEmits(['startedDraggingFromField', 'droppedOnField'])
 
 
 function getImageStyle(img: CardImage): string {
@@ -47,9 +53,21 @@ function getImageStyle(img: CardImage): string {
 const isBeingDragged = ref(false)
 
 
-const isMovable = computed((): boolean => {
-    return true
-})
+function onDragStart(event: any) {
+    console.info('field registered drag start')
+    isBeingDragged.value = true
+    if (typeof props.field != "undefined") {
+        event.dataTransfer.dropEffect = "move";
+        event.dataTransfer.effectAllowed = "move";
+        emit("startedDraggingFromField", props.field);
+    }
+}
+
+function onDrop(event: any) {
+    console.info('field registered drop')
+    isBeingDragged.value = false
+    emit("droppedOnField", props.field)
+}
 
 
 

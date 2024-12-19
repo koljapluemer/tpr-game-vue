@@ -3,12 +3,10 @@
 
         <div id="grid"
             class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 ">
-            Level Grid
             <div class="flex flex-row gap-2 justify-center" v-for="row in level.grid">
-                row
-                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="cellSize" ></FieldRenderer>
+                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="cellSize"
+                    @startedDraggingFromField="onDragStart" @droppedOnField="onDropOn"></FieldRenderer>
             </div>
-
         </div>
     </div>
 
@@ -25,17 +23,18 @@ const props = defineProps<{
     level: Level;
 }>();
 
-onMounted( () => {
+
+onMounted(() => {
     // console.log('getting rendered with level', props.level.grid)
     // console.log('level has a grid, I hope', props.level.grid)
 })
 
-const onDragStart = (field:Field) => {
-    console.log('wow a drag')
+const onDragStart = (field: Field) => {
+    console.log('level registered drag start', field)
 }
 
-const onDropOn = (field:Field) => {
-    console.log('wow drag stopped')
+const onDropOn = (field: Field) => {
+    console.log('level registered drop', field)
 }
 
 

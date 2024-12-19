@@ -1,12 +1,5 @@
 <template>
   playing topic
-  <br>
-  picked level:
-  <br>
-  <small>
-    {{  activeLevel }}
-
-  </small>
   <LevelRenderer v-if="activeLevel" :level="activeLevel"></LevelRenderer>
 </template>
 
