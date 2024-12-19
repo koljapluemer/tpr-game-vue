@@ -1,3 +1,4 @@
+import type { Topic } from "@/models_frontend/Topic";
 import type { LevelTemplate } from "./LevelTemplate";
 
 // this structure is almost going to be copied, albeit not quite:
@@ -25,4 +26,24 @@ export class TopicTemplate {
         const topic = this.getAll().find(topic => topic.name == name)
         return topic
     }
+
+    public createTopicBasedOnMe(): Topic {
+        // getting progressions
+        const progressions: string[][] = []
+        this.progressions.forEach(progressionTemplate => {
+            const progression: string[] = []
+            progressionTemplate.forEach(levelTemplate => {
+                progression.push(levelTemplate.name)
+            })
+            progressions.push(progression)
+        })
+        // getting final rotation
+        const rotation: string[] = this.finalRotation.map(levelTemplate => levelTemplate.name)
+        // making object
+        return {
+            name: this.name,
+            progressions: progressions,
+            finalRotation: rotation
+        }
+    } 
 }
