@@ -1,5 +1,5 @@
-import type { Affordance } from "@/classes/Affordance";
-import type { CardField } from "../CardField";
+import type { Field } from "@/models_frontend/CardField";
+import type { Affordance } from "@/models_shared/Affordance";
 
 export abstract class Capability {
 
@@ -9,7 +9,7 @@ export abstract class Capability {
         return this.partneredAffordances.includes(affordance)
     }
 
-    public abstract enactOnReceivingField(field:CardField):void
-    public abstract enactOnSendingField(field:CardField):void
+    public abstract enactOnReceivingField(field:Field):void
+    public abstract enactOnSendingField(field:Field):void
 
 }

@@ -4,12 +4,12 @@ import Footer from "./components/misc/Footer.vue";
 import { onBeforeMount, onMounted } from "vue";
 import { GameLoader } from "./classes/GameLoader";
 import { ThingTemplate } from "./classes/templates/ThingTemplate";
+import { LevelTemplate } from "./classes/templates/LevelTemplate";
+import { Topic } from "./classes/Topic";
 
 onBeforeMount(() => {
   GameLoader.loadFromDataSources()
   GameLoader.createGameData()
-
-  console.info('things are now', ThingTemplate.getAll())
 })
 
 </script>

@@ -1,6 +1,6 @@
 // STATIC DATA
 
-import type { Capability } from '../src/classes/capabilities/Capability'
+import type { Capability } from '../src/models_shared/capabilities/Capability'
 import type { CapabilityPartnered, PassiveAffordance } from './data/affordances'
 import { ItemName } from './data/items'
 import type { LevelTemplateName } from './data/levelTemplates'

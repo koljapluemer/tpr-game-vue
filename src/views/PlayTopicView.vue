@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CardField } from '@/classes/CardField';
+import type { CardField } from '@/models_frontend/CardField';
 import { Level } from '@/classes/Level';
 import { Topic } from '@/classes/Topic';
 import LevelRenderer from '@/components/game/FieldGridRenderer.vue';

@@ -1,5 +1,5 @@
+import { changeFieldAccordingToActivatedAffordance, type Field } from "@/models_frontend/CardField"
 import { Affordance } from "../Affordance"
-import type { CardField } from "../CardField"
 import { Capability } from "./Capability"
 
 
@@ -12,11 +12,11 @@ export class CapabilityCut extends Capability {
         return [Affordance.IsCuttable]
     }
 
-    public enactOnReceivingField(field: CardField) {
-        field.reactToInteractionHappenedToMeWithAffordance(Affordance.IsCuttable)
+    public enactOnReceivingField(field: Field) {
+        changeFieldAccordingToActivatedAffordance(field, Affordance.IsCuttable)
     }
 
-    public enactOnSendingField(field: CardField) {
+    public enactOnSendingField(field: Field) {
         
     }
 

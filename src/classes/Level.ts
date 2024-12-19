@@ -1,6 +1,6 @@
 import { useArrayUtils } from "@/composables/useArrayUtils"
-import { CardField } from "./CardField"
-import type { Interaction } from "./Interaction"
+import { CardField } from "../models_frontend/CardField"
+import type { Interaction } from "../models_frontend/Interaction"
 import type { LevelTemplate } from "./templates/LevelTemplate"
 import type { LevelTemplateCell } from "./templates/LevelTemplateCell"
 

@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import type { CardField } from "@/classes/CardField";
+import type { CardField } from "@/models_frontend/CardField";
 import FieldRenderer from "./FieldRenderer.vue";
 
 

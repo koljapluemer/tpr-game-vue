@@ -1,1 +1,1 @@
-- make the topic clickable and let me play the game!!
+- sketch a fucking data model before keeping up these blind rebuilds

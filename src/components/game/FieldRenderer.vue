@@ -6,7 +6,7 @@
 
 
 <script setup lang="ts">
-import type { CardField } from '@/classes/CardField';
+import type { CardField } from '@/models_frontend/CardField';
 
 
 const props = defineProps<{

@@ -1,4 +1,4 @@
-import type { AffordancePackage } from "@/classes/AffordancePackage"
+import type { AffordancePackage } from "@/models_shared/AffordancePackage"
 import { ThingTemplate } from "@/classes/templates/ThingTemplate"
 
 export const kiwiTemplate = {

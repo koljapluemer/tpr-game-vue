@@ -1,6 +1,6 @@
 import { kiwiObject } from "@/__tests__/data/kiwi"
 import { knifeObject } from "@/__tests__/data/knife"
-import { CardField } from "@/classes/CardField"
+import { CardField } from "@/models_frontend/CardField"
 import { LevelTemplate } from "@/classes/templates/LevelTemplate"
 import { LevelTemplateCell } from "@/classes/templates/LevelTemplateCell"
 import { LevelTemplateParser } from "@/classes/templates/LevelTemplateParser"
