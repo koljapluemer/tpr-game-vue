@@ -1,9 +1,9 @@
+import type { Capability } from "@/models_shared/capabilities/Capability";
 import { ThingTemplate, type ThingPropertyDict } from "./ThingTemplate";
-import type { AffordancePackage } from "../AffordancePackage";
 import { getEnumValueIfValid, isArrayOfStrings, isRecordOfStrings, isTupleOfNumberAndNumberOrJustOneString, isTupleOfOneOrTwoStrings, isTupleOfTwoStrings } from "@/utils/parsingUtils";
-import { Capability } from "../capabilities/Capability";
-import { Affordance } from "../Affordance";
-import { CapabilityFactory } from "../capabilities/CapabilityFactory";
+import { CapabilityFactory } from "@/models_shared/capabilities/CapabilityFactory";
+import type { AffordancePackage } from "@/models_shared/AffordancePackage";
+import { Affordance } from "@/models_shared/Affordance";
 
 
 export class ThingTemplateParser {

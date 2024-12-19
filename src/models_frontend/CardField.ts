@@ -1,9 +1,7 @@
-import { pickRandom } from "@/utils/arrayUtils"
-import { CardImage } from "../classes/CardImage"
-import type { FieldProperty } from "../classes/FieldProperty"
 import type { Affordance } from "../models_shared/Affordance"
 import { ThingTemplate } from "@/models_backend/ThingTemplate"
 import { createInteraction, type Interaction } from "./Interaction"
+import type { CardImage } from "./CardImage"
 
 export type Field = {
     thing: ThingTemplate | undefined

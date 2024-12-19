@@ -1,5 +1,4 @@
 import { isArray, isArrayOfStrings, isString } from "@/utils/parsingUtils";
-import type { Level } from "../Level";
 import { LevelTemplate } from "./LevelTemplate";
 import { LevelTemplateCell } from "./LevelTemplateCell";
 import { ThingTemplate } from "./ThingTemplate";

@@ -1,7 +1,5 @@
 import type { LevelProp } from "@/__tests__/classes/props/LevelProp"
-import type { ThingTemplate } from "./ThingTemplate"
 import type { LevelTemplateCell } from "./LevelTemplateCell"
-import { Level } from "../Level"
 
 
 export class LevelTemplate {

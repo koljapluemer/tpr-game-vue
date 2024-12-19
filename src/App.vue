@@ -2,7 +2,7 @@
 import Header from "./components/misc/Header.vue";
 import Footer from "./components/misc/Footer.vue";
 import { onBeforeMount, onMounted } from "vue";
-import { GameLoader } from "./classes/GameLoader";
+import { GameLoader } from "./models_shared/GameLoader";
 
 onBeforeMount(() => {
   GameLoader.loadFromDataSources()

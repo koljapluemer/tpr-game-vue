@@ -9,14 +9,14 @@
 </template>
 
 <script setup lang="ts">
-import { GameLoader } from '@/classes/GameLoader';
-import { Topic } from '@/classes/Topic';
+import type { Topic } from '@/models_frontend/Topic';
+import { gameDataStore } from '@/stores/gameData';
 import { onMounted, ref } from 'vue';
 
 const topics = ref<Topic[]>([])
 
 onMounted(() => {
-    topics.value = Topic.getAll()
+    topics.value = gameDataStore.topics
 })
 
 </script>
