@@ -28,16 +28,27 @@ export class LevelTemplateCell {
         return new LevelTemplateCell(possibleThings)
     }
 
+    public static createFromThingName(thingName:string) {
+        const thing = ThingTemplate.getByKey(thingName)
+        if (!thing) {
+            console.warn('illegal/unknown thingname', thingName)
+            return undefined
+        } else {
+            return new LevelTemplateCell([thing])
+        }
+
+    }
+
     public generateFieldBasedOnMe(): Field {
         switch (this.randomThing) {
             case undefined:
-                return this.generateEmptyField()
+                return LevelTemplateCell.generateEmptyField()
             default:
                 return this.generateFieldWithThing()
         }
     }
 
-    private generateEmptyField(): Field {
+    public static generateEmptyField(): Field {
         return {
             thing: undefined,
             images: [],
@@ -46,12 +57,12 @@ export class LevelTemplateCell {
     }
 
     private generateFieldWithThing(): Field {
-        if (!this.randomThing) return this.generateEmptyField()
+        if (!this.randomThing) return LevelTemplateCell.generateEmptyField()
         const randomThing = this.randomThing
         const randomImageName = randomThing.randomImage
         if (!randomImageName) {
             console.warn('thing has no images', randomThing)
-            return this.generateEmptyField()
+            return LevelTemplateCell.generateEmptyField()
         }
         return {
             thing: randomThing,

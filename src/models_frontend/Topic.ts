@@ -6,7 +6,3 @@ export type Topic = {
     finalRotation: string[]
 }
 
-export function createTopicsFromBackendClassObjectList(templates: TopicTemplate[]): Topic[] {
-    return templates.map(template => template.createTopicBasedOnMe())
-}
-

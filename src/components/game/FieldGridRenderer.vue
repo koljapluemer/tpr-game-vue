@@ -3,8 +3,8 @@
 
         <div id="grid"
             class="flex flex-col items-center justify-center mt-10 gap-2 p-2 max-h-full max-w-full bg-base-300 ">
-            <div class="flex flex-row gap-2 justify-center" v-for="row in level.grid">
-                <FieldRenderer v-for="cell in row" :field="cell" :cell-size="cellSize"
+            <div class="flex flex-row gap-2 justify-center" v-for="(row, rowIndex) in grid">
+                <FieldRenderer v-for="(cell, colIndex) in row" :field="cell" :cell-size="cellSize" :coords="[rowIndex, colIndex]"
                     @startedDraggingFromField="onDragStart" @droppedOnField="onDropOn"></FieldRenderer>
             </div>
         </div>
@@ -16,25 +16,42 @@
 import { computed, onMounted, ref, watch } from "vue";
 import FieldRenderer from "./FieldRenderer.vue";
 import type { Level } from "@/models_frontend/Level";
-import type { Field } from "@/models_frontend/Field";
+import { changeFieldAccordingToActivatedAffordance, getInteractionsGeneratedByDroppingFieldOnField, type Field } from "@/models_frontend/Field";
+import { LevelTemplateCell } from "@/models_backend/LevelTemplateCell";
 
 
 const props = defineProps<{
     level: Level;
 }>();
 
+const grid = ref(props.level.grid)
 
-onMounted(() => {
-    // console.log('getting rendered with level', props.level.grid)
-    // console.log('level has a grid, I hope', props.level.grid)
-})
 
-const onDragStart = (field: Field) => {
-    console.log('level registered drag start', field)
+const fieldBeingDragged = ref(undefined as (Field | undefined))
+const fieldBeingDraggedCoords = ref(undefined as ([number, number] | undefined))
+
+const onDragStart = (field: Field, coords: [number, number]) => {
+    fieldBeingDragged.value = field
+    fieldBeingDraggedCoords.value = coords
 }
 
-const onDropOn = (field: Field) => {
-    console.log('level registered drop', field)
+const onDropOn = (field: Field, coords: [number, number]) => {
+    if (!fieldBeingDragged.value || !fieldBeingDraggedCoords.value) { console.warn('drag registered but no dragged field'); return; }
+    console.info('level registered drop', fieldBeingDragged.value, 'on', field)
+    if (!field.thing) {
+        console.info('drop on empty field')
+        field = fieldBeingDragged.value
+        props.level.grid[coords[0]][coords[1]]! = fieldBeingDragged.value
+    
+        props.level.grid[fieldBeingDraggedCoords.value[0]][fieldBeingDraggedCoords.value[1]] = LevelTemplateCell.generateEmptyField()
+    } else {
+        console.info('drop on occupied')
+        const interactions = getInteractionsGeneratedByDroppingFieldOnField(fieldBeingDragged.value, field)
+        interactions.forEach(interaction => {
+            changeFieldAccordingToActivatedAffordance(field, interaction.affordance)
+        })
+    }
+
 }
 
 

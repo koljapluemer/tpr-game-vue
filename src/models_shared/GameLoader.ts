@@ -9,7 +9,6 @@ import { LevelTemplateParser } from "@/models_backend/LevelTemplateParser"
 import { ThingTemplateParser } from "@/models_backend/ThingTemplateParser"
 import { TopicTemplate } from "@/models_backend/TopicTemplate"
 import { TopicTemplateParser } from "@/models_backend/TopicTemplateParser"
-import { createTopicsFromBackendClassObjectList } from "@/models_frontend/Topic"
 import { gameDataStore } from "@/stores/gameData"
 
 export class GameLoader {
@@ -33,7 +32,7 @@ export class GameLoader {
 
     public static createGameData() {
         gameDataStore.setTopics(
-            createTopicsFromBackendClassObjectList(
+            TopicTemplate.createTopicsFromBackendClassObjectList(
                 TopicTemplate.getAll()
             )
         )

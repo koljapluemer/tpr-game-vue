@@ -27,6 +27,10 @@ export class TopicTemplate {
         return topic
     }
 
+    public static createTopicsFromBackendClassObjectList(templates: TopicTemplate[]): Topic[] {
+        return templates.map(template => template.createTopicBasedOnMe())
+    }
+
     public createTopicBasedOnMe(): Topic {
         // getting progressions
         const progressions: string[][] = []
@@ -45,5 +49,9 @@ export class TopicTemplate {
             progressions: progressions,
             finalRotation: rotation
         }
-    } 
+    }
+
+
+
+
 }

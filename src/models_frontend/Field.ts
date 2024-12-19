@@ -9,10 +9,6 @@ export type Field = {
     keys: string[]
 }
 
-export function setFieldImageToRandomThing(field: Field) {
-    // TODO
-}
-
 export function getInteractionsGeneratedByDroppingFieldOnField(senderField: Field, receiverField: Field): Interaction[] {
     if (!senderField.thing) return []
     if (!receiverField.thing) return []

@@ -29,7 +29,8 @@ import { computed, ref } from 'vue';
 
 const props = defineProps<{
     field: Field,
-    cellSize: string
+    cellSize: string,
+    coords: [number, number]
 }>();
 
 const emit = defineEmits(['startedDraggingFromField', 'droppedOnField'])
@@ -59,14 +60,14 @@ function onDragStart(event: any) {
     if (typeof props.field != "undefined") {
         event.dataTransfer.dropEffect = "move";
         event.dataTransfer.effectAllowed = "move";
-        emit("startedDraggingFromField", props.field);
+        emit("startedDraggingFromField", props.field, props.coords);
     }
 }
 
 function onDrop(event: any) {
     console.info('field registered drop')
     isBeingDragged.value = false
-    emit("droppedOnField", props.field)
+    emit("droppedOnField", props.field, props.coords)
 }
 
 
